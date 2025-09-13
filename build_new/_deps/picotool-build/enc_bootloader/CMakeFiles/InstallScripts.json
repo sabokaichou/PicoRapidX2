@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/develop/PicoRapidX/build_new/_deps/picotool-build/enc_bootloader/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/develop/PicoRapidX/build_new/_deps/picotool-subbuild/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

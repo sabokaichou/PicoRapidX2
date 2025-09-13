@@ -157,31 +157,37 @@ int GPIO_InputNo_Macro[] = {2, 3, 5, 4, 6, 7, 8, 9, 10, 11, 0, 1};
 #define SettingSW_DR_IRQ_enable   gpio_set_irq_enabled(SettingSW_DR_Pin, 0x4u, true);
 #define SettingSW_DR_IRQ_disable  gpio_set_irq_enabled(SettingSW_DR_Pin, 0x4u, false);
 
-// モードの定義
-const int SelectMode_Normal = 0;
-const int SelectMode_Input = 1;
-const int SelectMode_Output = 2;
-const int SelectMode_Rapid = 3;
-const int SelectMode_Custom = 4;
-const int SelectMode_Save = 5;
-const int SelectMode_Macro = 6;
-const int SelectMode_Repeat = 7;
+// モード定義 (enum化: Cで整数定数式として扱えるようにする)
+enum SelectMode {
+    SelectMode_Normal = 0,
+    SelectMode_Input,
+    SelectMode_Output,
+    SelectMode_Rapid,
+    SelectMode_Custom,
+    SelectMode_Save,
+    SelectMode_Macro,
+    SelectMode_Repeat
+};
 
-const int SelectRapid_Normal = 0;
-const int SelectRapid_Sync30 = 1;
-const int SelectRapid_Sync30R = 2;
-const int SelectRapid_20 = 3;
-const int SelectRapid_15 = 4;
-const int SelectRapid_12 = 5;
-const int SelectRapid_10 = 6;
-const int SelectRapid_75 = 7;
-const int SelectRapid_Custom = 8;
-const int SelectRapid_Sync15 = 9;
-const int SelectRapid_Sync15R = 10;
+enum SelectRapid {
+    SelectRapid_Normal = 0,
+    SelectRapid_Sync30,
+    SelectRapid_Sync30R,
+    SelectRapid_20,
+    SelectRapid_15,
+    SelectRapid_12,
+    SelectRapid_10,
+    SelectRapid_75,
+    SelectRapid_Custom,
+    SelectRapid_Sync15,
+    SelectRapid_Sync15R
+};
 
-const int ConfirmMode_Nothing = 0;
-const int ConfirmMode_Execute = 1;
-const int ConfirmMode_Cancel = 2;
+enum ConfirmMode {
+    ConfirmMode_Nothing = 0,
+    ConfirmMode_Execute,
+    ConfirmMode_Cancel
+};
 
 bool ModeSW_flg = false;
 bool EnterSW_flg = false;
@@ -193,8 +199,11 @@ bool ChangeBoard_Flg = false;
 int SelectMode = SelectMode_Normal;
 int SelectRapid = SelectRapid_Normal;
 
-const int SelectYes = 1;
-const int SelectNo = 0;
+// YES/NO 選択 (順番: No=0, Yes=1)
+enum SelectYesNo {
+    SelectNo = 0,
+    SelectYes = 1
+};
 
 bool jumpMode = false;
 
@@ -433,14 +442,14 @@ void callback_sync(uint gpio, uint32_t events) {
         switch (gpio)
         {
         case Sync_Pin:
+        {
+            // ブロックを追加して宣言をcase直後にまとめる（C90互換のため）
             // 同期信号の入力
-            // 現在の時間を取得
-            absolute_time_t now = get_absolute_time();
+            absolute_time_t now = get_absolute_time();              // 現在の時間
+            int64_t time_diff_us = absolute_time_diff_us(last_sync_time, now); // 経過時間(us)
 
-            // 前回の実行からの経過時間を計算
-            int64_t time_diff_us = absolute_time_diff_us(last_sync_time, now);
             if (time_diff_us < 15000) {
-                // 15ms未満の場合、残りの時間待機
+                // 15ms未満の場合、残りの時間待機 (約16ms周期に揃える)
                 busy_wait_us(16000 - time_diff_us);
             }
 
@@ -451,7 +460,8 @@ void callback_sync(uint gpio, uint32_t events) {
             InputExecute();
             Sync_IRQ_enable;
             gpio_put(LED_PIN, Rapid ? GPIO_IN : GPIO_OUT);
-            break;
+            break; // ブロック内breakでcaseを抜ける
+        }
         case ModeSW_Pin:
             // 設定モードボタンの入力
             Sync_IRQ_disable
