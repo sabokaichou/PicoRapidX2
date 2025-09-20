@@ -91,9 +91,9 @@ static bool Ssd1306_Write(unsigned char *data, unsigned long length);
 
 unsigned char *canvas;
 
-int col_byte = 16;
-int row_byte = 256;
-int row_byte_half = 128;
+const uint16_t col_byte = 16;
+const uint16_t row_byte = 256;
+const uint16_t row_byte_half = 128;
 
 #define I2C_PORT i2c0
 //#define SDA_PIN 26 // GP26
@@ -112,13 +112,13 @@ const int32_t maskIO     = 0b00000000000000000111111111111; // GP28-GP0
 
 bool InputStatus[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-int boardMode = 0;
+uint8_t boardMode = 0;
 
 //int Output_Pin[] = {11, 10, 9, 8, 6, 7, 5, 4, 3, 2, 1, 0};
 //int Input_Pin[]  = {15, 14, 13, 12, 16, 17, 18, 19, 20, 21, 22, 26};
 
-int Output_Pin[] = {4, 3, 11, 10, 9, 8, 7, 6, 5, 2, 1, 0};
-int Input_Pin[]  = {19, 20, 12, 13, 14, 15, 16, 17, 18, 21, 22, 26};
+int8_t Output_Pin[] = {4, 3, 11, 10, 9, 8, 7, 6, 5, 2, 1, 0};
+int8_t Input_Pin[]  = {19, 20, 12, 13, 14, 15, 16, 17, 18, 21, 22, 26};
 
 
 const int8_t Output_Pin_A[] = {11, 10, 9, 8, 6, 7, 5, 4, 3, 2, 1, 0};
@@ -195,8 +195,8 @@ bool Check_FrameDelete_Flg = false;
 bool Check_FrameInsert_Flg = false;
 bool ChangeBoard_Flg = false;
 
-int SelectMode = SelectMode_Normal;
-int SelectRapid = SelectRapid_Normal;
+uint8_t SelectMode = SelectMode_Normal;
+uint8_t SelectRapid = SelectRapid_Normal;
 
 // YES/NO 選択 (順番: No=0, Yes=1)
 enum SelectYesNo {
@@ -206,13 +206,11 @@ enum SelectYesNo {
 
 bool jumpMode = false;
 
-int repeat_flg = 0;
+uint8_t OnFrame = 1;
+uint8_t OffFrame = 1;
 
-int OnFrame = 1;
-int OffFrame = 1;
-
-int Confirm_Mode = ConfirmMode_Nothing;
-int Confirm_Flg = SelectYes;
+uint8_t Confirm_Mode = ConfirmMode_Nothing;
+uint8_t Confirm_Flg = SelectYes;
 
 bool SetMacroMode = false;
 
@@ -252,7 +250,7 @@ const uint32_t FLASH_TARGET_OFFSET_Macro_15 = 0x1EF000;
 
 // 入出力設定
 bool Rapid = false; // 表/裏管理用
-int SyncCount_15 = -1; // 15連表/裏管理用
+int8_t SyncCount_15 = -1; // 15連表/裏管理用
 
 const int IOCount = 12;
 
@@ -282,25 +280,33 @@ IOSettingDef IOSetting[12];
 
 // 設定モード関連
 IOSettingDef IOSetting_Current;
-int SelectInputNo = 0;
+uint8_t SelectInputNo = 0;
 
 bool GPIOStatusOn[12] = {false, false, false, false, false, false, false, false, false, false, false, false}; // 出力中ステータス
 
 // コマンド管理用宣言
-int ExecuteInputNo = 0; // 実行中の入力番号を格納
+uint8_t ExecuteInputNo = 0; // 実行中の入力番号を格納
 uint8_t LastFrameCount[12]; // 各入力番号で登録されたコマンドのフレーム数
-const int MaxMacroFrame = 120; // 256以上にする場合はアドレスが重複してしまうので処理を変更する必要あり
-bool MacroSetting[12][150][16];
-int MacroFrame = 1;
-int MacroFrame_Total = 1;
-int SelectMacroNo = 0;
+const uint16_t MaxMacroFrame = 120; // 256以上にする場合はアドレスが重複してしまうので処理を変更する必要あり
+// マクロ設定/実行セットを16ビットにビットパック（bit0=有効フレーム, bit1-15=出力1-15）
+uint16_t MacroSettingBits[12][150];
+uint8_t MacroFrame = 1;
+uint8_t MacroFrame_Total = 1;
+uint8_t SelectMacroNo = 0;
 
 typedef struct {
     bool LastButtonOn; // 前のフレームでのオン/オフ
     uint8_t CurrentFrame;  // 現在実行中のフレーム番号
 } ButtonCommand;
 ButtonCommand buttonCommands[12];  // 各入力に割り当てられたコマンド管理変数
-bool CommandSet[12][150][16];
+uint16_t CommandSetBits[12][150];
+
+// ビット操作ヘルパー
+static inline bool bit_get_u16(const uint16_t v, int bit) { return (v >> bit) & 1u; }
+static inline void bit_set_u16(uint16_t *v, int bit, bool on) {
+    if (on) { *v |= (uint16_t)(1u << bit); }
+    else    { *v &= (uint16_t)~(1u << bit); }
+}
 
 // マルチコア制御
 //static semaphore_t sem;
@@ -316,7 +322,7 @@ void GetInput();
 void InputExecute();
 void InputNormal(int InputNo);
 void InputCommand(int InputNo);
-void load_io_setting_from_flash(uint32_t load_address, int8_t *read_data);
+void load_io_setting_from_flash(uint32_t load_address, uint8_t *read_data);
 static void save_io_setting_to_flash(uint32_t save_address, uint8_t *save_data, uint32_t flash_size);
 void StartSettingMode();
 void InitGPIO_Macro();
@@ -522,16 +528,10 @@ void SetIOSetting() {
     }
 
     // マクロ用変数の初期化
+    memset(MacroSettingBits, 0, sizeof(MacroSettingBits));
+    memset(CommandSetBits, 0, sizeof(CommandSetBits));
     for (int i = 0; i < 12; i++) {
-        for (int j = 0; j < 150; j++) {
-            for (int k = 0; k < 16; k++) {
-                MacroSetting[i][j][k] = 0;
-                CommandSet[i][j][k] = 0;
-            }
-            if (j == 0) {
-                MacroSetting[i][j][0] = 1; // 1フレーム目は有効にしておく
-            }
-        }
+        bit_set_u16(&MacroSettingBits[i][0], 0, true); // 1フレーム目は有効
     }
 
     uint32_t read_address = FLASH_TARGET_OFFSET_Macro_0;
@@ -541,7 +541,7 @@ void SetIOSetting() {
             for (int k = 0; k < 16; k++) {
                 for (int l = 0; l < 16; l++) {
                     if (((j * 16) + k) < MaxMacroFrame) {
-                        MacroSetting[i][(j * 16) + k][l] = g_read_macro_data[(k * 16) + l];
+                        bit_set_u16(&MacroSettingBits[i][(j * 16) + k], l, g_read_macro_data[(k * 16) + l] != 0);
                     }
                 }
             }
@@ -563,7 +563,7 @@ void SetIOSetting() {
 void SetCommandData(int InputNo) {
     int i;    
     for (i = 1; i < 150; i++) {
-        if (MacroSetting[InputNo][i][0] == 0) {
+        if (!bit_get_u16(MacroSettingBits[InputNo][i], 0)) {
             break;
         } else {
             for (int j = 1; j < 16; j++) {
@@ -575,7 +575,7 @@ void SetCommandData(int InputNo) {
                         k = j - 1;
                     }
                 }
-                CommandSet[InputNo][i - 1][k - 1] = MacroSetting[InputNo][i][j];
+                bit_set_u16(&CommandSetBits[InputNo][i - 1], k - 1, bit_get_u16(MacroSettingBits[InputNo][i], j));
             }
         }
     }
@@ -745,7 +745,7 @@ void InputNormal(int InputNo) {
 void InputCommand(int InputNo)
 {
     for (int i = 0; i < IOCount; i++) {
-        bool on = CommandSet[InputNo][buttonCommands[IOSetting[InputNo].CommandType].CurrentFrame][i];
+        bool on = bit_get_u16(CommandSetBits[InputNo][buttonCommands[IOSetting[InputNo].CommandType].CurrentFrame], i);
         gpio_put(Output_Pin[i], on ? GPIO_OUT : GPIO_IN);
         GPIOStatusOn[i] = on;
     }
@@ -767,7 +767,7 @@ void InputCommand(int InputNo)
     }
 }
 
-void load_io_setting_from_flash(uint32_t load_address, int8_t *read_data)
+void load_io_setting_from_flash(uint32_t load_address, uint8_t *read_data)
 {
     // XIP_BASE(0x10000000)はflash.hで定義済み
     const uint8_t *flash_target_contents = (const uint8_t *) (XIP_BASE + load_address);
@@ -894,12 +894,8 @@ void StartSetting() {
     // マクロ用変数の初期化
     for (int i = 0; i < 12; i++) {
         for (int j = 0; j < 150; j++) {
-            for (int k = 0; k < 16; k++) {
-                MacroSetting[i][j][k] = 0;
-            }
-            if (j == 0) {
-                MacroSetting[i][j][0] = 1; // 1フレーム目は有効にしておく
-            }
+            MacroSettingBits[i][j] = 0;
+            if (j == 0) bit_set_u16(&MacroSettingBits[i][j], 0, true); // 1フレーム目は有効にしておく
         }
     }
 
@@ -914,7 +910,7 @@ void StartSetting() {
             for (int k = 0; k < 16; k++) {
                 for (int l = 0; l < 16; l++) {
                     if (((j * 16) + k) < MaxMacroFrame) {
-                        MacroSetting[i][(j * 16) + k][l] = g_read_macro_data[(k * 16) + l];
+                        bit_set_u16(&MacroSettingBits[i][(j * 16) + k], l, g_read_macro_data[(k * 16) + l] != 0);
                     }
                 }
             }
@@ -1538,7 +1534,7 @@ void Input_SW_Push(int gpio) {
         for (int i = 0; i < 12; i++) {
             if (i == (GPIO_InputNo_Macro[gpio - 2])) {
                 DispPanel[i] = (DispPanel[i] == '0') ? '1' : '0';
-                MacroSetting[SelectInputNo][MacroFrame][i + 1] = (DispPanel[i] == '0') ? 0 : 1;
+                bit_set_u16(&MacroSettingBits[SelectInputNo][MacroFrame], i + 1, (DispPanel[i] != '0'));
             }
         }
         DrawControlPanel(DispPanel);
@@ -1836,7 +1832,7 @@ void SaveMacro() {
             if (j == 0) {
                 save_macrodata[(i * 16) + j] = (i <= MacroFrame_Total) ? 1 : 0;
             } else {
-                save_macrodata[(i * 16) + j] = (i >= MaxMacroFrame) ? 0 : MacroSetting[IOSetting_Current.CommandType][i][j];
+                save_macrodata[(i * 16) + j] = (i >= MaxMacroFrame) ? 0 : (bit_get_u16(MacroSettingBits[IOSetting_Current.CommandType][i], j) ? 1 : 0);
             }
             printf("%d", save_macrodata[(i * 16) + j]);
         }
@@ -1980,7 +1976,7 @@ void DispChange() {
 int CountMacroEnableFrame()
 {
     for (int i = 1; i < MaxMacroFrame; i++) {
-        if (MacroSetting[SelectInputNo][i][0] == 0) {
+        if (!bit_get_u16(MacroSettingBits[SelectInputNo][i], 0)) {
             if (i == 1) return 1;
             return (i - 1);
         }
@@ -1991,7 +1987,7 @@ int CountMacroEnableFrame()
 void DispMacroSetting()
 {
     for (int i = 0; i < 12; i++) {
-        DispPanel[i] = (MacroSetting[SelectInputNo][MacroFrame][i + 1] == 0) ?  '0' : '1';
+        DispPanel[i] = (bit_get_u16(MacroSettingBits[SelectInputNo][MacroFrame], i + 1) ? '1' : '0');
     }
     DrawControlPanel(DispPanel);
 }
@@ -2002,9 +1998,7 @@ void DeleteFrame() {
         MacroFrame_Total--;
     }
     for (int i = MacroFrame; i < MaxMacroFrame + 1; i++) {
-        for (int j = 0; j < 16; j++) {
-            MacroSetting[SelectInputNo][i][j] = MacroSetting[SelectInputNo][i + 1][j];
-        }
+        MacroSettingBits[SelectInputNo][i] = MacroSettingBits[SelectInputNo][i + 1];
     }
     if (MacroFrame > MacroFrame_Total) MacroFrame = MacroFrame_Total;
 }
@@ -2015,13 +2009,9 @@ void InsertFrame() {
         MacroFrame_Total++;
     }
     for (int i = MaxMacroFrame; i > MacroFrame - 1; i--) {
-        for (int j = 0; j < 16; j++) {
-            MacroSetting[SelectInputNo][i][j] = MacroSetting[SelectInputNo][i - 1][j];
-        }
+        MacroSettingBits[SelectInputNo][i] = MacroSettingBits[SelectInputNo][i - 1];
     }
-    for (int j = 0; j < 16; j++) {
-        MacroSetting[SelectInputNo][MacroFrame][j] = 0;
-    }
+    MacroSettingBits[SelectInputNo][MacroFrame] = 0;
     if (MacroFrame_Total > MaxMacroFrame) MacroFrame = MaxMacroFrame;
 }
 
