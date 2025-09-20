@@ -18,9 +18,9 @@ if(EXISTS ${CMAKE_CURRENT_LIST_DIR}/header)
     target_include_directories(PicoRapidX PRIVATE ${CMAKE_CURRENT_LIST_DIR}/header)
 endif()
 
-# 標準IO (USB/UART) 必要に応じて切替
+# 標準IO設定
 pico_enable_stdio_usb(PicoRapidX 1)
-pico_enable_stdio_uart(PicoRapidX 0)
+pico_enable_stdio_uart(PicoRapidX 1)
 
 target_link_libraries(PicoRapidX
     pico_stdlib

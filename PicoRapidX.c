@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <pico/stdlib.h>
+#include <stdint.h>
 #include <pico/multicore.h>
 #include <pico/time.h>
 #include <hardware/flash.h>
@@ -106,8 +107,8 @@ int row_byte_half = 128;
 #define Sync_IRQ_enable   gpio_set_irq_enabled(Sync_Pin, 0x4u, true);
 #define Sync_IRQ_disable  gpio_set_irq_enabled(Sync_Pin, 0x4u, false);
 
-int32_t maskGPIO   = 0b01100011111111111111111111111; // GP28-GP0
-int32_t maskIO     = 0b00000000000000000111111111111; // GP28-GP0
+const int32_t maskGPIO   = 0b01100011111111111111111111111; // GP28-GP0
+const int32_t maskIO     = 0b00000000000000000111111111111; // GP28-GP0
 
 bool InputStatus[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
@@ -119,23 +120,21 @@ int boardMode = 0;
 int Output_Pin[] = {4, 3, 11, 10, 9, 8, 7, 6, 5, 2, 1, 0};
 int Input_Pin[]  = {19, 20, 12, 13, 14, 15, 16, 17, 18, 21, 22, 26};
 
-int Output_Pin_DEF[8][12];
-int Input_Pin_DEF[8][12];
 
-int Output_Pin_A[] = {11, 10, 9, 8, 6, 7, 5, 4, 3, 2, 1, 0};
-int Input_Pin_A[]  = {15, 14, 13, 12, 16, 17, 18, 19, 20, 21, 22, 26};
+const int8_t Output_Pin_A[] = {11, 10, 9, 8, 6, 7, 5, 4, 3, 2, 1, 0};
+const int8_t Input_Pin_A[]  = {15, 14, 13, 12, 16, 17, 18, 19, 20, 21, 22, 26};
 
-int Output_Pin_B[] = {4, 3, 11, 10, 9, 8, 7, 6, 5, 2, 1, 0};
-int Input_Pin_B[]  = {19, 20, 12, 13, 14, 15, 16, 17, 18, 21, 22, 26};
+const int8_t Output_Pin_B[] = {4, 3, 11, 10, 9, 8, 7, 6, 5, 2, 1, 0};
+const int8_t Input_Pin_B[]  = {19, 20, 12, 13, 14, 15, 16, 17, 18, 21, 22, 26};
 
 // GPIO関連(設定)
 bool SettingMode = false;
 #define LED_PIN 25 // 標準LED
-int32_t maskGPIO_Macro = 0b1110000011110011111111111100; // GP19-GP0
-int32_t maskIO_Macro   = 0b0000000000000000000000000000; // GP19-GP0
+const int32_t maskGPIO_Macro = 0b1110000011110011111111111100; // GP19-GP0
+const int32_t maskIO_Macro   = 0b0000000000000000000000000000; // GP19-GP0
 
-int Input_Pin_Macro[]  = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19, 26, 27};
-int GPIO_InputNo_Macro[] = {2, 3, 5, 4, 6, 7, 8, 9, 10, 11, 0, 1};
+const uint8_t Input_Pin_Macro[]  = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19, 26, 27};
+const uint8_t GPIO_InputNo_Macro[] = {2, 3, 5, 4, 6, 7, 8, 9, 10, 11, 0, 1};
 
 #define ModeSW_Pin 27
 #define EnterSW_Pin 26
@@ -261,23 +260,23 @@ const int IOCount = 12;
 typedef struct {
     bool Reverse;           // 押下反転フラグ
 
-    int RapidType;          // 連射設定 1:連なし 2:30連(表) 3:30連(裏) 4:任意 5:マクロ 6:15連(表) 7:15連(裏)
-    int CommandType;        // 1以上:コマンドNo(0-11を想定)
+    uint8_t RapidType;          // 連射設定 1..7
+    uint8_t CommandType;        // コマンドNo(0-11)
 
-    int RepeatMode;         // リピート回数 0:無制限
-    int RepeatCount;        // 現在のリピートカウント
+    uint8_t RepeatMode;         // リピート回数 0:無制限
+    uint8_t RepeatCount;        // 現在のリピートカウント
 
-    int OutputFrame;        // 出力フレーム数
-    int IntervalFrame;      // インターバルフレーム数
+    uint8_t OutputFrame;        // 出力フレーム数
+    uint8_t IntervalFrame;      // インターバルフレーム数
 
-    int OutputFrameCount;   // 出力中フレーム数
-    int IntervalFrameCount; // インターバル中フレーム数
+    uint8_t OutputFrameCount;   // 出力中フレーム数
+    uint8_t IntervalFrameCount; // インターバル中フレーム数
 
-    int OutputGPIONo[12];   // 出力するGPIO番号を格納
+    int16_t OutputGPIONo[12];   // 出力するGPIO番号を格納（-1 を含むため符号付）
 
     bool OutputNo[12];      // 出力するPinのID
 
-    int CurrentPin;         // 現在処理しているOutputGPIONoを格納
+    int16_t CurrentPin;         // 現在処理しているOutputGPIONoを格納
 } IOSettingDef;
 IOSettingDef IOSetting[12];
 
@@ -289,19 +288,19 @@ bool GPIOStatusOn[12] = {false, false, false, false, false, false, false, false,
 
 // コマンド管理用宣言
 int ExecuteInputNo = 0; // 実行中の入力番号を格納
-int LastFrameCount[12]; // 各入力番号で登録されたコマンドのフレーム数
+uint8_t LastFrameCount[12]; // 各入力番号で登録されたコマンドのフレーム数
 const int MaxMacroFrame = 120; // 256以上にする場合はアドレスが重複してしまうので処理を変更する必要あり
-int MacroSetting[12][150][16];
+bool MacroSetting[12][150][16];
 int MacroFrame = 1;
 int MacroFrame_Total = 1;
 int SelectMacroNo = 0;
 
 typedef struct {
     bool LastButtonOn; // 前のフレームでのオン/オフ
-    int CurrentFrame;  // 現在実行中のフレーム番号
+    uint8_t CurrentFrame;  // 現在実行中のフレーム番号
 } ButtonCommand;
 ButtonCommand buttonCommands[12];  // 各入力に割り当てられたコマンド管理変数
-int CommandSet[12][150][16];
+bool CommandSet[12][150][16];
 
 // マルチコア制御
 //static semaphore_t sem;
@@ -746,8 +745,9 @@ void InputNormal(int InputNo) {
 void InputCommand(int InputNo)
 {
     for (int i = 0; i < IOCount; i++) {
-        gpio_put(Output_Pin[i], (CommandSet[InputNo][buttonCommands[IOSetting[InputNo].CommandType].CurrentFrame][i] == 1) ? GPIO_OUT : GPIO_IN);
-        GPIOStatusOn[i] = (CommandSet[InputNo][buttonCommands[IOSetting[InputNo].CommandType].CurrentFrame][i] == 1) ? true : false;
+        bool on = CommandSet[InputNo][buttonCommands[IOSetting[InputNo].CommandType].CurrentFrame][i];
+        gpio_put(Output_Pin[i], on ? GPIO_OUT : GPIO_IN);
+        GPIOStatusOn[i] = on;
     }
     buttonCommands[IOSetting[InputNo].CommandType].CurrentFrame++;
 
@@ -771,10 +771,7 @@ void load_io_setting_from_flash(uint32_t load_address, int8_t *read_data)
 {
     // XIP_BASE(0x10000000)はflash.hで定義済み
     const uint8_t *flash_target_contents = (const uint8_t *) (XIP_BASE + load_address);
-
-    for (int i = 0; i < 256; i++) {
-        read_data[i] = flash_target_contents[i];
-    }
+    memcpy(read_data, flash_target_contents, 256);
 }
 
 static void save_io_setting_to_flash(uint32_t save_address, uint8_t *save_data, uint32_t flash_size)
