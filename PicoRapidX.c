@@ -8,6 +8,12 @@
 #include <hardware/sync.h>
 #include <hardware/gpio.h>
 #include <hardware/i2c.h>
+#include "bsp/board.h"
+void usb_msc_start(void);
+void usb_msc_task(void);
+bool usb_msc_is_connected(void);
+bool usb_msc_is_mounted(void);
+const char* usb_msc_get_status_string(void);
 
 // ディスプレイ関連
 #define _SSD1306_H_
@@ -165,7 +171,8 @@ enum SelectMode {
     SelectMode_Custom,
     SelectMode_Save,
     SelectMode_Macro,
-    SelectMode_Repeat
+    SelectMode_Repeat,
+    SelectMode_USB
 };
 
 enum SelectRapid {
@@ -364,6 +371,8 @@ void SetCharPattern_alphabet();
 void SetCharPattern_symbol(); 
 
 int main() {
+    // 基本クロック/USBなどボード初期化
+    board_init();
 
     // ボード設定の読込
     load_io_setting_from_flash(FLASH_TARGET_OFFSET_IO_Board, g_read_io_data);
@@ -371,13 +380,76 @@ int main() {
 
     InitGPIO();
 
+    // 起動時にモードボタンが押されていたらUSB MSC接続モード
+    gpio_pull_up(ModeSW_Pin);
+    busy_wait_ms(2);
+    if (gpio_get(ModeSW_Pin) == 0) {
+        // USB MSC接続モード: ダイレクトMSC機能
+        gpio_init(LED_PIN);
+        gpio_set_dir(LED_PIN, GPIO_OUT);
+        
+        // I2C初期化（OLED用）
+        i2c_init(I2C_PORT, 400 * 1000);
+        gpio_set_function(SDA_PIN, GPIO_FUNC_I2C);
+        gpio_set_function(SCL_PIN, GPIO_FUNC_I2C);
+        gpio_pull_up(SDA_PIN);
+        gpio_pull_up(SCL_PIN);
+        
+        // OLED初期化と初期メッセージ
+        Ssd1306_Init();
+        SetCharPattern();
+        canvas = Ssd1306_Get_Draw_Canvas();
+        DrawMessage(0, "USB MSC", false);
+        DrawMessage(1, "Starting...", false);
+        Ssd1306_Update_Frame();
+        
+        // MSCモード中は全ての割り込みを無効化
+        Sync_IRQ_disable
+        ModeSW_IRQ_disable
+        EnterSW_IRQ_disable
+        
+        usb_msc_start();
+        
+        // MSC専用メインループ
+        while (true) {
+            usb_msc_task();
+            
+            // 接続状態LED表示: マウント時点灯、未マウント時点滅
+            static uint32_t led_timer = 0;
+            static uint32_t status_timer = 0;
+            static bool led_state = false;
+            uint32_t now = to_ms_since_boot(get_absolute_time());
+            
+            // OLED状態表示（500ms周期で更新）
+            if (now - status_timer > 500) {
+                status_timer = now;
+                const char* status = usb_msc_get_status_string();
+                
+                if (usb_msc_is_mounted()) {
+                    DrawMessage(1, "Connected", false);
+                    DrawMessage(2, "Ready", false);
+                } else if (usb_msc_is_connected()) {
+                    DrawMessage(1, "Connecting...", false);
+                    DrawMessage(2, "Please wait", false);
+                } else {
+                    DrawMessage(1, "USB Cable?", false);
+                    DrawMessage(2, "Check host", false);
+                }
+                
+                Ssd1306_Update_Frame();
+            }
+                        
+            tight_loop_contents();
+        }
+    }
+
     SetIOSetting();
 
     multicore_launch_core1(core1_main); // 同期信号の受付とイベント処理
 
     InitGPIOSync();
     while (true) {
-        //GetInput();
+        tight_loop_contents();
     }
     return 0;
 }
@@ -1004,7 +1076,7 @@ void ModeSelect() {
 
     ModeSW_flg = true;
     SelectMode++;
-    if (SelectMode > SelectMode_Repeat) SelectMode = SelectMode_Save;
+    if (SelectMode > SelectMode_USB) SelectMode = SelectMode_Save;
     if (SelectMode == SelectMode_Normal) SelectRapid = SelectRapid_Normal;
     busy_wait_ms(300);
     ModeSW_IRQ_disable
@@ -1731,6 +1803,10 @@ void SaveSetting() {
     }
     IOSetting[SelectInputNo].CommandType = IOSetting_Current.CommandType;
     if (SetMacroMode) IOSetting[SelectInputNo].RapidType = 5; // マクロ有効
+    // RAPID_TYPE=5 の場合は CMD_TYPE を入力番号へ強制
+    if ((IOSetting[SelectInputNo].RapidType % 10) == 5) {
+        IOSetting[SelectInputNo].CommandType = SelectInputNo;
+    }
     IOSetting[SelectInputNo].RepeatMode = IOSetting_Current.RepeatMode;
 
     if (IOSetting_Current.Reverse == true) IOSetting[SelectInputNo].RapidType = IOSetting[SelectInputNo].RapidType + 10;
@@ -1757,7 +1833,8 @@ void SaveSetting() {
                     g_save_io_data[row_start + j] = IOSetting[i].IntervalFrame;
                     break;
                 case 3:
-                    g_save_io_data[row_start + j] = IOSetting[i].CommandType;
+                    // RapidType=5の場合はCMD_TYPEを入力番号に固定
+                    g_save_io_data[row_start + j] = ((IOSetting[i].RapidType % 10) == 5) ? i : IOSetting[i].CommandType;
                     break;
                 default:
                     g_save_io_data[row_start + j] = (IOSetting[i].OutputNo[j - 4]) ? 1 : 0;
