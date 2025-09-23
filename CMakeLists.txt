@@ -32,6 +32,7 @@ target_link_libraries(PicoRapidX
     pico_stdlib
     hardware_flash
     hardware_sync
+    hardware_pwm
     pico_multicore
     hardware_i2c
     tinyusb_device

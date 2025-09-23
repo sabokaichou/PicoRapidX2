@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <hardware/flash.h>
 #include <hardware/sync.h>
+#include <hardware/pwm.h>
 #include <pico/platform.h>
 #include <pico/stdlib.h>
 
@@ -14,6 +15,143 @@ static uint8_t ram_disk[DISK_SECTOR_SIZE * DISK_SECTOR_COUNT];
 
 #define ROOT_DIR_SECTOR       3
 #define DATA_START_SECTOR     4
+// 書き込み完了後、目視できる時間だけ点滅を維持
+#define MIN_BLINK_VISIBLE_MS 600
+static bool s_write_processed = false;
+static uint8_t s_write_buffer[DISK_SECTOR_SIZE * 8];
+static uint32_t s_write_len = 0;
+static bool s_led_blinking = false;
+static uint32_t s_file_size_hint = 0;
+static uint32_t s_last_write_ms = 0;
+static bool s_preseeded_buffer = false;
+static uint32_t s_blink_hold_until_ms = 0;
+// 完了後パターン点滅の状態
+static bool s_post_blink_active = false;
+static uint32_t s_post_blink_next_ms = 0;
+static int s_post_blink_remaining_toggles = 0; // 6トグル=3回点滅
+static bool s_led_manual_state = false;
+// 初回の実データ書込み(Setting.txtのデータセクタ)まで点滅を完全抑止
+static bool s_led_suppress_until_write = true;
+
+// ---- Validation and deletion helpers --------------------------------------
+static bool has_expected_header_n(const char *data, size_t len) {
+    if (!data || len == 0) return false;
+    const char *needle1 = "Format: INPUT_NO,RAPID_TYPE,REVERSE,OUT_FRAME,IN_FRAME,OUTPUT_PINS";
+    const char *needle2 = "RAPID: 1=Norm 2=R30 3=R30Rev 4=Custom 5=Macro 6=R15 7=R15Rev";
+    size_t n1 = strlen(needle1), n2 = strlen(needle2);
+    bool f1 = false, f2 = false;
+    for (size_t i = 0; i + n1 <= len; i++) { if (memcmp(data + i, needle1, n1) == 0) { f1 = true; break; } }
+    for (size_t i = 0; i + n2 <= len; i++) { if (memcmp(data + i, needle2, n2) == 0) { f2 = true; break; } }
+    return f1 && f2;
+}
+
+static bool validate_settings_lines_n(const char *data, size_t len) {
+    if (!data || len == 0) return false;
+    const char *p = data;
+    const char *end = data + len;
+    int valid_rows = 0;
+    for (int line = 0; line < 64 && p < end; line++) {
+        const char *line_start = p;
+        while (p < end && *p != '\n' && *p != '\r') p++;
+        const char *line_end = p;
+        while (p < end && (*p == '\r' || *p == '\n')) p++;
+
+        // trim
+        while (line_start < line_end && (*line_start == ' ' || *line_start == '\t')) line_start++;
+        while (line_end > line_start && (line_end[-1] == ' ' || line_end[-1] == '\t')) line_end--;
+        if (line_start >= line_end) continue; // empty
+
+        // non-data lines (headers/comments) are skipped
+        if (!(line_start[0] >= '0' && line_start[0] <= '9')) continue;
+
+        int commas = 0; for (const char *q = line_start; q < line_end; ++q) if (*q == ',') commas++;
+        if (commas < 5) return false; // data line must have 5 commas
+
+        // check last field has 12 binary digits (ignore spaces/tabs)
+        const char *last_comma = NULL;
+        for (const char *q = line_start; q < line_end; ++q) if (*q == ',') last_comma = q;
+        if (!last_comma) return false;
+        int digits = 0;
+        for (const char *q = last_comma + 1; q < line_end; ++q) {
+            if (*q == '0' || *q == '1') digits++;
+            else if (*q == ' ' || *q == '\t') {/* skip */}
+            else return false;
+            if (digits > 12) return false; // too many
+        }
+        if (digits != 12) return false;
+        valid_rows++;
+    }
+    return valid_rows > 0;
+}
+
+static void delete_setting_file_from_ramdisk(void) {
+    // ルートエントリを削除扱いに
+    uint8_t *root = ram_disk + DISK_SECTOR_SIZE * ROOT_DIR_SECTOR;
+    root[0] = 0xE5; // deleted mark
+    // FATのクラスタ2を解放
+    uint8_t *fat1 = ram_disk + DISK_SECTOR_SIZE * 1;
+    uint8_t *fat2 = ram_disk + DISK_SECTOR_SIZE * 2;
+    fat1[3] = 0x00; fat1[4] = 0x00;
+    fat2[3] = 0x00; fat2[4] = 0x00;
+    // ファイルサイズも0に
+    memset(root + 28, 0, 4);
+}
+
+// LED blink helpers (PWM-based, ~8 Hz, 50% duty)
+static inline void led_blink_start(void) {
+    const uint LED_PIN = 25;
+    gpio_set_function(LED_PIN, GPIO_FUNC_PWM);
+    uint slice = pwm_gpio_to_slice_num(LED_PIN);
+    pwm_config cfg = pwm_get_default_config();
+    pwm_config_set_clkdiv(&cfg, 256.0f);
+    pwm_config_set_wrap(&cfg, 61035); // ~8 Hz at 125 MHz
+    pwm_init(slice, &cfg, true);
+    pwm_set_gpio_level(LED_PIN, 61035 / 2);
+}
+
+static inline void led_blink_stop(void) {
+    const uint LED_PIN = 25;
+    uint slice = pwm_gpio_to_slice_num(LED_PIN);
+    pwm_set_enabled(slice, false);
+    gpio_set_function(LED_PIN, GPIO_FUNC_SIO);
+    gpio_set_dir(LED_PIN, GPIO_OUT);
+    gpio_put(LED_PIN, 0);
+}
+
+static inline void led_on(void) {
+    const uint LED_PIN = 25;
+    gpio_set_function(LED_PIN, GPIO_FUNC_SIO);
+    gpio_set_dir(LED_PIN, GPIO_OUT);
+    gpio_put(LED_PIN, 1);
+}
+
+static inline void led_off(void) {
+    const uint LED_PIN = 25;
+    gpio_set_function(LED_PIN, GPIO_FUNC_SIO);
+    gpio_set_dir(LED_PIN, GPIO_OUT);
+    gpio_put(LED_PIN, 0);
+}
+
+static inline void led_toggle(void) {
+    s_led_manual_state = !s_led_manual_state;
+    if (s_led_manual_state) led_on(); else led_off();
+}
+
+static inline void start_post_blink_pattern(void) {
+    if (s_led_suppress_until_write) {
+        return; // 接続直後など、実書込み前は一切点滅しない
+    }
+    // PWM点滅中なら停止し、手動トグルで3回点滅に移行
+    if (s_led_blinking) {
+        led_blink_stop();
+        s_led_blinking = false;
+    }
+    s_post_blink_active = true;
+    s_post_blink_remaining_toggles = 6; // ON/OFF 6回 = 3回点滅
+    s_led_manual_state = false; // 消灯から開始
+    led_off();
+    s_post_blink_next_ms = to_ms_since_boot(get_absolute_time()); // 直ちに1回目のトグル
+}
 
 static void build_fat12_image(void) {
     for (uint i = 0; i < sizeof(ram_disk); ++i) ram_disk[i] = 0;
@@ -138,108 +276,169 @@ int32_t tud_msc_read10_cb(uint8_t lun, uint32_t lba, uint32_t offset, void *buff
 }
 
 // CSVファイルをパースして設定に反映する
-static void parse_settings_csv(const char *csv_data) {
+static void parse_settings_csv_n(const char *csv_data, size_t csv_len) {
     uint8_t new_settings[256];
-    // 既存設定を読み込んでベースにする（未指定項目を保持するため）
-    const uint8_t *flash_ptr = (const uint8_t *) (XIP_BASE + 0x1F0000);
+    const uint8_t *flash_ptr = (const uint8_t *)(XIP_BASE + 0x1F0000);
     memcpy(new_settings, flash_ptr, 256);
-    
-    char line[128];
-    int line_pos = 0;
-    int data_pos = 0;
-    
-    // 行単位でパース
-    while (csv_data[data_pos] && data_pos < 512) {
-        char c = csv_data[data_pos++];
-        
-        if (c == '\r' || c == '\n') {
-            if (line_pos > 0) {
-                line[line_pos] = '\0';
-                
-                // コメント行やヘッダをスキップ
-                if (line[0] != '#' && line[0] != 'I' && line[0] >= '0' && line[0] <= '9') {
-                    // フォーマット: INPUT,TYPE,REV,OFRM,IFRM,PINS(12桁)
-                    // 例: 0,1,0,30,15,000000000000
-                    
-                    // カンマで最初の5つのフィールドを分割
-                    int values[5] = {0};
-                    int value_count = 0;
-                    char *start = line;
-                    
-                    for (int i = 0; i <= line_pos && value_count < 5; i++) {
-                        if (line[i] == ',' || i == line_pos) {
-                            line[i] = '\0';
-                            values[value_count++] = atoi(start);
-                            start = &line[i + 1];
-                        }
-                    }
-                    
-                    // 次フィールド（OUTPUT_PINS）を12桁の数字として解析
-                    char output_pins[12] = {0};
-                    if (value_count >= 5 && start < line + line_pos) {
-                        for (int i = 0; i < 12 && start[i] != '\0' && start[i] != '\r' && start[i] != '\n'; i++) {
-                            if (start[i] >= '0' && start[i] <= '9') {
-                                output_pins[i] = start[i] - '0';
-                            }
-                        }
-                    }
-                    
-                    // 設定に反映
-                    if (value_count >= 5) {
-                        int input_no = values[0];
-                        if (input_no >= 0 && input_no < 12) {
-                            int base = input_no * 16;
-                            
-                            // RAPID_TYPE + REVERSE
-                            int rapid_type = values[1];
-                            int reverse = values[2];
-                            new_settings[base] = rapid_type + (reverse ? 10 : 0);
-                            
-                            // 他のパラメータ
-                            new_settings[base + 1] = values[3]; // OUTPUT_FRAME
-                            new_settings[base + 2] = values[4]; // INTERVAL_FRAME
-                            // RAPID_TYPEが5(マクロ)のときはCMD_TYPEを入力番号に自動設定
-                            if (rapid_type == 5) {
-                                new_settings[base + 3] = (uint8_t)input_no;
-                            }
-                            
-                            // OUTPUT_PINS
-                            for (int pin = 0; pin < 12; pin++) {
-                                new_settings[base + 4 + pin] = output_pins[pin];
-                            }
-                        }
-                    }
-                }
-                line_pos = 0;
+
+    const char *p = csv_data;
+    const char *end = csv_data + csv_len;
+
+    while (p < end) {
+        const char *line_start = p;
+        while (p < end && *p != '\r' && *p != '\n') p++;
+        const char *line_end = p;
+        while (p < end && (*p == '\r' || *p == '\n')) p++;
+
+        // trim
+        while (line_start < line_end && (*line_start == ' ' || *line_start == '\t')) line_start++;
+        while (line_end > line_start && (line_end[-1] == ' ' || line_end[-1] == '\t')) line_end--;
+        if (line_start >= line_end) continue; // empty
+        if (!(line_start[0] >= '0' && line_start[0] <= '9')) continue; // only data lines
+
+        size_t len = (size_t)(line_end - line_start);
+        char buf[160];
+        if (len >= sizeof(buf)) len = sizeof(buf) - 1;
+        memcpy(buf, line_start, len);
+        buf[len] = '\0';
+
+        // split first 5 numeric fields
+        int values[5] = {0};
+        int value_count = 0;
+        char *s = buf;
+        char *field = s;
+        for (size_t i = 0; s[i] != '\0'; ++i) {
+            if (s[i] == ',') {
+                s[i] = '\0';
+                // trim field
+                char *f = field; while (*f == ' ' || *f == '\t') f++;
+                values[value_count++] = atoi(f);
+                field = &s[i + 1];
+                if (value_count == 5) break;
             }
-        } else if (line_pos < 127) {
-            line[line_pos++] = c;
         }
+        if (value_count < 5) continue;
+
+        // remaining is pins
+        char *pins = field;
+        int input_no = values[0];
+        if (input_no < 0 || input_no >= 12) continue;
+        int base = input_no * 16;
+
+        int rapid_type = values[1];
+        int reverse = values[2];
+        new_settings[base] = (uint8_t)(rapid_type + (reverse ? 10 : 0));
+        new_settings[base + 1] = (uint8_t)values[3];
+        new_settings[base + 2] = (uint8_t)values[4];
+        if (rapid_type == 5) {
+            new_settings[base + 3] = (uint8_t)input_no; // Macro: CMD=自分の番号
+        }
+
+        int filled = 0;
+        for (char *q = pins; *q != '\0' && filled < 12; ++q) {
+            if (*q == '0' || *q == '1') {
+                new_settings[base + 4 + filled] = (*q == '1') ? 1 : 0;
+                filled++;
+            } else if (*q == ' ' || *q == '\t') {
+                // skip
+            } else {
+                break;
+            }
+        }
+        if (filled != 12) continue; // 不完全行は適用しない
     }
+
+    uint32_t ints = save_and_disable_interrupts();
+    flash_range_erase(0x1F0000, FLASH_SECTOR_SIZE);
+    flash_range_program(0x1F0000, new_settings, FLASH_PAGE_SIZE);
+    restore_interrupts(ints);
     
-    // フラッシュメモリに保存（簡易実装）
-    // 実際の実装では save_io_setting_to_flash() を呼び出す
-    // ここでは RAM 上の設定として反映（デモ用）
-    uint8_t *flash_target = (uint8_t *)(XIP_BASE + 0x1F0000);
-    // memcpy((void*)flash_target, new_settings, 256); // 実際にはフラッシュ書き込み処理が必要
+    // フラッシュ書込み後に同期処理（重要）
+    __dsb(); // データ同期バリア
+    __isb(); // 命令同期バリア
+    
+    // 少し待機してフラッシュ書込み完了を確実に
+    sleep_us(1000);
 }
 
 int32_t tud_msc_write10_cb(uint8_t lun, uint32_t lba, uint32_t offset, uint8_t *buffer, uint32_t bufsize) {
     (void) lun;
-    if (lba != DATA_START_SECTOR) return (int32_t) bufsize; // ignore writes to non-data
-    if (offset >= DISK_SECTOR_SIZE) return 0;
-    uint32_t space = DISK_SECTOR_SIZE - offset;
-    uint32_t to_copy = bufsize < space ? bufsize : space;
-    memcpy(ram_disk + DISK_SECTOR_SIZE * lba + offset, buffer, to_copy);
-    
-    // ファイルが更新された場合、設定を解析・反映
-    if (offset == 0) {
-        // ファイルの先頭から書き込まれた場合、CSVをパース
-        char *file_data = (char *)(ram_disk + DISK_SECTOR_SIZE * lba);
-        parse_settings_csv(file_data);
+    if (lba >= DISK_SECTOR_COUNT) return -1;
+    uint32_t available = DISK_SECTOR_SIZE - offset;
+    if (bufsize > available) bufsize = available;
+    memcpy(ram_disk + DISK_SECTOR_SIZE * lba + offset, buffer, bufsize);
+
+    // ルートディレクトリ更新時に Setting.txt のサイズを捕捉し、完了扱いへフォールバック
+    if (lba == ROOT_DIR_SECTOR) {
+        uint8_t *root = ram_disk + DISK_SECTOR_SIZE * ROOT_DIR_SECTOR;
+        if (root[0] != 0x00 && root[0] != 0xE5) {
+            if (memcmp(root + 0, "SETTING TXT", 11) == 0) {
+                uint32_t fsz = 0; memcpy(&fsz, root + 28, 4);
+                s_file_size_hint = fsz;
+                if (!s_write_processed && s_write_len > 0) {
+                    // バッファ内容をそのまま適用（行単位で不正なものはパーサ側でスキップ）
+                    parse_settings_csv_n((const char*)s_write_buffer, s_write_len);
+                    s_write_processed = true;
+                    start_post_blink_pattern();
+                }
+            }
+        }
     }
-    
-    return (int32_t) to_copy;
+    // Setting.txt の最初のデータセクタ(=DATA_START_SECTOR)のみをトリガに点滅開始
+    // 以降の連続書込みもバッファへ蓄積。最初の書込みで現行内容をプリロード。
+    if (lba >= DATA_START_SECTOR && lba < DATA_START_SECTOR + 8) {
+        // 初回のデータセクタ書込みで点滅開始＆プリロード（LBA4に限定しない）
+        if (!s_led_blinking) {
+            // 完了パターン点滅中なら中断し、消灯から開始
+            s_post_blink_active = false;
+            s_post_blink_remaining_toggles = 0;
+            led_off();
+
+            // ここで初めて実データ書込み開始とみなし、抑止を解除
+            s_led_suppress_until_write = false;
+
+            led_blink_start();
+            s_led_blinking = true;
+            s_write_processed = false;
+            s_write_len = 0;
+            s_preseeded_buffer = false;
+            uint8_t *root = ram_disk + DISK_SECTOR_SIZE * ROOT_DIR_SECTOR;
+            uint32_t current_fsize = 0; memcpy(&current_fsize, root + 28, 4);
+            if (s_file_size_hint > 0) current_fsize = s_file_size_hint;
+            uint32_t preload_len = current_fsize;
+            if (preload_len == 0 || preload_len > sizeof(s_write_buffer)) preload_len = sizeof(s_write_buffer);
+            memcpy(s_write_buffer, ram_disk + DISK_SECTOR_SIZE * DATA_START_SECTOR, preload_len);
+            s_write_len = preload_len; // 既存内容を長さとして反映（部分書込みでも全体を検証可能に）
+            s_preseeded_buffer = true;
+        }
+        s_last_write_ms = to_ms_since_boot(get_absolute_time());
+        uint32_t pos = (lba - DATA_START_SECTOR) * DISK_SECTOR_SIZE + offset;
+        if (pos < sizeof(s_write_buffer)) {
+            uint32_t cpy = bufsize;
+            if (pos + cpy > sizeof(s_write_buffer)) cpy = sizeof(s_write_buffer) - pos;
+            memcpy(s_write_buffer + pos, buffer, cpy);
+            if (pos + cpy > s_write_len) s_write_len = pos + cpy;
+        }
+    }
+    return (int32_t) bufsize;
+}
+
+// 書き込み完了時に検証・適用/削除を行う
+void tud_msc_write10_complete_cb(uint8_t lun) {
+    (void)lun;
+    if (s_write_processed) return;
+    // ルートからファイルサイズを取得してRAMディスクの現内容を読み直す
+    uint8_t *root = ram_disk + DISK_SECTOR_SIZE * ROOT_DIR_SECTOR;
+    if (root[0] == 0x00 || root[0] == 0xE5 || memcmp(root + 0, "SETTING TXT", 11) != 0) return;
+    uint32_t fsz = 0; memcpy(&fsz, root + 28, 4);
+    if (fsz == 0) return;
+    uint32_t sz = fsz;
+    if (sz > sizeof(s_write_buffer)) sz = sizeof(s_write_buffer);
+    memcpy(s_write_buffer, ram_disk + DISK_SECTOR_SIZE * DATA_START_SECTOR, sz);
+    // 現在のRAMディスクの内容をそのまま適用（不正行はパーサがスキップ）
+    parse_settings_csv_n((const char*)s_write_buffer, sz);
+    s_write_processed = true;
+    start_post_blink_pattern();
 }
 
 bool tud_msc_is_writable_cb (uint8_t lun) { (void) lun; return true; }
@@ -263,6 +462,21 @@ const char* usb_msc_get_status_string(void) {
 void usb_msc_start(void) {
     static bool s_inited = false;
     build_fat12_image();
+    s_write_processed = false;
+    s_led_blinking = false;
+    s_write_len = 0;
+    s_file_size_hint = 0;
+    s_last_write_ms = 0;
+    s_preseeded_buffer = false;
+    s_blink_hold_until_ms = 0;
+    // 接続直後は点滅しないようLEDとパターン状態を明示的にリセット
+    s_post_blink_active = false;
+    s_post_blink_remaining_toggles = 0;
+    s_led_manual_state = false;
+    s_led_suppress_until_write = true;
+    led_blink_stop();
+    led_off();
+    memset(s_write_buffer, 0, sizeof(s_write_buffer));
     if (!s_inited) {
         board_init();
         s_inited = true;
@@ -275,6 +489,27 @@ void usb_msc_start(void) {
 
 void usb_msc_task(void) {
     tud_task();
+
+    uint32_t now = to_ms_since_boot(get_absolute_time());
+
+    // タイムアウトフォールバック: 書込みが途絶えて1.5秒以上なら完了処理
+    if (s_led_blinking && !s_write_processed && s_write_len > 0 && s_last_write_ms != 0 && (now - s_last_write_ms) > 1500) {
+        // タイムアウト時も即適用（パーサが安全側で取り込み）
+        parse_settings_csv_n((const char*)s_write_buffer, s_write_len);
+        s_write_processed = true;
+        start_post_blink_pattern();
+    }
+
+    // 完了後のパターン点滅（0.5秒間隔で3回）
+    if (s_post_blink_active && s_post_blink_remaining_toggles > 0 && now >= s_post_blink_next_ms) {
+        led_toggle();
+        s_post_blink_remaining_toggles--;
+        s_post_blink_next_ms = now + 500; // 0.5秒ごとにトグル
+        if (s_post_blink_remaining_toggles == 0) {
+            led_off();
+            s_post_blink_active = false;
+        }
+    }
 }
 
 // Optional: visibility on host state
@@ -282,10 +517,24 @@ void tud_mount_cb(void) {
     gpio_init(25);
     gpio_set_dir(25, GPIO_OUT);
     // MSC接続中はLED消灯
-    gpio_put(25, 0);
+    led_blink_stop();
+    led_off();
+    s_led_blinking = false;
+    s_blink_hold_until_ms = 0;
+    s_post_blink_active = false;
+    s_post_blink_remaining_toggles = 0;
+    s_led_manual_state = false;
+    s_led_suppress_until_write = true;
 }
 
 void tud_umount_cb(void) {
     // アンマウント時も消灯を維持
-    gpio_put(25, 0);
+    led_blink_stop();
+    led_off();
+    s_led_blinking = false;
+    s_blink_hold_until_ms = 0;
+    s_post_blink_active = false;
+    s_post_blink_remaining_toggles = 0;
+    s_led_manual_state = false;
+    s_led_suppress_until_write = true;
 }
