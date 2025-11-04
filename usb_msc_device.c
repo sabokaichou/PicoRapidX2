@@ -10,11 +10,11 @@
 #include <pico/stdlib.h>
 
 #define DISK_SECTOR_SIZE 512
-#define DISK_SECTOR_COUNT 16
+#define DISK_SECTOR_COUNT 200  // 13ファイル × 最大8セクタ + 管理領域
 static uint8_t ram_disk[DISK_SECTOR_SIZE * DISK_SECTOR_COUNT];
 
-#define ROOT_DIR_SECTOR       3
-#define DATA_START_SECTOR     4
+#define ROOT_DIR_SECTOR       9  // ルートディレクトリはセクタ9-10
+#define DATA_START_SECTOR     11  // データ領域の開始セクタ
 // 書き込み完了後、目視できる時間だけ点滅を維持
 #define MIN_BLINK_VISIBLE_MS 600
 static bool s_write_processed = false;
@@ -32,6 +32,11 @@ static int s_post_blink_remaining_toggles = 0; // 6トグル=3回点滅
 static bool s_led_manual_state = false;
 // 初回の実データ書込み(Setting.txtのデータセクタ)まで点滅を完全抑止
 static bool s_led_suppress_until_write = true;
+
+// マクロファイル書き込み用のバッファ (各マクロファイル用、最大8セクタ = 4096バイト)
+static uint8_t s_macro_write_buffer[DISK_SECTOR_SIZE * 8];
+static int s_macro_write_number = -1;  // 現在書き込み中のマクロ番号 (-1 = なし)
+static bool s_macro_write_pending = false;
 
 // ---- Validation and deletion helpers --------------------------------------
 static bool has_expected_header_n(const char *data, size_t len) {
@@ -90,7 +95,7 @@ static void delete_setting_file_from_ramdisk(void) {
     root[0] = 0xE5; // deleted mark
     // FATのクラスタ2を解放
     uint8_t *fat1 = ram_disk + DISK_SECTOR_SIZE * 1;
-    uint8_t *fat2 = ram_disk + DISK_SECTOR_SIZE * 2;
+    uint8_t *fat2 = ram_disk + DISK_SECTOR_SIZE * 3;
     fat1[3] = 0x00; fat1[4] = 0x00;
     fat2[3] = 0x00; fat2[4] = 0x00;
     // ファイルサイズも0に
@@ -153,6 +158,69 @@ static inline void start_post_blink_pattern(void) {
     s_post_blink_next_ms = to_ms_since_boot(get_absolute_time()); // 直ちに1回目のトグル
 }
 
+// マクロデータをテキスト形式で生成するヘルパー関数
+static void generate_macro_text(int macro_no, char *buffer, size_t buffer_size) {
+    // フラッシュからマクロデータを読み込む
+    const uint32_t macro_offsets[] = {
+        0x1E0000, 0x1E1000, 0x1E2000, 0x1E3000, 0x1E4000, 0x1E5000,
+        0x1E6000, 0x1E7000, 0x1E8000, 0x1E9000, 0x1EA000, 0x1EB000
+    };
+    
+    if (macro_no < 0 || macro_no >= 12 || !buffer || buffer_size == 0) {
+        if (buffer && buffer_size > 0) buffer[0] = '\0';
+        return;
+    }
+    
+    const uint8_t *flash_ptr = (const uint8_t *)(XIP_BASE + macro_offsets[macro_no]);
+    int pos = 0;
+    
+    // ヘッダー
+    pos += snprintf(buffer + pos, buffer_size - pos,
+        "Macro %d Data\r\n"
+        "Format: FRAME,OUT1,OUT2,OUT3,OUT4,OUT5,OUT6,OUT7,OUT8,OUT9,OUT10,OUT11,OUT12\r\n"
+        "\r\n",
+        macro_no);
+    
+    if (pos >= (int)buffer_size - 10) return;
+    
+    // マクロデータは4096バイト (1セクタ) に150フレーム分格納可能
+    // 各フレームは16バイト構成: ビット0=有効フラグ、ビット1-12=出力1-12の状態（ビットパック形式）
+    // フラッシュには16ビット単位で格納: bit0=有効, bit1-12=出力1-12, bit13-15=予約
+    for (int frame = 0; frame < 150 && pos < (int)buffer_size - 50; frame++) {
+        // 各フレームは2バイト（16ビット）で格納されている
+        int byte_offset = frame * 2;
+        if (byte_offset >= 4096 - 1) break;
+        
+        uint16_t frame_data = flash_ptr[byte_offset] | (flash_ptr[byte_offset + 1] << 8);
+        
+        // bit0 = 有効フラグ
+        bool frame_valid = (frame_data & 0x0001) != 0;
+        
+        if (!frame_valid && frame > 0) continue; // 空のフレームはスキップ (フレーム0は常に表示)
+        
+        // フレーム番号
+        pos += snprintf(buffer + pos, buffer_size - pos, "%d,", frame + 1);
+        
+        // 12個の出力値 (bit1-12)
+        for (int i = 0; i < 12 && pos < (int)buffer_size - 3; i++) {
+            int bit_val = (frame_data >> (i + 1)) & 0x0001;
+            pos += snprintf(buffer + pos, buffer_size - pos, "%d", bit_val);
+            if (i < 11) {
+                buffer[pos++] = ',';
+            }
+        }
+        
+        if (pos < (int)buffer_size - 2) {
+            buffer[pos++] = '\r';
+            buffer[pos++] = '\n';
+        }
+    }
+    
+    if (pos < (int)buffer_size) {
+        buffer[pos] = '\0';
+    }
+}
+
 static void build_fat12_image(void) {
     for (uint i = 0; i < sizeof(ram_disk); ++i) ram_disk[i] = 0;
 
@@ -164,32 +232,90 @@ static void build_fat12_image(void) {
     b[13] = 1; // sectors per cluster
     uint16_t reserved = 1; memcpy(&b[14], &reserved, 2);
     b[16] = 2; // number of FATs
-    uint16_t root_entries = 16; memcpy(&b[17], &root_entries, 2);
+    uint16_t root_entries = 32; memcpy(&b[17], &root_entries, 2);
     uint16_t total_sectors = DISK_SECTOR_COUNT; memcpy(&b[19], &total_sectors, 2);
     b[21] = 0xF8; // media
-    uint16_t sectors_per_fat = 1; memcpy(&b[22], &sectors_per_fat, 2);
+    uint16_t sectors_per_fat = 4; memcpy(&b[22], &sectors_per_fat, 2);  // FATサイズを4セクタに拡張
     uint16_t sectors_per_track = 1; memcpy(&b[24], &sectors_per_track, 2);
     uint16_t heads = 1; memcpy(&b[26], &heads, 2);
     b[36] = 0x29;
     memcpy(&b[43], "NO NAME    ", 8);
     memcpy(&b[54], "FAT12   ", 8);
 
+    // FAT領域の設定 (セクタ1-4とセクタ5-8の2つのFATテーブル)
     uint8_t *fat1 = ram_disk + DISK_SECTOR_SIZE * 1;
-    uint8_t *fat2 = ram_disk + DISK_SECTOR_SIZE * 2;
-    memset(fat1, 0, DISK_SECTOR_SIZE);
-    memset(fat2, 0, DISK_SECTOR_SIZE);
+    uint8_t *fat2 = ram_disk + DISK_SECTOR_SIZE * 5;
+    memset(fat1, 0, DISK_SECTOR_SIZE * 4);
+    memset(fat2, 0, DISK_SECTOR_SIZE * 4);
     fat1[0] = 0xF8; fat1[1] = 0xFF; fat1[2] = 0xFF; // media + EOC
-    fat1[3] = 0xFF; fat1[4] = 0x0F;                 // cluster 2 EOC
-    memcpy(fat2, fat1, DISK_SECTOR_SIZE);
+    
+    // FAT12エントリを設定
+    for (int c = 0; c < 100; c++) {
+        int offset = c * 3 / 2;
+        if (c % 2 == 0) {
+            fat1[offset] = 0;
+            fat1[offset + 1] &= 0xF0;
+        } else {
+            fat1[offset] &= 0x0F;
+            fat1[offset + 1] = 0;
+        }
+    }
+    
+    // クラスタ2: Setting.txt (1セクタ、EOC)
+    {
+        int offset = 2 * 3 / 2;  // cluster 2
+        fat1[offset] = 0xFF;
+        fat1[offset + 1] = (fat1[offset + 1] & 0xF0) | 0x0F;
+    }
+    
+    // クラスタ3以降: MACRO_00.txt - MACRO_11.txt (各8セクタ)
+    int cluster = 3;
+    for (int macro = 0; macro < 12; macro++) {
+        // 8セクタのチェーンを作成
+        for (int sec = 0; sec < 8; sec++) {
+            int offset = cluster * 3 / 2;
+            uint16_t next_val = (sec < 7) ? (cluster + 1) : 0xFFF;
+            
+            if (cluster % 2 == 0) {
+                fat1[offset] = next_val & 0xFF;
+                fat1[offset + 1] = (fat1[offset + 1] & 0xF0) | ((next_val >> 8) & 0x0F);
+            } else {
+                fat1[offset] = (fat1[offset] & 0x0F) | ((next_val & 0x0F) << 4);
+                fat1[offset + 1] = (next_val >> 4) & 0xFF;
+            }
+            cluster++;
+        }
+    }
+    
+    memcpy(fat2, fat1, DISK_SECTOR_SIZE * 4);
 
-    uint8_t *root = ram_disk + DISK_SECTOR_SIZE * ROOT_DIR_SECTOR;
-    memset(root, 0, DISK_SECTOR_SIZE);
-    // 8.3形式のファイル名: "SETTING TXT" => Setting.txt
+    // ルートディレクトリはセクタ9-10 (32エントリ = 2セクタ)
+    uint8_t *root = ram_disk + DISK_SECTOR_SIZE * 9;
+    memset(root, 0, DISK_SECTOR_SIZE * 2);
+    
+    // Setting.txt エントリ
     memcpy(root + 0, "SETTING TXT", 11);
     root[11] = 0x20;
     uint16_t start_cluster = 2; memcpy(root + 26, &start_cluster, 2);
 
-    char *text_buffer = (char *)(ram_disk + DISK_SECTOR_SIZE * DATA_START_SECTOR);
+    // MACRO_00.txt - MACRO_11.txt エントリ
+    cluster = 3;
+    for (int i = 0; i < 12; i++) {
+        uint8_t *entry = root + (i + 1) * 32;
+        char filename[12];
+        snprintf(filename, sizeof(filename), "MACRO_%02dTXT", i);
+        memcpy(entry, filename, 11);
+        entry[11] = 0x20;
+        uint16_t file_cluster = cluster;
+        memcpy(entry + 26, &file_cluster, 2);
+        cluster += 8; // 次のマクロファイルは8クラスタ後
+    }
+
+    // データ領域の開始はセクタ11 (ルート後)
+    const int actual_data_start = 11;
+    
+    // Setting.txt の内容を生成 (クラスタ2 = セクタ11)
+    char *text_buffer = (char *)(ram_disk + DISK_SECTOR_SIZE * actual_data_start);
     memset(text_buffer, 0, DISK_SECTOR_SIZE);
 
     const uint8_t *flash_ptr = (const uint8_t *) (XIP_BASE + 0x1F0000);
@@ -243,7 +369,23 @@ static void build_fat12_image(void) {
         }
     }
     
+    // Setting.txt のファイルサイズを設定
     uint32_t fsize = text_pos; memcpy(root + 28, &fsize, 4);
+    
+    // MACRO_00.txt - MACRO_11.txt の内容を生成 (各8セクタ)
+    for (int macro_no = 0; macro_no < 12; macro_no++) {
+        // 各マクロファイルは8セクタ = 4096バイト使用
+        int macro_start_sector = actual_data_start + 1 + (macro_no * 8);
+        char *macro_buffer = (char *)(ram_disk + DISK_SECTOR_SIZE * macro_start_sector);
+        memset(macro_buffer, 0, DISK_SECTOR_SIZE * 8);
+        
+        generate_macro_text(macro_no, macro_buffer, DISK_SECTOR_SIZE * 8);
+        
+        // ファイルサイズを設定
+        uint32_t macro_size = strlen(macro_buffer);
+        uint8_t *macro_entry = root + (macro_no + 1) * 32;
+        memcpy(macro_entry + 28, &macro_size, 4);
+    }
 }
 
 // TinyUSB MSC callbacks ------------------------------------------------------
@@ -273,6 +415,98 @@ int32_t tud_msc_read10_cb(uint8_t lun, uint32_t lba, uint32_t offset, void *buff
     if (bufsize > available) bufsize = available;
     memcpy(buffer, ram_disk + lba * DISK_SECTOR_SIZE + offset, bufsize);
     return (int32_t) bufsize;
+}
+
+// マクロCSVファイルをパースしてフラッシュに書き込む
+static void parse_macro_csv_n(int macro_no, const char *csv_data, size_t csv_len) {
+    if (macro_no < 0 || macro_no >= 12) return;
+    
+    const uint32_t macro_offsets[] = {
+        0x1E0000, 0x1E1000, 0x1E2000, 0x1E3000, 0x1E4000, 0x1E5000,
+        0x1E6000, 0x1E7000, 0x1E8000, 0x1E9000, 0x1EA000, 0x1EB000
+    };
+    
+    // 4096バイト = 1セクタ分のマクロデータ (150フレーム × 2バイト = 300バイト使用)
+    uint8_t new_macro_data[4096];
+    
+    // 全セクタを0でクリア
+    memset(new_macro_data, 0, sizeof(new_macro_data));
+    
+    const char *p = csv_data;
+    const char *end = csv_data + csv_len;
+    
+    while (p < end) {
+        const char *line_start = p;
+        while (p < end && *p != '\r' && *p != '\n') p++;
+        const char *line_end = p;
+        while (p < end && (*p == '\r' || *p == '\n')) p++;
+        
+        // trim
+        while (line_start < line_end && (*line_start == ' ' || *line_start == '\t')) line_start++;
+        while (line_end > line_start && (line_end[-1] == ' ' || line_end[-1] == '\t')) line_end--;
+        if (line_start >= line_end) continue; // empty
+        if (!(line_start[0] >= '0' && line_start[0] <= '9')) continue; // only data lines
+        
+        size_t len = (size_t)(line_end - line_start);
+        char buf[160];
+        if (len >= sizeof(buf)) len = sizeof(buf) - 1;
+        memcpy(buf, line_start, len);
+        buf[len] = '\0';
+        
+        // フレーム番号を取得
+        int frame_no = 0;
+        char *s = buf;
+        char *comma = strchr(s, ',');
+        if (!comma) continue;
+        *comma = '\0';
+        frame_no = atoi(s);
+        
+        if (frame_no < 1 || frame_no > 150) continue; // フレーム1-150まで有効
+        int frame_index = frame_no - 1;
+        
+        // 各フレームは2バイト（16ビット）で格納
+        // bit0 = 有効フラグ, bit1-12 = 出力1-12
+        uint16_t frame_data = 0x0001; // 有効フラグをセット
+        
+        // 12個の出力値を取得してビットパック
+        s = comma + 1;
+        int output_count = 0;
+        for (int i = 0; i < 12 && *s != '\0'; i++) {
+            while (*s == ' ' || *s == '\t') s++;
+            if (*s == '\0') break;
+            
+            if (*s == '1') {
+                frame_data |= (1 << (i + 1)); // bit1-12に出力状態を設定
+            } else if (*s != '0') {
+                break; // 不正な値
+            }
+            
+            output_count++;
+            s++;
+            // カンマをスキップ
+            while (*s == ' ' || *s == '\t') s++;
+            if (*s == ',') s++;
+        }
+        
+        if (output_count == 12) {
+            // 16ビットデータを2バイトに格納
+            int byte_offset = frame_index * 2;
+            if (byte_offset < 4096 - 1) {
+                new_macro_data[byte_offset] = frame_data & 0xFF;
+                new_macro_data[byte_offset + 1] = (frame_data >> 8) & 0xFF;
+            }
+        }
+    }
+    
+    // フラッシュに書き込み
+    uint32_t ints = save_and_disable_interrupts();
+    flash_range_erase(macro_offsets[macro_no], FLASH_SECTOR_SIZE);
+    flash_range_program(macro_offsets[macro_no], new_macro_data, FLASH_SECTOR_SIZE);
+    restore_interrupts(ints);
+    
+    __dsb();
+    __isb();
+    sleep_us(1000);
 }
 
 // CSVファイルをパースして設定に反映する
@@ -368,33 +602,49 @@ int32_t tud_msc_write10_cb(uint8_t lun, uint32_t lba, uint32_t offset, uint8_t *
     if (bufsize > available) bufsize = available;
     memcpy(ram_disk + DISK_SECTOR_SIZE * lba + offset, buffer, bufsize);
 
-    // ルートディレクトリ更新時に Setting.txt のサイズを捕捉し、完了扱いへフォールバック
-    if (lba == ROOT_DIR_SECTOR) {
+    // ルートディレクトリ更新時にファイルを識別
+    if (lba == ROOT_DIR_SECTOR || lba == ROOT_DIR_SECTOR + 1) {
         uint8_t *root = ram_disk + DISK_SECTOR_SIZE * ROOT_DIR_SECTOR;
+        
+        // Setting.txt のチェック
         if (root[0] != 0x00 && root[0] != 0xE5) {
             if (memcmp(root + 0, "SETTING TXT", 11) == 0) {
                 uint32_t fsz = 0; memcpy(&fsz, root + 28, 4);
                 s_file_size_hint = fsz;
                 if (!s_write_processed && s_write_len > 0) {
-                    // バッファ内容をそのまま適用（行単位で不正なものはパーサ側でスキップ）
                     parse_settings_csv_n((const char*)s_write_buffer, s_write_len);
                     s_write_processed = true;
                     start_post_blink_pattern();
                 }
             }
         }
+        
+        // MACRO_XX.txt のチェック (エントリ1-12)
+        for (int i = 0; i < 12; i++) {
+            uint8_t *entry = root + (i + 1) * 32;
+            if (entry[0] != 0x00 && entry[0] != 0xE5) {
+                char expected_name[12];
+                snprintf(expected_name, sizeof(expected_name), "MACRO_%02dTXT", i);
+                if (memcmp(entry, expected_name, 11) == 0) {
+                    uint32_t fsz = 0; memcpy(&fsz, entry + 28, 4);
+                    if (fsz > 0 && s_macro_write_number == i && s_macro_write_pending) {
+                        // マクロファイルの書き込みを適用
+                        parse_macro_csv_n(i, (const char*)s_macro_write_buffer, fsz);
+                        s_macro_write_pending = false;
+                        s_macro_write_number = -1;
+                        start_post_blink_pattern();
+                    }
+                }
+            }
+        }
     }
-    // Setting.txt の最初のデータセクタ(=DATA_START_SECTOR)のみをトリガに点滅開始
-    // 以降の連続書込みもバッファへ蓄積。最初の書込みで現行内容をプリロード。
-    if (lba >= DATA_START_SECTOR && lba < DATA_START_SECTOR + 8) {
-        // 初回のデータセクタ書込みで点滅開始＆プリロード（LBA4に限定しない）
+    
+    // Setting.txt のデータセクタ書込み (セクタ7)
+    if (lba == DATA_START_SECTOR) {
         if (!s_led_blinking) {
-            // 完了パターン点滅中なら中断し、消灯から開始
             s_post_blink_active = false;
             s_post_blink_remaining_toggles = 0;
             led_off();
-
-            // ここで初めて実データ書込み開始とみなし、抑止を解除
             s_led_suppress_until_write = false;
 
             led_blink_start();
@@ -408,7 +658,7 @@ int32_t tud_msc_write10_cb(uint8_t lun, uint32_t lba, uint32_t offset, uint8_t *
             uint32_t preload_len = current_fsize;
             if (preload_len == 0 || preload_len > sizeof(s_write_buffer)) preload_len = sizeof(s_write_buffer);
             memcpy(s_write_buffer, ram_disk + DISK_SECTOR_SIZE * DATA_START_SECTOR, preload_len);
-            s_write_len = preload_len; // 既存内容を長さとして反映（部分書込みでも全体を検証可能に）
+            s_write_len = preload_len;
             s_preseeded_buffer = true;
         }
         s_last_write_ms = to_ms_since_boot(get_absolute_time());
@@ -420,25 +670,76 @@ int32_t tud_msc_write10_cb(uint8_t lun, uint32_t lba, uint32_t offset, uint8_t *
             if (pos + cpy > s_write_len) s_write_len = pos + cpy;
         }
     }
+    
+    // MACRO_XX.txt のデータセクタ書込み (各マクロファイルは8セクタ)
+    for (int i = 0; i < 12; i++) {
+        int macro_start_sector = DATA_START_SECTOR + 1 + (i * 8);
+        int macro_end_sector = macro_start_sector + 8;
+        
+        if (lba >= macro_start_sector && lba < macro_end_sector) {
+            if (!s_led_blinking) {
+                s_post_blink_active = false;
+                s_post_blink_remaining_toggles = 0;
+                led_off();
+                s_led_suppress_until_write = false;
+                led_blink_start();
+                s_led_blinking = true;
+                s_macro_write_number = i;
+                memset(s_macro_write_buffer, 0, sizeof(s_macro_write_buffer));
+            }
+            s_last_write_ms = to_ms_since_boot(get_absolute_time());
+            
+            // マクロ書き込みバッファにコピー (8セクタ分)
+            int sector_offset = lba - macro_start_sector;
+            uint32_t buf_pos = sector_offset * DISK_SECTOR_SIZE + offset;
+            if (buf_pos + bufsize <= sizeof(s_macro_write_buffer)) {
+                memcpy(s_macro_write_buffer + buf_pos, buffer, bufsize);
+                s_macro_write_number = i;
+                s_macro_write_pending = true;
+            }
+            break;
+        }
+    }
+    
     return (int32_t) bufsize;
 }
 
 // 書き込み完了時に検証・適用/削除を行う
 void tud_msc_write10_complete_cb(uint8_t lun) {
     (void)lun;
-    if (s_write_processed) return;
-    // ルートからファイルサイズを取得してRAMディスクの現内容を読み直す
-    uint8_t *root = ram_disk + DISK_SECTOR_SIZE * ROOT_DIR_SECTOR;
-    if (root[0] == 0x00 || root[0] == 0xE5 || memcmp(root + 0, "SETTING TXT", 11) != 0) return;
-    uint32_t fsz = 0; memcpy(&fsz, root + 28, 4);
-    if (fsz == 0) return;
-    uint32_t sz = fsz;
-    if (sz > sizeof(s_write_buffer)) sz = sizeof(s_write_buffer);
-    memcpy(s_write_buffer, ram_disk + DISK_SECTOR_SIZE * DATA_START_SECTOR, sz);
-    // 現在のRAMディスクの内容をそのまま適用（不正行はパーサがスキップ）
-    parse_settings_csv_n((const char*)s_write_buffer, sz);
-    s_write_processed = true;
-    start_post_blink_pattern();
+    
+    // Setting.txt の書き込み完了処理
+    if (!s_write_processed) {
+        uint8_t *root = ram_disk + DISK_SECTOR_SIZE * ROOT_DIR_SECTOR;
+        if (root[0] != 0x00 && root[0] != 0xE5 && memcmp(root + 0, "SETTING TXT", 11) == 0) {
+            uint32_t fsz = 0; memcpy(&fsz, root + 28, 4);
+            if (fsz > 0) {
+                uint32_t sz = fsz;
+                if (sz > sizeof(s_write_buffer)) sz = sizeof(s_write_buffer);
+                memcpy(s_write_buffer, ram_disk + DISK_SECTOR_SIZE * DATA_START_SECTOR, sz);
+                parse_settings_csv_n((const char*)s_write_buffer, sz);
+                s_write_processed = true;
+                start_post_blink_pattern();
+            }
+        }
+    }
+    
+    // MACRO_XX.txt の書き込み完了処理
+    if (s_macro_write_pending && s_macro_write_number >= 0 && s_macro_write_number < 12) {
+        uint8_t *root = ram_disk + DISK_SECTOR_SIZE * ROOT_DIR_SECTOR;
+        uint8_t *entry = root + (s_macro_write_number + 1) * 32;
+        if (entry[0] != 0x00 && entry[0] != 0xE5) {
+            uint32_t fsz = 0; memcpy(&fsz, entry + 28, 4);
+            if (fsz > 0 && fsz <= sizeof(s_macro_write_buffer)) {
+                int macro_start_sector = DATA_START_SECTOR + 1 + (s_macro_write_number * 8);
+                memcpy(s_macro_write_buffer, ram_disk + DISK_SECTOR_SIZE * macro_start_sector, fsz);
+                parse_macro_csv_n(s_macro_write_number, (const char*)s_macro_write_buffer, fsz);
+                s_macro_write_pending = false;
+                s_macro_write_number = -1;
+                start_post_blink_pattern();
+            }
+        }
+    }
 }
 
 bool tud_msc_is_writable_cb (uint8_t lun) { (void) lun; return true; }
@@ -474,6 +775,10 @@ void usb_msc_start(void) {
     s_post_blink_remaining_toggles = 0;
     s_led_manual_state = false;
     s_led_suppress_until_write = true;
+    // マクロ書き込み用の変数を初期化
+    s_macro_write_number = -1;
+    s_macro_write_pending = false;
+    memset(s_macro_write_buffer, 0, sizeof(s_macro_write_buffer));
     led_blink_stop();
     led_off();
     memset(s_write_buffer, 0, sizeof(s_write_buffer));
