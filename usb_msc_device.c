@@ -33,8 +33,8 @@ static bool s_led_manual_state = false;
 // 初回の実データ書込み(Setting.txtのデータセクタ)まで点滅を完全抑止
 static bool s_led_suppress_until_write = true;
 
-// マクロファイル書き込み用のバッファ (各マクロファイル用、最大8セクタ = 4096バイト)
-static uint8_t s_macro_write_buffer[DISK_SECTOR_SIZE * 8];
+// マクロファイル書き込み用のバッファ (各マクロファイル用、最大10セクタ = 5120バイト)
+static uint8_t s_macro_write_buffer[DISK_SECTOR_SIZE * 10];
 static int s_macro_write_number = -1;  // 現在書き込み中のマクロ番号 (-1 = なし)
 static bool s_macro_write_pending = false;
 
@@ -186,7 +186,7 @@ static void generate_macro_text(int macro_no, char *buffer, size_t buffer_size) 
     // マクロデータは4096バイト (1セクタ) に150フレーム分格納可能
     // 各フレームは16バイト構成: ビット0=有効フラグ、ビット1-12=出力1-12の状態（ビットパック形式）
     // フラッシュには16ビット単位で格納: bit0=有効, bit1-12=出力1-12, bit13-15=予約
-    for (int frame = 0; frame < 150 && pos < (int)buffer_size - 50; frame++) {
+    for (int frame = 0; frame < 150; frame++) {
         // 各フレームは2バイト（16ビット）で格納されている
         int byte_offset = frame * 2;
         if (byte_offset >= 4096 - 1) break;
@@ -197,6 +197,9 @@ static void generate_macro_text(int macro_no, char *buffer, size_t buffer_size) 
         bool frame_valid = (frame_data & 0x0001) != 0;
         
         if (!frame_valid && frame > 0) continue; // 空のフレームはスキップ (フレーム0は常に表示)
+        
+        // バッファサイズチェック (1行あたり約30バイト必要)
+        if (pos >= (int)buffer_size - 35) break;
         
         // フレーム番号
         pos += snprintf(buffer + pos, buffer_size - pos, "%d,", frame + 1);
@@ -268,13 +271,13 @@ static void build_fat12_image(void) {
         fat1[offset + 1] = (fat1[offset + 1] & 0xF0) | 0x0F;
     }
     
-    // クラスタ3以降: MACRO_00.txt - MACRO_11.txt (各8セクタ)
+    // クラスタ3以降: MACRO_00.txt - MACRO_11.txt (各10セクタ)
     int cluster = 3;
     for (int macro = 0; macro < 12; macro++) {
-        // 8セクタのチェーンを作成
-        for (int sec = 0; sec < 8; sec++) {
+        // 10セクタのチェーンを作成
+        for (int sec = 0; sec < 10; sec++) {
             int offset = cluster * 3 / 2;
-            uint16_t next_val = (sec < 7) ? (cluster + 1) : 0xFFF;
+            uint16_t next_val = (sec < 9) ? (cluster + 1) : 0xFFF;
             
             if (cluster % 2 == 0) {
                 fat1[offset] = next_val & 0xFF;
@@ -308,7 +311,7 @@ static void build_fat12_image(void) {
         entry[11] = 0x20;
         uint16_t file_cluster = cluster;
         memcpy(entry + 26, &file_cluster, 2);
-        cluster += 8; // 次のマクロファイルは8クラスタ後
+        cluster += 10; // 次のマクロファイルは10クラスタ後
     }
 
     // データ領域の開始はセクタ11 (ルート後)
@@ -372,14 +375,14 @@ static void build_fat12_image(void) {
     // Setting.txt のファイルサイズを設定
     uint32_t fsize = text_pos; memcpy(root + 28, &fsize, 4);
     
-    // MACRO_00.txt - MACRO_11.txt の内容を生成 (各8セクタ)
+    // MACRO_00.txt - MACRO_11.txt の内容を生成 (各10セクタ)
     for (int macro_no = 0; macro_no < 12; macro_no++) {
-        // 各マクロファイルは8セクタ = 4096バイト使用
-        int macro_start_sector = actual_data_start + 1 + (macro_no * 8);
+        // 各マクロファイルは10セクタ = 5120バイト使用 (150フレーム分には十分)
+        int macro_start_sector = actual_data_start + 1 + (macro_no * 10);
         char *macro_buffer = (char *)(ram_disk + DISK_SECTOR_SIZE * macro_start_sector);
-        memset(macro_buffer, 0, DISK_SECTOR_SIZE * 8);
+        memset(macro_buffer, 0, DISK_SECTOR_SIZE * 10);
         
-        generate_macro_text(macro_no, macro_buffer, DISK_SECTOR_SIZE * 8);
+        generate_macro_text(macro_no, macro_buffer, DISK_SECTOR_SIZE * 10);
         
         // ファイルサイズを設定
         uint32_t macro_size = strlen(macro_buffer);
@@ -431,6 +434,8 @@ static void parse_macro_csv_n(int macro_no, const char *csv_data, size_t csv_len
     
     // 全セクタを0でクリア
     memset(new_macro_data, 0, sizeof(new_macro_data));
+    
+    int max_frame_parsed = 0;  // 最大フレーム番号を記録
     
     const char *p = csv_data;
     const char *end = csv_data + csv_len;
@@ -494,7 +499,25 @@ static void parse_macro_csv_n(int macro_no, const char *csv_data, size_t csv_len
             if (byte_offset < 4096 - 1) {
                 new_macro_data[byte_offset] = frame_data & 0xFF;
                 new_macro_data[byte_offset + 1] = (frame_data >> 8) & 0xFF;
+                
+                // 最大フレーム番号を更新
+                if (frame_no > max_frame_parsed) {
+                    max_frame_parsed = frame_no;
+                }
             }
+        }
+    }
+    
+    // デバッグ用: 最大フレーム番号までの全フレームを有効化
+    // CSVに書かれている最大フレーム番号までが有効範囲とする
+    for (int i = 0; i < max_frame_parsed; i++) {
+        int byte_offset = i * 2;
+        uint16_t frame_data = new_macro_data[byte_offset] | (new_macro_data[byte_offset + 1] << 8);
+        
+        // まだ無効(0x0000)のフレームは、有効フラグだけセット(全出力OFF)
+        if (frame_data == 0x0000) {
+            new_macro_data[byte_offset] = 0x01;  // bit0=1 (有効), bit1-12=0 (全出力OFF)
+            new_macro_data[byte_offset + 1] = 0x00;
         }
     }
     
@@ -671,10 +694,10 @@ int32_t tud_msc_write10_cb(uint8_t lun, uint32_t lba, uint32_t offset, uint8_t *
         }
     }
     
-    // MACRO_XX.txt のデータセクタ書込み (各マクロファイルは8セクタ)
+    // MACRO_XX.txt のデータセクタ書込み (各マクロファイルは10セクタ)
     for (int i = 0; i < 12; i++) {
-        int macro_start_sector = DATA_START_SECTOR + 1 + (i * 8);
-        int macro_end_sector = macro_start_sector + 8;
+        int macro_start_sector = DATA_START_SECTOR + 1 + (i * 10);
+        int macro_end_sector = macro_start_sector + 10;
         
         if (lba >= macro_start_sector && lba < macro_end_sector) {
             if (!s_led_blinking) {
@@ -689,7 +712,7 @@ int32_t tud_msc_write10_cb(uint8_t lun, uint32_t lba, uint32_t offset, uint8_t *
             }
             s_last_write_ms = to_ms_since_boot(get_absolute_time());
             
-            // マクロ書き込みバッファにコピー (8セクタ分)
+            // マクロ書き込みバッファにコピー (10セクタ分)
             int sector_offset = lba - macro_start_sector;
             uint32_t buf_pos = sector_offset * DISK_SECTOR_SIZE + offset;
             if (buf_pos + bufsize <= sizeof(s_macro_write_buffer)) {
@@ -729,11 +752,24 @@ void tud_msc_write10_complete_cb(uint8_t lun) {
         uint8_t *root = ram_disk + DISK_SECTOR_SIZE * ROOT_DIR_SECTOR;
         uint8_t *entry = root + (s_macro_write_number + 1) * 32;
         if (entry[0] != 0x00 && entry[0] != 0xE5) {
-            uint32_t fsz = 0; memcpy(&fsz, entry + 28, 4);
-            if (fsz > 0 && fsz <= sizeof(s_macro_write_buffer)) {
-                int macro_start_sector = DATA_START_SECTOR + 1 + (s_macro_write_number * 8);
-                memcpy(s_macro_write_buffer, ram_disk + DISK_SECTOR_SIZE * macro_start_sector, fsz);
-                parse_macro_csv_n(s_macro_write_number, (const char*)s_macro_write_buffer, fsz);
+            // ルートディレクトリのファイルサイズではなく、実際のバッファから直接読み取る
+            int macro_start_sector = DATA_START_SECTOR + 1 + (s_macro_write_number * 10);
+            
+            // バッファ全体をコピー (最大5120バイト)
+            memcpy(s_macro_write_buffer, ram_disk + DISK_SECTOR_SIZE * macro_start_sector, sizeof(s_macro_write_buffer));
+            
+            // 実際のファイルサイズを計算 (NULL終端または最大サイズまで)
+            size_t actual_size = 0;
+            for (size_t i = 0; i < sizeof(s_macro_write_buffer); i++) {
+                if (s_macro_write_buffer[i] == '\0') {
+                    actual_size = i;
+                    break;
+                }
+            }
+            if (actual_size == 0) actual_size = sizeof(s_macro_write_buffer);
+            
+            if (actual_size > 0) {
+                parse_macro_csv_n(s_macro_write_number, (const char*)s_macro_write_buffer, actual_size);
                 s_macro_write_pending = false;
                 s_macro_write_number = -1;
                 start_post_blink_pattern();
