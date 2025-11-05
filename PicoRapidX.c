@@ -426,14 +426,14 @@ int main() {
                 const char* status = usb_msc_get_status_string();
                 
                 if (usb_msc_is_mounted()) {
-                    DrawMessage(1, "Connected", false);
+                    DrawMessage(1, "Connect", false);
                     DrawMessage(2, "Ready", false);
                 } else if (usb_msc_is_connected()) {
-                    DrawMessage(1, "Connecting...", false);
-                    DrawMessage(2, "Please wait", false);
+                    DrawMessage(1, "Connect", false);
+                    DrawMessage(2, "Wait...", false);
                 } else {
-                    DrawMessage(1, "USB Cable?", false);
-                    DrawMessage(2, "Check host", false);
+                    DrawMessage(1, "No USB", false);
+                    DrawMessage(2, "Cable?", false);
                 }
                 
                 Ssd1306_Update_Frame();
