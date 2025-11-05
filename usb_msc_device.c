@@ -183,20 +183,19 @@ static void generate_macro_text(int macro_no, char *buffer, size_t buffer_size) 
     
     if (pos >= (int)buffer_size - 10) return;
     
-    // マクロデータは4096バイト (1セクタ) に150フレーム分格納可能
-    // 各フレームは16バイト構成: ビット0=有効フラグ、ビット1-12=出力1-12の状態（ビットパック形式）
-    // フラッシュには16ビット単位で格納: bit0=有効, bit1-12=出力1-12, bit13-15=予約
+    // マクロデータは4096バイト (1セクタ)
+    // 256フレーム × 16バイト = 4096バイト
+    // 各フレームの16バイト: バイト0=有効フラグ、バイト1-15=出力1-15 (出力は12個まで使用)
+    // 注意: フラッシュのインデックス0はダミー、実際のフレーム1はインデックス1から
     for (int frame = 0; frame < 150; frame++) {
-        // 各フレームは2バイト（16ビット）で格納されている
-        int byte_offset = frame * 2;
-        if (byte_offset >= 4096 - 1) break;
+        // 各フレームは16バイト、ただしインデックス0はスキップ(ダミーフレーム)
+        int byte_offset = (frame + 1) * 16;  // +1でインデックス0をスキップ
+        if (byte_offset >= 4096) break;
         
-        uint16_t frame_data = flash_ptr[byte_offset] | (flash_ptr[byte_offset + 1] << 8);
+        // バイト0 = 有効フラグ
+        bool frame_valid = (flash_ptr[byte_offset] != 0);
         
-        // bit0 = 有効フラグ
-        bool frame_valid = (frame_data & 0x0001) != 0;
-        
-        if (!frame_valid && frame > 0) continue; // 空のフレームはスキップ (フレーム0は常に表示)
+        if (!frame_valid) continue; // 無効フレームはスキップ
         
         // バッファサイズチェック (1行あたり約30バイト必要)
         if (pos >= (int)buffer_size - 35) break;
@@ -204,10 +203,10 @@ static void generate_macro_text(int macro_no, char *buffer, size_t buffer_size) 
         // フレーム番号
         pos += snprintf(buffer + pos, buffer_size - pos, "%d,", frame + 1);
         
-        // 12個の出力値 (bit1-12)
+        // 12個の出力値 (バイト1-12)
         for (int i = 0; i < 12 && pos < (int)buffer_size - 3; i++) {
-            int bit_val = (frame_data >> (i + 1)) & 0x0001;
-            pos += snprintf(buffer + pos, buffer_size - pos, "%d", bit_val);
+            int bit_val = flash_ptr[byte_offset + 1 + i];  // バイト1から出力1
+            pos += snprintf(buffer + pos, buffer_size - pos, "%d", bit_val ? 1 : 0);
             if (i < 11) {
                 buffer[pos++] = ',';
             }
@@ -429,7 +428,9 @@ static void parse_macro_csv_n(int macro_no, const char *csv_data, size_t csv_len
         0x1E6000, 0x1E7000, 0x1E8000, 0x1E9000, 0x1EA000, 0x1EB000
     };
     
-    // 4096バイト = 1セクタ分のマクロデータ (150フレーム × 2バイト = 300バイト使用)
+    // 4096バイト = 1セクタ分のマクロデータ
+    // 256フレーム × 16バイト = 4096バイト
+    // 各フレームの16バイト: バイト0=有効フラグ、バイト1-15=出力1-15 (出力は12個まで使用)
     uint8_t new_macro_data[4096];
     
     // 全セクタを0でクリア
@@ -469,19 +470,20 @@ static void parse_macro_csv_n(int macro_no, const char *csv_data, size_t csv_len
         if (frame_no < 1 || frame_no > 150) continue; // フレーム1-150まで有効
         int frame_index = frame_no - 1;
         
-        // 各フレームは2バイト（16ビット）で格納
-        // bit0 = 有効フラグ, bit1-12 = 出力1-12
-        uint16_t frame_data = 0x0001; // 有効フラグをセット
+        // 各フレームは16バイトで格納
+        // バイト0 = 有効フラグ, バイト1-12 = 出力1-12
         
-        // 12個の出力値を取得してビットパック
+        // 12個の出力値を取得
         s = comma + 1;
         int output_count = 0;
+        uint8_t outputs[12] = {0};
+        
         for (int i = 0; i < 12 && *s != '\0'; i++) {
             while (*s == ' ' || *s == '\t') s++;
             if (*s == '\0') break;
             
             if (*s == '1') {
-                frame_data |= (1 << (i + 1)); // bit1-12に出力状態を設定
+                outputs[i] = 1;
             } else if (*s != '0') {
                 break; // 不正な値
             }
@@ -494,11 +496,14 @@ static void parse_macro_csv_n(int macro_no, const char *csv_data, size_t csv_len
         }
         
         if (output_count == 12) {
-            // 16ビットデータを2バイトに格納
-            int byte_offset = frame_index * 2;
-            if (byte_offset < 4096 - 1) {
-                new_macro_data[byte_offset] = frame_data & 0xFF;
-                new_macro_data[byte_offset + 1] = (frame_data >> 8) & 0xFF;
+            // 16バイト形式でデータを格納
+            // インデックス0はダミーなので、フレーム1はインデックス1に格納
+            int byte_offset = (frame_index + 1) * 16;  // +1でインデックス0をスキップ
+            if (byte_offset < 4096 - 15) {
+                new_macro_data[byte_offset] = 1;  // バイト0: 有効フラグ
+                for (int i = 0; i < 12; i++) {
+                    new_macro_data[byte_offset + 1 + i] = outputs[i];  // バイト1-12: 出力1-12
+                }
                 
                 // 最大フレーム番号を更新
                 if (frame_no > max_frame_parsed) {
@@ -508,23 +513,48 @@ static void parse_macro_csv_n(int macro_no, const char *csv_data, size_t csv_len
         }
     }
     
-    // デバッグ用: 最大フレーム番号までの全フレームを有効化
     // CSVに書かれている最大フレーム番号までが有効範囲とする
+    // 空白フレームを補完 (+1でインデックス0をスキップ)
     for (int i = 0; i < max_frame_parsed; i++) {
-        int byte_offset = i * 2;
-        uint16_t frame_data = new_macro_data[byte_offset] | (new_macro_data[byte_offset + 1] << 8);
+        int byte_offset = (i + 1) * 16;  // +1でインデックス0をスキップ
         
-        // まだ無効(0x0000)のフレームは、有効フラグだけセット(全出力OFF)
-        if (frame_data == 0x0000) {
-            new_macro_data[byte_offset] = 0x01;  // bit0=1 (有効), bit1-12=0 (全出力OFF)
-            new_macro_data[byte_offset + 1] = 0x00;
+        // まだ無効(バイト0=0)のフレームは、有効フラグだけセット(全出力OFF)
+        if (new_macro_data[byte_offset] == 0) {
+            new_macro_data[byte_offset] = 1;  // バイト0=1 (有効フラグ)
+            // バイト1-12は既に0なので全出力OFF
         }
     }
+    
+    // インデックス0(ダミーフレーム)に有効フラグを設定
+    new_macro_data[0] = (max_frame_parsed > 0) ? 1 : 0;
     
     // フラッシュに書き込み
     uint32_t ints = save_and_disable_interrupts();
     flash_range_erase(macro_offsets[macro_no], FLASH_SECTOR_SIZE);
     flash_range_program(macro_offsets[macro_no], new_macro_data, FLASH_SECTOR_SIZE);
+    restore_interrupts(ints);
+    
+    __dsb();
+    __isb();
+    sleep_us(1000);
+    
+    // マクロファイル保存時に、対応する入力のRAPID_TYPEを5(Macro)に自動設定
+    const uint8_t *settings_flash = (const uint8_t *)(XIP_BASE + 0x1F0000);
+    uint8_t settings_data[256];
+    memcpy(settings_data, settings_flash, 256);
+    
+    // 対応する入力番号の設定を更新 (macro_no = 入力番号)
+    int setting_offset = macro_no * 16;
+    uint8_t current_rapid_type = settings_data[setting_offset];
+    bool is_reverse = (current_rapid_type >= 10);
+    
+    // RAPID_TYPE = 5 (Macro) に設定 (REVERSEフラグは維持)
+    settings_data[setting_offset] = is_reverse ? 15 : 5;
+    
+    // 設定をフラッシュに書き込み
+    ints = save_and_disable_interrupts();
+    flash_range_erase(0x1F0000, FLASH_SECTOR_SIZE);
+    flash_range_program(0x1F0000, settings_data, FLASH_SECTOR_SIZE);
     restore_interrupts(ints);
     
     __dsb();
