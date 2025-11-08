@@ -323,10 +323,11 @@ static void build_fat12_image(void) {
     const uint8_t *flash_ptr = (const uint8_t *) (XIP_BASE + 0x1F0000);
     int text_pos = 0;
     
-    // 設定ファイルのヘッダ（ユーザー指定の2行）
+    // 設定ファイルのヘッダ
     const char *header =
         "Format: INPUT_NO,RAPID_TYPE,REVERSE,OUT_FRAME,IN_FRAME,OUTPUT_PINS(0:OFF 1:ON)\r\n"
         "RAPID: 1=Norm 2=R30 3=R30Rev 4=Custom 5=Macro 6=R15 7=R15Rev\r\n"
+        "+10(11-17) for Button ON/OFF Reverse\r\n"
         "\r\n";
     
     int header_len = strlen(header);
@@ -538,7 +539,7 @@ static void parse_macro_csv_n(int macro_no, const char *csv_data, size_t csv_len
     __isb();
     sleep_us(1000);
     
-    // マクロファイル保存時に、対応する入力のRAPID_TYPEを5(Macro)に自動設定
+    // マクロファイル保存時の自動設定
     const uint8_t *settings_flash = (const uint8_t *)(XIP_BASE + 0x1F0000);
     uint8_t settings_data[256];
     memcpy(settings_data, settings_flash, 256);
@@ -548,8 +549,13 @@ static void parse_macro_csv_n(int macro_no, const char *csv_data, size_t csv_len
     uint8_t current_rapid_type = settings_data[setting_offset];
     bool is_reverse = (current_rapid_type >= 10);
     
-    // RAPID_TYPE = 5 (Macro) に設定 (REVERSEフラグは維持)
-    settings_data[setting_offset] = is_reverse ? 15 : 5;
+    if (max_frame_parsed > 0) {
+        // 有効なフレームがある場合: RAPID_TYPE = 5 (Macro) に設定
+        settings_data[setting_offset] = is_reverse ? 15 : 5;
+    } else {
+        // 空のマクロの場合: RAPID_TYPE = 1 (R10) に設定
+        settings_data[setting_offset] = is_reverse ? 11 : 1;
+    }
     
     // 設定をフラッシュに書き込み
     ints = save_and_disable_interrupts();
