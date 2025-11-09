@@ -205,6 +205,7 @@ bool Check_FrameDelete_Flg = false;
 bool Check_FrameInsert_Flg = false;
 bool ChangeBoard_Flg = false;
 bool GamePadMode = false;  // GamePadモード中フラグ
+bool FrameToggle = false;  // ループごとにtrue/falseを繰り返す
 
 uint8_t SelectMode = SelectMode_Normal;
 uint8_t SelectRapid = SelectRapid_Normal;
@@ -418,6 +419,9 @@ int main() {
         gpio_set_dir(SettingSW_DR_Pin, GPIO_IN);
         gpio_pull_up(SettingSW_DR_Pin);
         
+        // 連射設定を読み込み
+        SetIOSetting();
+        
         // I2C初期化（OLED用）
         i2c_init(I2C_PORT, 400 * 1000);
         gpio_set_function(SDA_PIN, GPIO_FUNC_I2C);
@@ -446,13 +450,19 @@ int main() {
         uint8_t report[3] = {0, 0, 0};  // [0]=buttons 1-8, [1]=buttons 9-16, [2]=hat switch
         bool connected = false;
         uint32_t last_check = 0;
+        uint32_t last_report = 0;
+        
+        // 連射用カウンタ（各入力ごと）
+        uint8_t rapid_counter[12] = {0};
+        bool rapid_state[12] = {false};  // 連射のON/OFF状態
         
         while (true) {
             tud_task();
             usb_msc_task();  // MSCタスクも処理（複合デバイスのため）
             
-            // 接続状態チェック（500ms毎）
             uint32_t now = to_ms_since_boot(get_absolute_time());
+            
+            // 接続状態チェック（500ms毎）
             if (now - last_check > 500) {
                 last_check = now;
                 bool mounted = tud_mounted();
@@ -468,12 +478,83 @@ int main() {
                 }
             }
             
+            // 60Hzループ（16.67ms）
+            if (now - last_report < 17) {
+                tud_task();
+                usb_msc_task();
+                sleep_ms(1);
+                continue;
+            }
+            last_report = now;
+            
+            // 連射処理（入力0-11に対応する設定を取得）
+            // 設定0 → 入力10
+            // 設定1 → 入力11
+            // 設定2-11 → 入力0-9
+            for (int i = 0; i < 12; i++) {
+                int setting_index;
+                if (i <= 9) {
+                    // 入力0-9 → 設定2-11
+                    setting_index = i + 2;
+                } else {
+                    // 入力10,11 → 設定0,1
+                    setting_index = i - 10;
+                }
+                
+                bool button_pressed = (gpio_get(gamepad_pins[i]) == 0);
+                
+                if (!button_pressed) {
+                    // ボタンが離されている
+                    rapid_state[i] = false;
+                    rapid_counter[i] = 0;  // カウンタリセット
+                } else {
+                    // ボタンが押されている
+                    if (IOSetting[setting_index].RapidType == 1) {
+                        // RapidType=1: 連射無効、押しっぱなし
+                        rapid_state[i] = true;
+                    } else if (IOSetting[setting_index].RapidType == 2) {
+                        // RapidType=2: FrameToggleがtrueの時ON、falseの時OFF
+                        rapid_state[i] = FrameToggle;
+                    } else if (IOSetting[setting_index].RapidType == 3) {
+                        // RapidType=3: FrameToggleがfalseの時ON、trueの時OFF
+                        rapid_state[i] = !FrameToggle;
+                    } else if (IOSetting[setting_index].RapidType == 4) {
+                        // RapidType=4: 指定フレーム数ONの後、指定フレーム数OFF、繰り返し
+                        rapid_counter[i]++;
+                        
+                        // ON期間中
+                        if (rapid_state[i]) {
+                            if (rapid_counter[i] >= IOSetting[setting_index].OutputFrame) {
+                                // OFF期間へ移行
+                                rapid_state[i] = false;
+                                rapid_counter[i] = 0;
+                            }
+                        }
+                        // OFF期間中
+                        else {
+                            if (rapid_counter[i] >= IOSetting[setting_index].IntervalFrame) {
+                                // ON期間へ移行
+                                rapid_state[i] = true;
+                                rapid_counter[i] = 0;
+                            }
+                        }
+                    } else {
+                        // その他のRapidType: とりあえず押しっぱなし
+                        rapid_state[i] = true;
+                    }
+                }
+            }
+            
+            // FrameToggleを反転
+            FrameToggle = !FrameToggle;
+            
+            // HIDレポート送信（準備ができていれば）
             if (tud_hid_ready()) {
                 report[0] = 0;  // buttons 1-8
                 report[1] = 0;  // buttons 9-16
                 report[2] = 8;  // hat switch (8 = neutral)
                 
-                // 入力とボタンのマッピング
+                // 入力とボタンのマッピング（連射状態を反映）
                 // 入力4 → ボタン2 (bit 1 of byte 0)
                 // 入力5 → ボタン3 (bit 2 of byte 0)
                 // 入力6 → ボタン4 (bit 3 of byte 0)
@@ -485,14 +566,14 @@ int main() {
                 // SettingSW_DL → ボタン5 (bit 4 of byte 0)
                 // SettingSW_DR → ボタン6 (bit 5 of byte 0)
                 
-                if (gpio_get(gamepad_pins[4]) == 0) report[0] |= (1 << 1);  // ボタン2
-                if (gpio_get(gamepad_pins[5]) == 0) report[0] |= (1 << 2);  // ボタン3
-                if (gpio_get(gamepad_pins[6]) == 0) report[0] |= (1 << 3);  // ボタン4
-                if (gpio_get(gamepad_pins[7]) == 0) report[0] |= (1 << 0);  // ボタン1
-                if (gpio_get(gamepad_pins[8]) == 0) report[1] |= (1 << 0);  // ボタン9
-                if (gpio_get(gamepad_pins[9]) == 0) report[1] |= (1 << 1);  // ボタン10
-                if (gpio_get(gamepad_pins[10]) == 0) report[0] |= (1 << 6); // ボタン7
-                if (gpio_get(gamepad_pins[11]) == 0) report[0] |= (1 << 7); // ボタン8
+                if (rapid_state[4]) report[0] |= (1 << 1);  // ボタン2
+                if (rapid_state[5]) report[0] |= (1 << 2);  // ボタン3
+                if (rapid_state[6]) report[0] |= (1 << 3);  // ボタン4
+                if (rapid_state[7]) report[0] |= (1 << 0);  // ボタン1
+                if (rapid_state[8]) report[1] |= (1 << 0);  // ボタン9
+                if (rapid_state[9]) report[1] |= (1 << 1);  // ボタン10
+                if (rapid_state[10]) report[0] |= (1 << 6); // ボタン7
+                if (rapid_state[11]) report[0] |= (1 << 7); // ボタン8
                 if (gpio_get(SettingSW_DL_Pin) == 0) report[0] |= (1 << 4);    // ボタン5
                 if (gpio_get(SettingSW_DR_Pin) == 0) report[0] |= (1 << 5);    // ボタン6
                 
@@ -530,7 +611,6 @@ int main() {
                 
                 tud_hid_report(0, report, sizeof(report));
             }
-            sleep_ms(10);
         }
     }
     
