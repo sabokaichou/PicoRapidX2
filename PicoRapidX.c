@@ -403,6 +403,15 @@ int main() {
             gpio_pull_up(Input_Pin_Macro[i]);
         }
         
+        // 設定ボタンの初期化（DL, DR）
+        gpio_init(SettingSW_DL_Pin);
+        gpio_set_dir(SettingSW_DL_Pin, GPIO_IN);
+        gpio_pull_up(SettingSW_DL_Pin);
+        
+        gpio_init(SettingSW_DR_Pin);
+        gpio_set_dir(SettingSW_DR_Pin, GPIO_IN);
+        gpio_pull_up(SettingSW_DR_Pin);
+        
         // I2C初期化（OLED用）
         i2c_init(I2C_PORT, 400 * 1000);
         gpio_set_function(SDA_PIN, GPIO_FUNC_I2C);
@@ -428,7 +437,7 @@ int main() {
         }
         
         // ゲームパッドメインループ
-        uint8_t report[3] = {0, 0, 0};
+        uint8_t report[3] = {0, 0, 0};  // [0]=buttons 1-8, [1]=buttons 9-16, [2]=hat switch
         bool connected = false;
         uint32_t last_check = 0;
         
@@ -454,33 +463,64 @@ int main() {
             }
             
             if (tud_hid_ready()) {
-                report[0] = 0;  // buttons
-                report[1] = 0;  // X axis
-                report[2] = 0;  // Y axis
+                report[0] = 0;  // buttons 1-8
+                report[1] = 0;  // buttons 9-16
+                report[2] = 8;  // hat switch (8 = neutral)
                 
-                // 入力4-11: ボタン1-8 (bit 0-7)
-                for (int i = 4; i <= 11 && i < 18; i++) {
-                    // ModeSW_Pinは無視
-                    if (Input_Pin_Macro[i] == ModeSW_Pin) continue;
-                    
-                    if (gpio_get(Input_Pin_Macro[i]) == 0) {
-                        report[0] |= (1 << (i - 4));
-                    }
+                // 入力とボタンのマッピング
+                // 入力4 → ボタン2 (bit 1 of byte 0)
+                // 入力5 → ボタン3 (bit 2 of byte 0)
+                // 入力6 → ボタン4 (bit 3 of byte 0)
+                // 入力7 → ボタン1 (bit 0 of byte 0)
+                // 入力8 → ボタン9 (bit 0 of byte 1)
+                // 入力9 → ボタン10 (bit 1 of byte 1)
+                // 入力10 → ボタン7 (bit 6 of byte 0)
+                // 入力11 → ボタン8 (bit 7 of byte 0)
+                // SettingSW_DL → ボタン5 (bit 4 of byte 0)
+                // SettingSW_DR → ボタン6 (bit 5 of byte 0)
+                
+                if (gpio_get(Input_Pin_Macro[4]) == 0) report[0] |= (1 << 1);  // ボタン2
+                if (gpio_get(Input_Pin_Macro[5]) == 0) report[0] |= (1 << 2);  // ボタン3
+                if (gpio_get(Input_Pin_Macro[6]) == 0) report[0] |= (1 << 3);  // ボタン4
+                if (gpio_get(Input_Pin_Macro[7]) == 0) report[0] |= (1 << 0);  // ボタン1
+                if (gpio_get(Input_Pin_Macro[8]) == 0) report[1] |= (1 << 0);  // ボタン9
+                if (gpio_get(Input_Pin_Macro[9]) == 0) report[1] |= (1 << 1);  // ボタン10
+                if (gpio_get(Input_Pin_Macro[10]) == 0) report[0] |= (1 << 6); // ボタン7
+                if (gpio_get(Input_Pin_Macro[11]) == 0) report[0] |= (1 << 7); // ボタン8
+                if (gpio_get(SettingSW_DL_Pin) == 0) report[0] |= (1 << 4);    // ボタン5
+                if (gpio_get(SettingSW_DR_Pin) == 0) report[0] |= (1 << 5);    // ボタン6
+                
+                // 入力0-3: ハットスイッチ
+                // 入力0: 上
+                // 入力1: 下
+                // 入力2: 左
+                // 入力3: 右
+                bool up    = (gpio_get(Input_Pin_Macro[0]) == 0);
+                bool down  = (gpio_get(Input_Pin_Macro[1]) == 0);
+                bool left  = (gpio_get(Input_Pin_Macro[2]) == 0);
+                bool right = (gpio_get(Input_Pin_Macro[3]) == 0);
+                
+                // ハットスイッチの値を決定
+                // 0=上, 1=右上, 2=右, 3=右下, 4=下, 5=左下, 6=左, 7=左上, 8=ニュートラル
+                if (up && !left && !right) {
+                    report[2] = 0;  // 上
+                } else if (up && right) {
+                    report[2] = 1;  // 右上
+                } else if (right && !up && !down) {
+                    report[2] = 2;  // 右
+                } else if (down && right) {
+                    report[2] = 3;  // 右下
+                } else if (down && !left && !right) {
+                    report[2] = 4;  // 下
+                } else if (down && left) {
+                    report[2] = 5;  // 左下
+                } else if (left && !up && !down) {
+                    report[2] = 6;  // 左
+                } else if (up && left) {
+                    report[2] = 7;  // 左上
+                } else {
+                    report[2] = 8;  // ニュートラル
                 }
-                
-                // 入力0-3: 方向キー (X/Y軸)
-                // 入力0: 上 (Y = -127)
-                // 入力1: 下 (Y = +127)
-                // 入力2: 左 (X = -127)
-                // 入力3: 右 (X = +127)
-                int8_t x = 0, y = 0;
-                if (gpio_get(Input_Pin_Macro[0]) == 0) y = -127;  // 上
-                if (gpio_get(Input_Pin_Macro[1]) == 0) y = 127;   // 下
-                if (gpio_get(Input_Pin_Macro[2]) == 0) x = -127;  // 左
-                if (gpio_get(Input_Pin_Macro[3]) == 0) x = 127;   // 右
-                
-                report[1] = (uint8_t)x;
-                report[2] = (uint8_t)y;
                 
                 tud_hid_report(0, report, sizeof(report));
             }
