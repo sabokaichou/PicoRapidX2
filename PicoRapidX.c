@@ -380,10 +380,90 @@ int main() {
 
     InitGPIO();
 
-    // 起動時にモードボタンが押されていたらUSB MSC接続モード
+    // 起動時のボタンチェック
     gpio_pull_up(ModeSW_Pin);
+    gpio_pull_up(EnterSW_Pin);
     busy_wait_ms(2);
-    if (gpio_get(ModeSW_Pin) == 0) {
+    
+    bool mode_pressed = (gpio_get(ModeSW_Pin) == 0);
+    bool enter_pressed = (gpio_get(EnterSW_Pin) == 0);
+    
+    // Enterボタン: ゲームパッドモード
+    if (enter_pressed && !mode_pressed) {
+        gpio_init(LED_PIN);
+        gpio_set_dir(LED_PIN, GPIO_OUT);
+        
+        // I2C初期化（OLED用）
+        i2c_init(I2C_PORT, 400 * 1000);
+        gpio_set_function(SDA_PIN, GPIO_FUNC_I2C);
+        gpio_set_function(SCL_PIN, GPIO_FUNC_I2C);
+        gpio_pull_up(SDA_PIN);
+        gpio_pull_up(SCL_PIN);
+        
+        // OLED初期化
+        Ssd1306_Init();
+        SetCharPattern();
+        canvas = Ssd1306_Get_Draw_Canvas();
+        DrawMessage(0, "GamePad Mode", false);
+        DrawMessage(1, "Wait USB...", false);
+        Ssd1306_Update_Frame();
+        
+        // MSC初期化（HID+MSC複合デバイスのため必要）
+        usb_msc_start();
+        
+        // USB初期化待機
+        for (int i = 0; i < 10; i++) {
+            tud_task();
+            sleep_ms(10);
+        }
+        
+        // ゲームパッドメインループ
+        uint8_t report[3] = {0, 0, 0};
+        bool connected = false;
+        uint32_t last_check = 0;
+        
+        while (true) {
+            tud_task();
+            usb_msc_task();  // MSCタスクも処理（複合デバイスのため）
+            
+            // 接続状態チェック（500ms毎）
+            uint32_t now = to_ms_since_boot(get_absolute_time());
+            if (now - last_check > 500) {
+                last_check = now;
+                bool mounted = tud_mounted();
+                
+                if (mounted && !connected) {
+                    connected = true;
+                    DrawMessage(1, "Connected!", false);
+                    Ssd1306_Update_Frame();
+                    gpio_put(LED_PIN, 1);
+                } else if (!mounted && connected) {
+                    connected = false;
+                    DrawMessage(1, "Wait USB...", false);
+                    Ssd1306_Update_Frame();
+                    gpio_put(LED_PIN, 0);
+                }
+            }
+            
+            if (tud_hid_ready()) {
+                report[0] = 0;
+                report[1] = 0;
+                report[2] = 0;
+                
+                for (int i = 0; i < 8 && i < 18; i++) {
+                    if (gpio_get(Input_Pin_Macro[i]) == 0) {
+                        report[0] |= (1 << i);
+                    }
+                }
+                
+                tud_hid_report(0, report, sizeof(report));
+            }
+            sleep_ms(10);
+        }
+    }
+    
+    // Modeボタン: USB MSC接続モード
+    if (mode_pressed) {
         // USB MSC接続モード: ダイレクトMSC機能
         gpio_init(LED_PIN);
         gpio_set_dir(LED_PIN, GPIO_OUT);
@@ -5075,4 +5155,22 @@ void SetCharPattern_symbol()
     DispPattern[99].pattern_foot[14] = 0x00;
     DispPattern[99].pattern_foot[15] = 0x00;
 
+}
+
+// TinyUSB HID callbacks ----------------------------------------------
+uint16_t tud_hid_get_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_t report_type, uint8_t* buffer, uint16_t reqlen) {
+    (void) instance;
+    (void) report_id;
+    (void) report_type;
+    (void) buffer;
+    (void) reqlen;
+    return 0;
+}
+
+void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id, hid_report_type_t report_type, uint8_t const* buffer, uint16_t bufsize) {
+    (void) instance;
+    (void) report_id;
+    (void) report_type;
+    (void) buffer;
+    (void) bufsize;
 }

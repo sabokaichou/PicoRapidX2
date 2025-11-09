@@ -1,6 +1,35 @@
 #include <string.h>
 #include "tusb.h"
 
+// HID Report Descriptor (Gamepad) ------------------------------------
+static uint8_t const desc_hid_report[] = {
+    HID_USAGE_PAGE(HID_USAGE_PAGE_DESKTOP),
+    HID_USAGE(HID_USAGE_DESKTOP_GAMEPAD),
+    HID_COLLECTION(HID_COLLECTION_APPLICATION),
+        HID_USAGE_PAGE(HID_USAGE_PAGE_BUTTON),
+        HID_USAGE_MIN(1),
+        HID_USAGE_MAX(8),
+        HID_LOGICAL_MIN(0),
+        HID_LOGICAL_MAX(1),
+        HID_REPORT_COUNT(8),
+        HID_REPORT_SIZE(1),
+        HID_INPUT(HID_DATA | HID_VARIABLE | HID_ABSOLUTE),
+        HID_USAGE_PAGE(HID_USAGE_PAGE_DESKTOP),
+        HID_USAGE(HID_USAGE_DESKTOP_X),
+        HID_USAGE(HID_USAGE_DESKTOP_Y),
+        HID_LOGICAL_MIN_N(-127, 2),
+        HID_LOGICAL_MAX(127),
+        HID_REPORT_COUNT(2),
+        HID_REPORT_SIZE(8),
+        HID_INPUT(HID_DATA | HID_VARIABLE | HID_ABSOLUTE),
+    HID_COLLECTION_END
+};
+
+uint8_t const * tud_hid_descriptor_report_cb(uint8_t instance) {
+    (void) instance;
+    return desc_hid_report;
+}
+
 // Device descriptor -------------------------------------------------
 static tusb_desc_device_t const desc_device = {
     .bLength = sizeof(tusb_desc_device_t),
@@ -11,7 +40,7 @@ static tusb_desc_device_t const desc_device = {
     .bDeviceProtocol = 0x00,
     .bMaxPacketSize0 = 64,
     .idVendor = 0xCafe,
-    .idProduct = 0x4001,
+    .idProduct = 0x4006,  // MSC+HID composite (GamePad)
     .bcdDevice = 0x0100,
     .iManufacturer = 0x01,
     .iProduct = 0x02,
@@ -23,27 +52,23 @@ uint8_t const * tud_descriptor_device_cb(void) {
     return (uint8_t const*) &desc_device;
 }
 
-// Configuration descriptor with one MSC interface -------------------
-// Configuration total length: config(9) + interface(9) + 2 endpoints(2*7) = 32
-enum { CONFIG_TOTAL_LEN = 9 + 9 + 7 + 7 };
+// Configuration descriptor with HID + MSC interfaces -------------------
+enum {
+    ITF_NUM_HID = 0,
+    ITF_NUM_MSC,
+    ITF_NUM_TOTAL
+};
 
-#define EPNUM_MSC_OUT   0x01
-#define EPNUM_MSC_IN    0x81
+#define CONFIG_TOTAL_LEN  (TUD_CONFIG_DESC_LEN + TUD_HID_DESC_LEN + TUD_MSC_DESC_LEN)
+
+#define EPNUM_HID       0x81
+#define EPNUM_MSC_OUT   0x02
+#define EPNUM_MSC_IN    0x82
 
 static uint8_t const desc_fs_configuration[] = {
-    // config
-    0x09, TUSB_DESC_CONFIGURATION, (CONFIG_TOTAL_LEN & 0xFF), (CONFIG_TOTAL_LEN >> 8),
-    0x01, // one interface
-    0x01, // configuration value
-    0x00, // string index
-    0x80, // attributes (bus powered)
-    250,  // 500mA (value is in 2mA units)
-    // interface (MSC)
-    0x09, TUSB_DESC_INTERFACE, 0x00, 0x00, 0x02, TUSB_CLASS_MSC, MSC_SUBCLASS_SCSI, MSC_PROTOCOL_BOT, 0x00,
-    // Endpoint OUT
-    0x07, TUSB_DESC_ENDPOINT, EPNUM_MSC_OUT, 0x02, 64, 0x00, 0x00,
-    // Endpoint IN
-    0x07, TUSB_DESC_ENDPOINT, EPNUM_MSC_IN,  0x02, 64, 0x00, 0x00,
+    TUD_CONFIG_DESCRIPTOR(1, ITF_NUM_TOTAL, 0, CONFIG_TOTAL_LEN, 0x80, 250),
+    TUD_HID_DESCRIPTOR(ITF_NUM_HID, 0, HID_ITF_PROTOCOL_NONE, sizeof(desc_hid_report), EPNUM_HID, 16, 10),
+    TUD_MSC_DESCRIPTOR(ITF_NUM_MSC, 0, EPNUM_MSC_OUT, EPNUM_MSC_IN, 64)
 };
 
 uint8_t const * tud_descriptor_configuration_cb(uint8_t index) {
@@ -54,7 +79,7 @@ uint8_t const * tud_descriptor_configuration_cb(uint8_t index) {
 static char const *string_desc[] = {
     (const char[]) {0x09, 0x04}, // 0: supported language (en-US)
     "Pico",                      // 1: Manufacturer
-    "Pico RAM Disk",            // 2: Product
+    "PicoRapidX PAD Mode",      // 2: Product
     "123456",                   // 3: Serial
 };
 
