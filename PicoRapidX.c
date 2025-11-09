@@ -548,16 +548,15 @@ int main() {
             // FrameToggleを反転
             FrameToggle = !FrameToggle;
             
-            // HIDレポート送信（準備ができていれば）
-            if (tud_hid_ready()) {
-                report[0] = 0;  // buttons 1-8
-                report[1] = 0;  // buttons 9-16
-                report[2] = 8;  // hat switch (8 = neutral)
-                
-                // 入力とボタンのマッピング（連射状態を反映）
-                // 入力4 → ボタン2 (bit 1 of byte 0)
-                // 入力5 → ボタン3 (bit 2 of byte 0)
-                // 入力6 → ボタン4 (bit 3 of byte 0)
+            // HIDレポートデータ作成
+            report[0] = 0;  // buttons 1-8
+            report[1] = 0;  // buttons 9-16
+            report[2] = 8;  // hat switch (8 = neutral)
+            
+            // 入力とボタンのマッピング（連射状態を反映）
+            // 入力4 → ボタン2 (bit 1 of byte 0)
+            // 入力5 → ボタン3 (bit 2 of byte 0)
+            // 入力6 → ボタン4 (bit 3 of byte 0)
                 // 入力7 → ボタン1 (bit 0 of byte 0)
                 // 入力8 → ボタン9 (bit 0 of byte 1)
                 // 入力9 → ボタン10 (bit 1 of byte 1)
@@ -608,7 +607,9 @@ int main() {
                 } else {
                     report[2] = 8;  // ニュートラル
                 }
-                
+            
+            // HIDレポート送信（準備ができていれば）
+            if (tud_hid_ready()) {
                 tud_hid_report(0, report, sizeof(report));
             }
         }
