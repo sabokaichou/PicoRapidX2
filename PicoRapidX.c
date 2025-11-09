@@ -142,6 +142,9 @@ const int32_t maskIO_Macro   = 0b0000000000000000000000000000; // GP19-GP0
 const uint8_t Input_Pin_Macro[]  = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 16, 17, 18, 19, 26, 27};
 const uint8_t GPIO_InputNo_Macro[] = {2, 3, 5, 4, 6, 7, 8, 9, 10, 11, 0, 1};
 
+// GamePadモード用入力ピン配列（Input_Pin_Macroの最初の12個を使用）
+const uint8_t Input_Pin_GamePad[] = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13};
+
 #define ModeSW_Pin 27
 #define EnterSW_Pin 26
 #define SettingSW_UL_Pin 19
@@ -392,15 +395,18 @@ int main() {
     if (mode_pressed) {
         GamePadMode = true;  // GamePadモードフラグを設定
         
+        // GamePad用入力ピン配列を選択
+        const uint8_t *gamepad_pins = Input_Pin_GamePad;
+        
         // Modeボタンピンを無効化（誤入力防止）
         gpio_set_function(ModeSW_Pin, GPIO_FUNC_NULL);
         gpio_disable_pulls(ModeSW_Pin);
         
         // 入力ピンの初期化（0-11を使用）
         for (int i = 0; i < 12; i++) {
-            gpio_init(Input_Pin_Macro[i]);
-            gpio_set_dir(Input_Pin_Macro[i], GPIO_IN);
-            gpio_pull_up(Input_Pin_Macro[i]);
+            gpio_init(gamepad_pins[i]);
+            gpio_set_dir(gamepad_pins[i], GPIO_IN);
+            gpio_pull_up(gamepad_pins[i]);
         }
         
         // 設定ボタンの初期化（DL, DR）
@@ -479,14 +485,14 @@ int main() {
                 // SettingSW_DL → ボタン5 (bit 4 of byte 0)
                 // SettingSW_DR → ボタン6 (bit 5 of byte 0)
                 
-                if (gpio_get(Input_Pin_Macro[4]) == 0) report[0] |= (1 << 1);  // ボタン2
-                if (gpio_get(Input_Pin_Macro[5]) == 0) report[0] |= (1 << 2);  // ボタン3
-                if (gpio_get(Input_Pin_Macro[6]) == 0) report[0] |= (1 << 3);  // ボタン4
-                if (gpio_get(Input_Pin_Macro[7]) == 0) report[0] |= (1 << 0);  // ボタン1
-                if (gpio_get(Input_Pin_Macro[8]) == 0) report[1] |= (1 << 0);  // ボタン9
-                if (gpio_get(Input_Pin_Macro[9]) == 0) report[1] |= (1 << 1);  // ボタン10
-                if (gpio_get(Input_Pin_Macro[10]) == 0) report[0] |= (1 << 6); // ボタン7
-                if (gpio_get(Input_Pin_Macro[11]) == 0) report[0] |= (1 << 7); // ボタン8
+                if (gpio_get(gamepad_pins[4]) == 0) report[0] |= (1 << 1);  // ボタン2
+                if (gpio_get(gamepad_pins[5]) == 0) report[0] |= (1 << 2);  // ボタン3
+                if (gpio_get(gamepad_pins[6]) == 0) report[0] |= (1 << 3);  // ボタン4
+                if (gpio_get(gamepad_pins[7]) == 0) report[0] |= (1 << 0);  // ボタン1
+                if (gpio_get(gamepad_pins[8]) == 0) report[1] |= (1 << 0);  // ボタン9
+                if (gpio_get(gamepad_pins[9]) == 0) report[1] |= (1 << 1);  // ボタン10
+                if (gpio_get(gamepad_pins[10]) == 0) report[0] |= (1 << 6); // ボタン7
+                if (gpio_get(gamepad_pins[11]) == 0) report[0] |= (1 << 7); // ボタン8
                 if (gpio_get(SettingSW_DL_Pin) == 0) report[0] |= (1 << 4);    // ボタン5
                 if (gpio_get(SettingSW_DR_Pin) == 0) report[0] |= (1 << 5);    // ボタン6
                 
@@ -495,10 +501,10 @@ int main() {
                 // 入力1: 下
                 // 入力2: 左
                 // 入力3: 右
-                bool up    = (gpio_get(Input_Pin_Macro[0]) == 0);
-                bool down  = (gpio_get(Input_Pin_Macro[1]) == 0);
-                bool left  = (gpio_get(Input_Pin_Macro[2]) == 0);
-                bool right = (gpio_get(Input_Pin_Macro[3]) == 0);
+                bool up    = (gpio_get(gamepad_pins[0]) == 0);
+                bool down  = (gpio_get(gamepad_pins[1]) == 0);
+                bool left  = (gpio_get(gamepad_pins[2]) == 0);
+                bool right = (gpio_get(gamepad_pins[3]) == 0);
                 
                 // ハットスイッチの値を決定
                 // 0=上, 1=右上, 2=右, 3=右下, 4=下, 5=左下, 6=左, 7=左上, 8=ニュートラル
