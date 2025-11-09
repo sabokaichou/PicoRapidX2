@@ -386,13 +386,9 @@ int main() {
     busy_wait_ms(2);
     
     bool mode_pressed = (gpio_get(ModeSW_Pin) == 0);
-    bool enter_pressed = (gpio_get(EnterSW_Pin) == 0);
     
-    // Enterボタン: ゲームパッドモード
-    if (enter_pressed && !mode_pressed) {
-        gpio_init(LED_PIN);
-        gpio_set_dir(LED_PIN, GPIO_OUT);
-        
+    // Modeボタン: ゲームパッドモード
+    if (mode_pressed) {
         // I2C初期化（OLED用）
         i2c_init(I2C_PORT, 400 * 1000);
         gpio_set_function(SDA_PIN, GPIO_FUNC_I2C);
@@ -436,12 +432,10 @@ int main() {
                     connected = true;
                     DrawMessage(1, "Connected!", false);
                     Ssd1306_Update_Frame();
-                    gpio_put(LED_PIN, 1);
                 } else if (!mounted && connected) {
                     connected = false;
                     DrawMessage(1, "Wait USB...", false);
                     Ssd1306_Update_Frame();
-                    gpio_put(LED_PIN, 0);
                 }
             }
             
@@ -462,67 +456,6 @@ int main() {
         }
     }
     
-    // Modeボタン: USB MSC接続モード
-    if (mode_pressed) {
-        // USB MSC接続モード: ダイレクトMSC機能
-        gpio_init(LED_PIN);
-        gpio_set_dir(LED_PIN, GPIO_OUT);
-        
-        // I2C初期化（OLED用）
-        i2c_init(I2C_PORT, 400 * 1000);
-        gpio_set_function(SDA_PIN, GPIO_FUNC_I2C);
-        gpio_set_function(SCL_PIN, GPIO_FUNC_I2C);
-        gpio_pull_up(SDA_PIN);
-        gpio_pull_up(SCL_PIN);
-        
-        // OLED初期化と初期メッセージ
-        Ssd1306_Init();
-        SetCharPattern();
-        canvas = Ssd1306_Get_Draw_Canvas();
-        DrawMessage(0, "USB MSC", false);
-        DrawMessage(1, "Starting...", false);
-        Ssd1306_Update_Frame();
-        
-        // MSCモード中は全ての割り込みを無効化
-        Sync_IRQ_disable
-        ModeSW_IRQ_disable
-        EnterSW_IRQ_disable
-        
-        usb_msc_start();
-        
-        // MSC専用メインループ
-        while (true) {
-            usb_msc_task();
-            
-            // 接続状態LED表示: マウント時点灯、未マウント時点滅
-            static uint32_t led_timer = 0;
-            static uint32_t status_timer = 0;
-            static bool led_state = false;
-            uint32_t now = to_ms_since_boot(get_absolute_time());
-            
-            // OLED状態表示（500ms周期で更新）
-            if (now - status_timer > 500) {
-                status_timer = now;
-                const char* status = usb_msc_get_status_string();
-                
-                if (usb_msc_is_mounted()) {
-                    DrawMessage(1, "Connect", false);
-                    DrawMessage(2, "Ready", false);
-                } else if (usb_msc_is_connected()) {
-                    DrawMessage(1, "Connect", false);
-                    DrawMessage(2, "Wait...", false);
-                } else {
-                    DrawMessage(1, "No USB", false);
-                    DrawMessage(2, "Cable?", false);
-                }
-                
-                Ssd1306_Update_Frame();
-            }
-                        
-            tight_loop_contents();
-        }
-    }
-
     SetIOSetting();
 
     multicore_launch_core1(core1_main); // 同期信号の受付とイベント処理
