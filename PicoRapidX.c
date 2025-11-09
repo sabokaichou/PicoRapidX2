@@ -201,6 +201,7 @@ bool Button_Flg = false;
 bool Check_FrameDelete_Flg = false;
 bool Check_FrameInsert_Flg = false;
 bool ChangeBoard_Flg = false;
+bool GamePadMode = false;  // GamePadモード中フラグ
 
 uint8_t SelectMode = SelectMode_Normal;
 uint8_t SelectRapid = SelectRapid_Normal;
@@ -389,6 +390,19 @@ int main() {
     
     // Modeボタン: ゲームパッドモード
     if (mode_pressed) {
+        GamePadMode = true;  // GamePadモードフラグを設定
+        
+        // Modeボタンピンを無効化（誤入力防止）
+        gpio_set_function(ModeSW_Pin, GPIO_FUNC_NULL);
+        gpio_disable_pulls(ModeSW_Pin);
+        
+        // 入力ピンの初期化（0-11を使用）
+        for (int i = 0; i < 12; i++) {
+            gpio_init(Input_Pin_Macro[i]);
+            gpio_set_dir(Input_Pin_Macro[i], GPIO_IN);
+            gpio_pull_up(Input_Pin_Macro[i]);
+        }
+        
         // I2C初期化（OLED用）
         i2c_init(I2C_PORT, 400 * 1000);
         gpio_set_function(SDA_PIN, GPIO_FUNC_I2C);
@@ -440,15 +454,33 @@ int main() {
             }
             
             if (tud_hid_ready()) {
-                report[0] = 0;
-                report[1] = 0;
-                report[2] = 0;
+                report[0] = 0;  // buttons
+                report[1] = 0;  // X axis
+                report[2] = 0;  // Y axis
                 
-                for (int i = 0; i < 8 && i < 18; i++) {
+                // 入力4-11: ボタン1-8 (bit 0-7)
+                for (int i = 4; i <= 11 && i < 18; i++) {
+                    // ModeSW_Pinは無視
+                    if (Input_Pin_Macro[i] == ModeSW_Pin) continue;
+                    
                     if (gpio_get(Input_Pin_Macro[i]) == 0) {
-                        report[0] |= (1 << i);
+                        report[0] |= (1 << (i - 4));
                     }
                 }
+                
+                // 入力0-3: 方向キー (X/Y軸)
+                // 入力0: 上 (Y = -127)
+                // 入力1: 下 (Y = +127)
+                // 入力2: 左 (X = -127)
+                // 入力3: 右 (X = +127)
+                int8_t x = 0, y = 0;
+                if (gpio_get(Input_Pin_Macro[0]) == 0) y = -127;  // 上
+                if (gpio_get(Input_Pin_Macro[1]) == 0) y = 127;   // 下
+                if (gpio_get(Input_Pin_Macro[2]) == 0) x = -127;  // 左
+                if (gpio_get(Input_Pin_Macro[3]) == 0) x = 127;   // 右
+                
+                report[1] = (uint8_t)x;
+                report[2] = (uint8_t)y;
                 
                 tud_hid_report(0, report, sizeof(report));
             }
@@ -891,6 +923,11 @@ static void save_io_setting_to_flash(uint32_t save_address, uint8_t *save_data, 
 
 // ここからマクロ設定用
 void StartSettingMode() {
+    // GamePadモード中は設定モードに入らない
+    if (GamePadMode) {
+        return;
+    }
+    
     SettingMode = true;
     multicore_reset_core1();
 
