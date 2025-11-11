@@ -457,6 +457,10 @@ int main() {
         bool rapid_state[12] = {false};  // 連射のON/OFF状態
         int8_t sync_count_15 = 0;  // 15Hz連射用カウンタ (0→1→2→3→0のサイクル)
         
+        // マクロ実行用
+        int8_t ExecuteInputNo = -1;  // 現在実行中のマクロの入力番号 (-1=なし)
+        bool macro_output_state[12] = {false};  // マクロ実行時の出力状態
+        
         while (true) {
             tud_task();
             usb_msc_task();  // MSCタスクも処理（複合デバイスのため）
@@ -545,9 +549,72 @@ int main() {
                     } else if (IOSetting[setting_index].RapidType == 7) {
                         // RapidType=7: 15Hz連射反転 (sync_count_15が2,3の時ON)
                         rapid_state[i] = (sync_count_15 >= 2);
+                    } else if (IOSetting[setting_index].RapidType == 5) {
+                        // RapidType=5: マクロ
+                        // マクロが設定されている場合のみ処理
+                        uint8_t macro_index = IOSetting[setting_index].CommandType;
+                        if (macro_index < 12 && LastFrameCount[macro_index] > 0) {
+                            // マクロ実行中でない場合のみ、このボタンのマクロを開始
+                            if (ExecuteInputNo == -1) {
+                                ExecuteInputNo = i;
+                                buttonCommands[i].CurrentFrame = 0;
+                                buttonCommands[i].LastButtonOn = true;
+                            }
+                        }
+                        rapid_state[i] = false;  // マクロ実行時は通常の入力は無効
                     } else {
-                        // RapidType=5,8以降: 未実装（マクロ等）
+                        // RapidType=8以降: 未実装
                         rapid_state[i] = false;
+                    }
+                }
+            }
+            
+            // マクロ実行処理
+            if (ExecuteInputNo != -1) {
+                int input_no = ExecuteInputNo;
+                int setting_index;
+                if (input_no <= 9) {
+                    setting_index = input_no + 2;
+                } else {
+                    setting_index = input_no - 10;
+                }
+                
+                uint8_t macro_index = IOSetting[setting_index].CommandType;
+                if (macro_index < 12 && LastFrameCount[macro_index] > 0) {
+                    // 現在のフレームからマクロデータを読み取る
+                    uint8_t current_frame = buttonCommands[input_no].CurrentFrame;
+                    uint16_t frame_data = CommandSetBits[macro_index][current_frame];
+                    
+                    // 12個の出力状態をmacro_output_stateに格納
+                    for (int output_no = 0; output_no < 12; output_no++) {
+                        macro_output_state[output_no] = bit_get_u16(frame_data, output_no);
+                    }
+                    
+                    // 次のフレームへ
+                    buttonCommands[input_no].CurrentFrame++;
+                    
+                    // マクロ終了判定
+                    if (buttonCommands[input_no].CurrentFrame >= LastFrameCount[macro_index]) {
+                        // RepeatModeに応じて処理
+                        if (IOSetting[setting_index].RepeatMode == 1) {
+                            // リピートモード: 最初のフレームに戻る
+                            buttonCommands[input_no].CurrentFrame = 0;
+                            
+                            // ボタンが離されていたらマクロ終了
+                            bool button_pressed = (gpio_get(gamepad_pins[input_no]) == 0);
+                            if (!button_pressed) {
+                                ExecuteInputNo = -1;
+                                for (int j = 0; j < 12; j++) {
+                                    macro_output_state[j] = false;
+                                }
+                            }
+                        } else {
+                            // リピートなし: マクロ終了
+                            ExecuteInputNo = -1;
+                            for (int j = 0; j < 12; j++) {
+                                macro_output_state[j] = false;
+                            }
+                        }
                     }
                 }
             }
@@ -567,17 +634,59 @@ int main() {
             // ハットスイッチ用の方向フラグ
             bool hat_up = false, hat_down = false, hat_left = false, hat_right = false;
             
-            // 入力とボタンのマッピング（OutputGPIONoベース）
-            // 出力0 → ボタン5 (SettingSW_DL相当)
-            // 出力1 → ボタン6 (SettingSW_DR相当)
-            // 出力2 → ハット上
-            // 出力3 → ハット下
-            // 出力4 → ハット左
-            // 出力5 → ハット右
-            // 出力6-11 → ボタン1-6
-            
-            for (int i = 0; i < 12; i++) {
-                if (!rapid_state[i]) continue;  // ボタンが押されていない
+            // マクロ実行中は、マクロの出力状態をそのままHIDレポートに反映
+            if (ExecuteInputNo != -1) {
+                // macro_output_state[0-11]を直接HIDボタンにマッピング
+                // kはOutput_Pin配列のインデックス(0-11)
+                for (int k = 0; k < 12; k++) {
+                    if (!macro_output_state[k]) continue;
+                    
+                    // Output_Pin[k]のインデックスに応じてボタンまたはハットを設定
+                    // 通常の入力処理と同じマッピング
+                    if (k == 0) {
+                        report[0] |= (1 << 6);  // ボタン7
+                    } else if (k == 1) {
+                        report[0] |= (1 << 7);  // ボタン8
+                    } else if (k == 2) {
+                        hat_up = true;  // ハット上
+                    } else if (k == 3) {
+                        hat_down = true;  // ハット下
+                    } else if (k == 4) {
+                        hat_right = true;  // ハット右 (Output_Pin[4]=GPIO9)
+                    } else if (k == 5) {
+                        hat_left = true;  // ハット左 (Output_Pin[5]=GPIO8)
+                    } else if (k == 6) {
+                        report[0] |= (1 << 1);  // ボタン2
+                    } else if (k == 7) {
+                        report[0] |= (1 << 2);  // ボタン3
+                    } else if (k == 8) {
+                        report[0] |= (1 << 3);  // ボタン4
+                    } else if (k == 9) {
+                        report[0] |= (1 << 0);  // ボタン1
+                    } else if (k == 10) {
+                        report[1] |= (1 << 0);  // ボタン9
+                    } else if (k == 11) {
+                        report[1] |= (1 << 1);  // ボタン10
+                    }
+                }
+            } else {
+                // マクロ実行中でない場合: 通常の入力処理
+                // 入力とボタンのマッピング（OutputGPIONoベース）
+                // 出力0 → ボタン7
+                // 出力1 → ボタン8
+                // 出力2 → ハット上
+                // 出力3 → ハット下
+                // 出力4 → ハット左
+                // 出力5 → ハット右
+                // 出力6 → ボタン2
+                // 出力7 → ボタン3
+                // 出力8 → ボタン4
+                // 出力9 → ボタン1
+                // 出力10 → ボタン9
+                // 出力11 → ボタン10
+                
+                for (int i = 0; i < 12; i++) {
+                    if (!rapid_state[i]) continue;  // ボタンが押されていない
                 
                 int setting_index;
                 if (i <= 9) {
@@ -636,6 +745,7 @@ int main() {
                     }
                 }
             }
+            }  // マクロ実行中でない場合の終了
             
             // SettingSW_DL/DR は直接ボタン5,6として扱う
             if (gpio_get(SettingSW_DL_Pin) == 0) report[0] |= (1 << 4);  // ボタン5
