@@ -455,6 +455,7 @@ int main() {
         // 連射用カウンタ（各入力ごと）
         uint8_t rapid_counter[12] = {0};
         bool rapid_state[12] = {false};  // 連射のON/OFF状態
+        int8_t sync_count_15 = 0;  // 15Hz連射用カウンタ (0→1→2→3→0のサイクル)
         
         while (true) {
             tud_task();
@@ -502,8 +503,58 @@ int main() {
                 }
                 
                 bool button_pressed = (gpio_get(gamepad_pins[i]) == 0);
-                rapid_state[i] = button_pressed;  // とりあえず物理状態をそのまま反映
+                
+                if (!button_pressed) {
+                    // ボタンが離されている
+                    rapid_state[i] = false;
+                    rapid_counter[i] = 0;  // カウンタリセット
+                } else {
+                    // ボタンが押されている - 連射設定に応じて処理
+                    if (IOSetting[setting_index].RapidType == 1) {
+                        // RapidType=1: 連射無効、押しっぱなし
+                        rapid_state[i] = true;
+                    } else if (IOSetting[setting_index].RapidType == 2) {
+                        // RapidType=2: 30Hz連射 (FrameToggleがtrueの時ON)
+                        rapid_state[i] = FrameToggle;
+                    } else if (IOSetting[setting_index].RapidType == 3) {
+                        // RapidType=3: 30Hz連射反転 (FrameToggleがfalseの時ON)
+                        rapid_state[i] = !FrameToggle;
+                    } else if (IOSetting[setting_index].RapidType == 4) {
+                        // RapidType=4: カスタム連射 (OutputFrame/IntervalFrame指定)
+                        rapid_counter[i]++;
+                        
+                        // ON期間中
+                        if (rapid_state[i]) {
+                            if (rapid_counter[i] >= IOSetting[setting_index].OutputFrame) {
+                                // OFF期間へ移行
+                                rapid_state[i] = false;
+                                rapid_counter[i] = 0;
+                            }
+                        }
+                        // OFF期間中
+                        else {
+                            if (rapid_counter[i] >= IOSetting[setting_index].IntervalFrame) {
+                                // ON期間へ移行
+                                rapid_state[i] = true;
+                                rapid_counter[i] = 0;
+                            }
+                        }
+                    } else if (IOSetting[setting_index].RapidType == 6) {
+                        // RapidType=6: 15Hz連射 (sync_count_15が0,1の時ON)
+                        rapid_state[i] = (sync_count_15 >= 0 && sync_count_15 < 2);
+                    } else if (IOSetting[setting_index].RapidType == 7) {
+                        // RapidType=7: 15Hz連射反転 (sync_count_15が2,3の時ON)
+                        rapid_state[i] = (sync_count_15 >= 2);
+                    } else {
+                        // RapidType=5,8以降: 未実装（マクロ等）
+                        rapid_state[i] = false;
+                    }
+                }
             }
+            
+            // 15Hz連射用カウンタを更新 (4フレームで1サイクル: 0→1→2→3→0)
+            sync_count_15++;
+            if (sync_count_15 >= 4) sync_count_15 = 0;
             
             // FrameToggleを反転
             FrameToggle = !FrameToggle;
