@@ -502,47 +502,7 @@ int main() {
                 }
                 
                 bool button_pressed = (gpio_get(gamepad_pins[i]) == 0);
-                
-                if (!button_pressed) {
-                    // ボタンが離されている
-                    rapid_state[i] = false;
-                    rapid_counter[i] = 0;  // カウンタリセット
-                } else {
-                    // ボタンが押されている
-                    if (IOSetting[setting_index].RapidType == 1) {
-                        // RapidType=1: 連射無効、押しっぱなし
-                        rapid_state[i] = true;
-                    } else if (IOSetting[setting_index].RapidType == 2) {
-                        // RapidType=2: FrameToggleがtrueの時ON、falseの時OFF
-                        rapid_state[i] = FrameToggle;
-                    } else if (IOSetting[setting_index].RapidType == 3) {
-                        // RapidType=3: FrameToggleがfalseの時ON、trueの時OFF
-                        rapid_state[i] = !FrameToggle;
-                    } else if (IOSetting[setting_index].RapidType == 4) {
-                        // RapidType=4: 指定フレーム数ONの後、指定フレーム数OFF、繰り返し
-                        rapid_counter[i]++;
-                        
-                        // ON期間中
-                        if (rapid_state[i]) {
-                            if (rapid_counter[i] >= IOSetting[setting_index].OutputFrame) {
-                                // OFF期間へ移行
-                                rapid_state[i] = false;
-                                rapid_counter[i] = 0;
-                            }
-                        }
-                        // OFF期間中
-                        else {
-                            if (rapid_counter[i] >= IOSetting[setting_index].IntervalFrame) {
-                                // ON期間へ移行
-                                rapid_state[i] = true;
-                                rapid_counter[i] = 0;
-                            }
-                        }
-                    } else {
-                        // その他のRapidType: とりあえず押しっぱなし
-                        rapid_state[i] = true;
-                    }
-                }
+                rapid_state[i] = button_pressed;  // とりあえず物理状態をそのまま反映
             }
             
             // FrameToggleを反転
@@ -553,60 +513,104 @@ int main() {
             report[1] = 0;  // buttons 9-16
             report[2] = 8;  // hat switch (8 = neutral)
             
-            // 入力とボタンのマッピング（連射状態を反映）
-            // 入力4 → ボタン2 (bit 1 of byte 0)
-            // 入力5 → ボタン3 (bit 2 of byte 0)
-            // 入力6 → ボタン4 (bit 3 of byte 0)
-                // 入力7 → ボタン1 (bit 0 of byte 0)
-                // 入力8 → ボタン9 (bit 0 of byte 1)
-                // 入力9 → ボタン10 (bit 1 of byte 1)
-                // 入力10 → ボタン7 (bit 6 of byte 0)
-                // 入力11 → ボタン8 (bit 7 of byte 0)
-                // SettingSW_DL → ボタン5 (bit 4 of byte 0)
-                // SettingSW_DR → ボタン6 (bit 5 of byte 0)
+            // ハットスイッチ用の方向フラグ
+            bool hat_up = false, hat_down = false, hat_left = false, hat_right = false;
+            
+            // 入力とボタンのマッピング（OutputGPIONoベース）
+            // 出力0 → ボタン5 (SettingSW_DL相当)
+            // 出力1 → ボタン6 (SettingSW_DR相当)
+            // 出力2 → ハット上
+            // 出力3 → ハット下
+            // 出力4 → ハット左
+            // 出力5 → ハット右
+            // 出力6-11 → ボタン1-6
+            
+            for (int i = 0; i < 12; i++) {
+                if (!rapid_state[i]) continue;  // ボタンが押されていない
                 
-                if (rapid_state[4]) report[0] |= (1 << 1);  // ボタン2
-                if (rapid_state[5]) report[0] |= (1 << 2);  // ボタン3
-                if (rapid_state[6]) report[0] |= (1 << 3);  // ボタン4
-                if (rapid_state[7]) report[0] |= (1 << 0);  // ボタン1
-                if (rapid_state[8]) report[1] |= (1 << 0);  // ボタン9
-                if (rapid_state[9]) report[1] |= (1 << 1);  // ボタン10
-                if (rapid_state[10]) report[0] |= (1 << 6); // ボタン7
-                if (rapid_state[11]) report[0] |= (1 << 7); // ボタン8
-                if (gpio_get(SettingSW_DL_Pin) == 0) report[0] |= (1 << 4);    // ボタン5
-                if (gpio_get(SettingSW_DR_Pin) == 0) report[0] |= (1 << 5);    // ボタン6
-                
-                // 入力0-3: ハットスイッチ
-                // 入力0: 上
-                // 入力1: 下
-                // 入力2: 左
-                // 入力3: 右
-                bool up    = (gpio_get(gamepad_pins[0]) == 0);
-                bool down  = (gpio_get(gamepad_pins[1]) == 0);
-                bool left  = (gpio_get(gamepad_pins[2]) == 0);
-                bool right = (gpio_get(gamepad_pins[3]) == 0);
-                
-                // ハットスイッチの値を決定
-                // 0=上, 1=右上, 2=右, 3=右下, 4=下, 5=左下, 6=左, 7=左上, 8=ニュートラル
-                if (up && !left && !right) {
-                    report[2] = 0;  // 上
-                } else if (up && right) {
-                    report[2] = 1;  // 右上
-                } else if (right && !up && !down) {
-                    report[2] = 2;  // 右
-                } else if (down && right) {
-                    report[2] = 3;  // 右下
-                } else if (down && !left && !right) {
-                    report[2] = 4;  // 下
-                } else if (down && left) {
-                    report[2] = 5;  // 左下
-                } else if (left && !up && !down) {
-                    report[2] = 6;  // 左
-                } else if (up && left) {
-                    report[2] = 7;  // 左上
+                int setting_index;
+                if (i <= 9) {
+                    setting_index = i + 2;  // 入力0-9 → 設定2-11
                 } else {
-                    report[2] = 8;  // ニュートラル
+                    setting_index = i - 10;  // 入力10,11 → 設定0,1
                 }
+                
+                // この入力に設定された出力ピンをすべてONにする
+                for (int j = 0; j < 12; j++) {
+                    if (IOSetting[setting_index].OutputGPIONo[j] == -1) break;
+                    
+                    // OutputGPIONoからOutput_Pinのインデックスを逆引き
+                    for (int k = 0; k < 12; k++) {
+                        if (Output_Pin[k] == IOSetting[setting_index].OutputGPIONo[j]) {
+                            // Output_Pin[k]に対応する機能をON
+                            // 出力0 → ボタン7
+                            // 出力1 → ボタン8
+                            // 出力2 → ハット上
+                            // 出力3 → ハット下
+                            // 出力4 → ハット左
+                            // 出力5 → ハット右
+                            // 出力6 → ボタン2
+                            // 出力7 → ボタン3
+                            // 出力8 → ボタン4
+                            // 出力9 → ボタン1
+                            // 出力10 → ボタン9
+                            // 出力11 → ボタン10
+                            if (k == 0) {
+                                report[0] |= (1 << 6);  // ボタン7
+                            } else if (k == 1) {
+                                report[0] |= (1 << 7);  // ボタン8
+                            } else if (k == 2) {
+                                hat_up = true;  // ハット上
+                            } else if (k == 3) {
+                                hat_down = true;  // ハット下
+                            } else if (k == 4) {
+                                hat_left = true;  // ハット左
+                            } else if (k == 5) {
+                                hat_right = true;  // ハット右
+                            } else if (k == 6) {
+                                report[0] |= (1 << 1);  // ボタン2
+                            } else if (k == 7) {
+                                report[0] |= (1 << 2);  // ボタン3
+                            } else if (k == 8) {
+                                report[0] |= (1 << 3);  // ボタン4
+                            } else if (k == 9) {
+                                report[0] |= (1 << 0);  // ボタン1
+                            } else if (k == 10) {
+                                report[1] |= (1 << 0);  // ボタン9
+                            } else if (k == 11) {
+                                report[1] |= (1 << 1);  // ボタン10
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            // SettingSW_DL/DR は直接ボタン5,6として扱う
+            if (gpio_get(SettingSW_DL_Pin) == 0) report[0] |= (1 << 4);  // ボタン5
+            if (gpio_get(SettingSW_DR_Pin) == 0) report[0] |= (1 << 5);  // ボタン6
+            
+            // ハットスイッチの値を決定
+            // 0=上, 1=右上, 2=右, 3=右下, 4=下, 5=左下, 6=左, 7=左上, 8=ニュートラル
+            if (hat_up && !hat_left && !hat_right) {
+                report[2] = 0;  // 上
+            } else if (hat_up && hat_right) {
+                report[2] = 1;  // 右上
+            } else if (hat_right && !hat_up && !hat_down) {
+                report[2] = 2;  // 右
+            } else if (hat_down && hat_right) {
+                report[2] = 3;  // 右下
+            } else if (hat_down && !hat_left && !hat_right) {
+                report[2] = 4;  // 下
+            } else if (hat_down && hat_left) {
+                report[2] = 5;  // 左下
+            } else if (hat_left && !hat_up && !hat_down) {
+                report[2] = 6;  // 左
+            } else if (hat_up && hat_left) {
+                report[2] = 7;  // 左上
+            } else {
+                report[2] = 8;  // ニュートラル
+            }
             
             // HIDレポート送信（準備ができていれば）
             if (tud_hid_ready()) {
