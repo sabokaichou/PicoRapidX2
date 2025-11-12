@@ -462,6 +462,7 @@ int main() {
         bool macro_output_state[12] = {false};  // マクロ実行時の出力状態
         
         while (true) {
+            // 1000Hzポーリング（1ms周期）
             tud_task();
             usb_msc_task();  // MSCタスクも処理（複合デバイスのため）
             
@@ -483,11 +484,9 @@ int main() {
                 }
             }
             
-            // 60Hzループ（16.67ms）
+            // レポート作成は60Hz（16.67ms）
             if (now - last_report < 17) {
-                tud_task();
-                usb_msc_task();
-                sleep_ms(1);
+                sleep_ms(1);  // 1ms待機（1000Hzポーリング）
                 continue;
             }
             last_report = now;
