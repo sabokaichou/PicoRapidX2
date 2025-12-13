@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/develop/PicoRapidX/build/CMakeFiles/picotoolBuild"
+		},
+		{
+			"file" : "C:/develop/PicoRapidX/build/CMakeFiles/picotoolBuild.rule"
+		},
+		{
+			"file" : "C:/develop/PicoRapidX/build/CMakeFiles/picotoolBuild-complete.rule"
+		},
+		{
+			"file" : "C:/develop/PicoRapidX/build/picotool/src/picotoolBuild-stamp/picotoolBuild-build.rule"
+		},
+		{
+			"file" : "C:/develop/PicoRapidX/build/picotool/src/picotoolBuild-stamp/picotoolBuild-configure.rule"
+		},
+		{
+			"file" : "C:/develop/PicoRapidX/build/picotool/src/picotoolBuild-stamp/picotoolBuild-download.rule"
+		},
+		{
+			"file" : "C:/develop/PicoRapidX/build/picotool/src/picotoolBuild-stamp/picotoolBuild-install.rule"
+		},
+		{
+			"file" : "C:/develop/PicoRapidX/build/picotool/src/picotoolBuild-stamp/picotoolBuild-mkdir.rule"
+		},
+		{
+			"file" : "C:/develop/PicoRapidX/build/picotool/src/picotoolBuild-stamp/picotoolBuild-patch.rule"
+		},
+		{
+			"file" : "C:/develop/PicoRapidX/build/picotool/src/picotoolBuild-stamp/picotoolBuild-test.rule"
+		},
+		{
+			"file" : "C:/develop/PicoRapidX/build/picotool/src/picotoolBuild-stamp/picotoolBuild-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"picotoolBuild"
+		],
+		"name" : "picotoolBuild"
+	}
+}

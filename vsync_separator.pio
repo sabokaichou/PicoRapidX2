@@ -1,0 +1,55 @@
+; PIO State Machine for Composite Sync to V-Sync Separator
+; 複合同期信号から垂直同期信号を分離するPIOステートマシン
+;
+; 入力: 複合同期信号 (C-Sync)
+; 出力: パルス幅をFIFOに送信（CPU側で解析）
+
+.program csync_measure
+
+.wrap_target
+    wait 1 pin 0        ; C-Sync信号がHIGHになるまで待機
+    set x, 0            ; カウンタをリセット
+measure_high:
+    jmp pin still_high  ; まだHIGHならカウント継続
+    jmp send_width      ; LOWになったら幅を送信
+still_high:
+    jmp x-- measure_high [1]  ; カウントダウン（最大値まで）
+    jmp send_width      ; オーバーフローしたら送信
+
+send_width:
+    mov isr, x          ; X（残りカウント）をISRに移動
+    push noblock        ; FIFOに送信（ブロックしない）
+    
+    ; LOW期間も測定
+    set x, 0
+measure_low:
+    jmp pin send_low    ; HIGHになったら送信
+    jmp x-- measure_low [1]
+send_low:
+    mov isr, x
+    push noblock
+.wrap
+
+% c-sdk {
+static inline void csync_measure_program_init(PIO pio, uint sm, uint offset, uint pin) {
+    pio_sm_config c = csync_measure_program_get_default_config(offset);
+    
+    // 入力ピン設定
+    sm_config_set_in_pins(&c, pin);
+    sm_config_set_jmp_pin(&c, pin);
+    
+    // シフト方向設定
+    sm_config_set_in_shift(&c, false, false, 32);
+    
+    // クロック設定 (125MHz → 1MHz = 1μs分解能)
+    sm_config_set_clkdiv(&c, 125.0f);
+    
+    // GPIO設定
+    pio_gpio_init(pio, pin);
+    pio_sm_set_consecutive_pindirs(pio, sm, pin, 1, false);
+    
+    // ステートマシン初期化
+    pio_sm_init(pio, sm, offset, &c);
+    pio_sm_set_enabled(pio, sm, true);
+}
+%}

@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/develop/PicoRapidX/build/pioasm/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

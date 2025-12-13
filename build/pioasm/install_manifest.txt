@@ -1,0 +1,5 @@
+C:/develop/PicoRapidX/build/pioasm-install/pioasm/pioasm.exe
+C:/develop/PicoRapidX/build/pioasm-install/pioasm/pioasmTargets.cmake
+C:/develop/PicoRapidX/build/pioasm-install/pioasm/pioasmTargets-release.cmake
+C:/develop/PicoRapidX/build/pioasm-install/pioasm/pioasmConfig.cmake
+C:/develop/PicoRapidX/build/pioasm-install/pioasm/pioasmConfigVersion.cmake
