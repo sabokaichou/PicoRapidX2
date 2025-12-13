@@ -349,6 +349,15 @@ PICO_STDIO_USB:BOOL=OFF
 PIOASM_INSTALL_DIR:PATH=C:/develop/PicoRapidX/build_ninja/pioasm-install
 
 //Value Computed by CMake
+PicoRapidUSB_BINARY_DIR:STATIC=C:/develop/PicoRapidX/build_ninja/PicoRapidUSB_build
+
+//Value Computed by CMake
+PicoRapidUSB_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+PicoRapidUSB_SOURCE_DIR:STATIC=C:/develop/PicoRapidUSB
+
+//Value Computed by CMake
 PicoRapidX_BINARY_DIR:STATIC=C:/develop/PicoRapidX/build_ninja
 
 //Value Computed by CMake
