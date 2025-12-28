@@ -35,6 +35,8 @@ typedef struct {
     uint32_t last_low_width;
     int current_state;
     bool vsync_active;
+    uint32_t debug_hsync_count_in_period;  // デバッグ: 現在の期間内H-Syncカウント
+    uint32_t debug_prev_hsync_count;       // デバッグ: 前回の期間内H-Syncカウント
 } sync_stats_t;
 
 /*
@@ -43,9 +45,24 @@ typedef struct {
 void vsync_separator_init(void);
 
 /*
+ * V-Sync分離器の初期化（コールバック付き）
+ */
+void vsync_separator_init_with_callback(void (*callback)(void));
+
+/*
  * V-Sync分離タスク（メインループで定期的に呼び出し）
  */
 void vsync_separator_task(void);
+
+/*
+ * V-Sync分離タスクCore1専用（Core1で回し続ける）
+ */
+void vsync_separator_task_core1(void);
+
+/*
+ * Core1でV-Sync検出タスクを起動
+ */
+void vsync_separator_start_core1(void);
 
 /*
  * 統計情報取得
