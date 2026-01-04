@@ -852,7 +852,8 @@ static void vsync_callback(void) {
     led_state = !led_state;
     gpio_put(LED_PIN, led_state);
     
-    // 入力処理実行
+    // 入力状態を取得してから処理実行
+    GetInput();
     InputExecute();
 }
 
