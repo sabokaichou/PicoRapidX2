@@ -13,31 +13,20 @@
 // ------------- //
 
 #define csync_measure_wrap_target 0
-#define csync_measure_wrap 12
+#define csync_measure_wrap 1
 #define csync_measure_pio_version 0
 
 static const uint16_t csync_measure_program_instructions[] = {
             //     .wrap_target
-    0x20a0, //  0: wait   1 pin, 0
-    0xe020, //  1: set    x, 0
-    0x00c4, //  2: jmp    pin, 4
-    0x0006, //  3: jmp    6
-    0x0142, //  4: jmp    x--, 2                 [1]
-    0x0006, //  5: jmp    6
-    0xa0c1, //  6: mov    isr, x
-    0x8000, //  7: push   noblock
-    0xe020, //  8: set    x, 0
-    0x00cb, //  9: jmp    pin, 11
-    0x0149, // 10: jmp    x--, 9                 [1]
-    0xa0c1, // 11: mov    isr, x
-    0x8000, // 12: push   noblock
+    0xa0c0, //  0: mov    isr, pins
+    0x8000, //  1: push   noblock
             //     .wrap
 };
 
 #if !PICO_NO_HARDWARE
 static const struct pio_program csync_measure_program = {
     .instructions = csync_measure_program_instructions,
-    .length = 13,
+    .length = 2,
     .origin = -1,
     .pio_version = csync_measure_pio_version,
 #if PICO_PIO_VERSION > 0
@@ -53,17 +42,11 @@ static inline pio_sm_config csync_measure_program_get_default_config(uint offset
 
 static inline void csync_measure_program_init(PIO pio, uint sm, uint offset, uint pin) {
     pio_sm_config c = csync_measure_program_get_default_config(offset);
-    // 入力ピン設定
-    sm_config_set_in_pins(&c, pin);
-    sm_config_set_jmp_pin(&c, pin);
-    // シフト方向設定
+    // シフト方向設定（全ピン読み取りなのでin_pinsは不要）
     sm_config_set_in_shift(&c, false, false, 32);
     // クロック設定 (125MHz → 1MHz = 1μs分解能)
     sm_config_set_clkdiv(&c, 125.0f);
-    // GPIO設定
-    pio_gpio_init(pio, pin);
-    pio_sm_set_consecutive_pindirs(pio, sm, pin, 1, false);
-    // ステートマシン初期化
+    // ステートマシン初期化と有効化
     pio_sm_init(pio, sm, offset, &c);
     pio_sm_set_enabled(pio, sm, true);
 }

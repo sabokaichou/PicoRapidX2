@@ -9,6 +9,8 @@
 #include <hardware/gpio.h>
 #include <hardware/i2c.h>
 #include "bsp/board.h"
+#include "vsync_separator.h"
+
 void usb_msc_start(void);
 void usb_msc_task(void);
 bool usb_msc_is_connected(void);
@@ -373,7 +375,8 @@ void SetCharPattern();
 void SetCharPattern_Number();
 void SetCharPattern_ALPHABET();
 void SetCharPattern_alphabet();
-void SetCharPattern_symbol(); 
+void SetCharPattern_symbol();
+static void vsync_callback(void);
 
 int main() {
     // 基本クロック/USBなどボード初期化
@@ -783,9 +786,12 @@ int main() {
 
     multicore_launch_core1(core1_main); // 同期信号の受付とイベント処理
 
-    InitGPIOSync();
+    // VSync分離器初期化（コールバック登録）
+    vsync_separator_init_with_callback(vsync_callback);
+    
+    // メインループ: VSync検出タスク実行
     while (true) {
-        tight_loop_contents();
+        vsync_separator_task();
     }
     return 0;
 }
@@ -837,7 +843,17 @@ void InitGPIO() {
     gpio_init(LED_PIN);
     gpio_set_dir(LED_PIN, GPIO_OUT);
     gpio_set_drive_strength(LED_PIN, GPIO_DRIVE_STRENGTH_2MA);
+}
 
+// VSync検出コールバック
+static void vsync_callback(void) {
+    // LED点滅
+    static bool led_state = false;
+    led_state = !led_state;
+    gpio_put(LED_PIN, led_state);
+    
+    // 入力処理実行
+    InputExecute();
 }
 
 // 同期信号入力ピン初期化
