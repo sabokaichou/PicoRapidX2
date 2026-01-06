@@ -837,10 +837,21 @@ void InitGPIO() {
         gpio_put(Output_Pin[i], false);
     }
 
-    // GP7-GP10を確実にLOWに設定（デバッグ用）
+    // GP7-GP10を個別に完全初期化（デバッグ用）
+    gpio_init(7);
+    gpio_set_dir(7, GPIO_OUT);
     gpio_put(7, false);
+    
+    gpio_init(8);
+    gpio_set_dir(8, GPIO_OUT);
     gpio_put(8, false);
+    
+    gpio_init(9);
+    gpio_set_dir(9, GPIO_OUT);
     gpio_put(9, false);
+    
+    gpio_init(10);
+    gpio_set_dir(10, GPIO_OUT);
     gpio_put(10, false);
 
     for (int i = 0; i < IOCount; i++) {
@@ -1047,8 +1058,10 @@ void InputExecute() {
     SyncCount_15++;
     if (SyncCount_15 == 4) SyncCount_15 = -1;
 
+    // すべての出力ピンをLOWにリセット
     int i;
     for (i = 0; i < IOCount; i++) {
+        gpio_put(Output_Pin[i], false);
         GPIOStatusOn[i] = false; 
     }
 
