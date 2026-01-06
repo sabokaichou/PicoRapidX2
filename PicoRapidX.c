@@ -837,6 +837,12 @@ void InitGPIO() {
         gpio_put(Output_Pin[i], false);
     }
 
+    // GP7-GP10を確実にLOWに設定（デバッグ用）
+    gpio_put(7, false);
+    gpio_put(8, false);
+    gpio_put(9, false);
+    gpio_put(10, false);
+
     for (int i = 0; i < IOCount; i++) {
         gpio_pull_up(Input_Pin[i]);
     }
