@@ -55,6 +55,47 @@ rule CXX_EXECUTABLE_LINKER__PicoVSyncSeparator_Release
 #############################################
 # Rule for compiling ASM files.
 
+rule ASM_COMPILER__PicoRapidX2_unscanned_Release
+  depfile = $DEP_FILE
+  deps = gcc
+  command = ${LAUNCHER}${CODE_CHECK}C:\PROGRA~2\GNUARM~1\102021~1.10\bin\AR19DD~1.EXE $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out   -c $in
+  description = Building ASM object $out
+
+
+#############################################
+# Rule for compiling C files.
+
+rule C_COMPILER__PicoRapidX2_unscanned_Release
+  depfile = $DEP_FILE
+  deps = gcc
+  command = ${LAUNCHER}${CODE_CHECK}C:\PROGRA~2\GNUARM~1\102021~1.10\bin\AR19DD~1.EXE $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
+  description = Building C object $out
+
+
+#############################################
+# Rule for compiling CXX files.
+
+rule CXX_COMPILER__PicoRapidX2_unscanned_Release
+  depfile = $DEP_FILE
+  deps = gcc
+  command = ${LAUNCHER}${CODE_CHECK}C:\PROGRA~2\GNUARM~1\102021~1.10\bin\AR10B2~1.EXE $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
+  description = Building CXX object $out
+
+
+#############################################
+# Rule for linking CXX executable.
+
+rule CXX_EXECUTABLE_LINKER__PicoRapidX2_Release
+  command = C:\WINDOWS\system32\cmd.exe /C "$PRE_LINK && C:\PROGRA~2\GNUARM~1\102021~1.10\bin\AR10B2~1.EXE $FLAGS $LINK_FLAGS @$RSP_FILE -o $TARGET_FILE && $POST_BUILD"
+  description = Linking CXX executable $TARGET_FILE
+  rspfile = $RSP_FILE
+  rspfile_content = $in $LINK_PATH $LINK_LIBRARIES
+  restat = $RESTAT
+
+
+#############################################
+# Rule for compiling ASM files.
+
 rule ASM_COMPILER__PicoRapidX_Original_unscanned_Release
   depfile = $DEP_FILE
   deps = gcc
@@ -134,7 +175,7 @@ rule ASM_COMPILER__bs2_default_library_unscanned_Release
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = "C:\Program Files\CMake\bin\cmake.exe" --regenerate-during-build -SC:\develop\PicoRapidX -BC:\develop\PicoRapidX\build
+  command = "C:\Program Files\CMake\bin\cmake.exe" --regenerate-during-build -SC:\develop\PicoRapidX2 -BC:\develop\PicoRapidX2\build
   description = Re-running CMake...
   generator = 1
 

@@ -6,22 +6,22 @@ cmake_minimum_required(VERSION ${CMAKE_VERSION}) # this file comes with cmake
 # If CMAKE_DISABLE_SOURCE_CHANGES is set to true and the source directory is an
 # existing directory in our source tree, calling file(MAKE_DIRECTORY) on it
 # would cause a fatal error, even though it would be a no-op.
-if(NOT EXISTS "C:/develop/PicoRapidX/build/_deps/picotool-src")
-  file(MAKE_DIRECTORY "C:/develop/PicoRapidX/build/_deps/picotool-src")
+if(NOT EXISTS "C:/develop/PicoRapidX2/build/_deps/picotool-src")
+  file(MAKE_DIRECTORY "C:/develop/PicoRapidX2/build/_deps/picotool-src")
 endif()
 file(MAKE_DIRECTORY
-  "C:/develop/PicoRapidX/build/_deps/picotool-build"
-  "C:/develop/PicoRapidX/build/_deps"
-  "C:/develop/PicoRapidX/build/picotool/tmp"
-  "C:/develop/PicoRapidX/build/picotool/src/picotoolBuild-stamp"
-  "C:/develop/PicoRapidX/build/picotool/src"
-  "C:/develop/PicoRapidX/build/picotool/src/picotoolBuild-stamp"
+  "C:/develop/PicoRapidX2/build/_deps/picotool-build"
+  "C:/develop/PicoRapidX2/build/_deps"
+  "C:/develop/PicoRapidX2/build/picotool/tmp"
+  "C:/develop/PicoRapidX2/build/picotool/src/picotoolBuild-stamp"
+  "C:/develop/PicoRapidX2/build/picotool/src"
+  "C:/develop/PicoRapidX2/build/picotool/src/picotoolBuild-stamp"
 )
 
 set(configSubDirs )
 foreach(subDir IN LISTS configSubDirs)
-    file(MAKE_DIRECTORY "C:/develop/PicoRapidX/build/picotool/src/picotoolBuild-stamp/${subDir}")
+    file(MAKE_DIRECTORY "C:/develop/PicoRapidX2/build/picotool/src/picotoolBuild-stamp/${subDir}")
 endforeach()
 if(cfgdir)
-  file(MAKE_DIRECTORY "C:/develop/PicoRapidX/build/picotool/src/picotoolBuild-stamp${cfgdir}") # cfgdir has leading slash
+  file(MAKE_DIRECTORY "C:/develop/PicoRapidX2/build/picotool/src/picotoolBuild-stamp${cfgdir}") # cfgdir has leading slash
 endif()

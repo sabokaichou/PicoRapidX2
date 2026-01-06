@@ -101,7 +101,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/C/"
+      - "C:/develop/PicoRapidX2/build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -149,9 +149,9 @@ events:
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc.com"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc.exe"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc.com"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc.exe"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc.com"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc.exe"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc"
@@ -319,7 +319,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/C/"
+      - "C:/develop/PicoRapidX2/build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -367,9 +367,9 @@ events:
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-g++.com"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-g++.exe"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-g++"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-g++.com"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-g++.exe"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-g++"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-g++.com"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-g++.exe"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-g++"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-g++.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-g++.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-g++"
@@ -537,7 +537,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/C/"
+      - "C:/develop/PicoRapidX2/build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -585,9 +585,9 @@ events:
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-objcopy.com"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-objcopy.exe"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-objcopy"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-objcopy.com"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-objcopy.exe"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-objcopy"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-objcopy.com"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-objcopy.exe"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-objcopy"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-objcopy.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-objcopy.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-objcopy"
@@ -755,7 +755,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/C/"
+      - "C:/develop/PicoRapidX2/build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -803,9 +803,9 @@ events:
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-objdump.com"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-objdump.exe"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-objdump"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-objdump.com"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-objdump.exe"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-objdump"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-objdump.com"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-objdump.exe"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-objdump"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-objdump.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-objdump.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-objdump"
@@ -912,7 +912,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/C/"
+      - "C:/develop/PicoRapidX2/build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -1020,15 +1020,15 @@ events:
       - "C:/Windows/System32/OpenSSH/samu.com"
       - "C:/Windows/System32/OpenSSH/samu.exe"
       - "C:/Windows/System32/OpenSSH/samu"
-      - "C:/develop/PicoRapidX/build/C/ninja-build.com"
-      - "C:/develop/PicoRapidX/build/C/ninja-build.exe"
-      - "C:/develop/PicoRapidX/build/C/ninja-build"
-      - "C:/develop/PicoRapidX/build/C/ninja.com"
-      - "C:/develop/PicoRapidX/build/C/ninja.exe"
-      - "C:/develop/PicoRapidX/build/C/ninja"
-      - "C:/develop/PicoRapidX/build/C/samu.com"
-      - "C:/develop/PicoRapidX/build/C/samu.exe"
-      - "C:/develop/PicoRapidX/build/C/samu"
+      - "C:/develop/PicoRapidX2/build/C/ninja-build.com"
+      - "C:/develop/PicoRapidX2/build/C/ninja-build.exe"
+      - "C:/develop/PicoRapidX2/build/C/ninja-build"
+      - "C:/develop/PicoRapidX2/build/C/ninja.com"
+      - "C:/develop/PicoRapidX2/build/C/ninja.exe"
+      - "C:/develop/PicoRapidX2/build/C/ninja"
+      - "C:/develop/PicoRapidX2/build/C/samu.com"
+      - "C:/develop/PicoRapidX2/build/C/samu.exe"
+      - "C:/develop/PicoRapidX2/build/C/samu"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/ninja-build.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/ninja-build.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/ninja-build"
@@ -1378,7 +1378,7 @@ events:
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CMakeCCompilerId.o"
       
       The C compiler identification is GNU, found in:
-        C:/develop/PicoRapidX/build/CMakeFiles/4.1.1/CompilerIdC/CMakeCCompilerId.o
+        C:/develop/PicoRapidX2/build/CMakeFiles/4.1.1/CompilerIdC/CMakeCCompilerId.o
       
   -
     kind: "find-v1"
@@ -1412,7 +1412,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/C/"
+      - "C:/develop/PicoRapidX2/build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -1508,7 +1508,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/C/"
+      - "C:/develop/PicoRapidX2/build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -1604,7 +1604,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/C/"
+      - "C:/develop/PicoRapidX2/build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -1700,7 +1700,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/C/"
+      - "C:/develop/PicoRapidX2/build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -1796,7 +1796,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/C/"
+      - "C:/develop/PicoRapidX2/build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -1892,7 +1892,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/C/"
+      - "C:/develop/PicoRapidX2/build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -1988,7 +1988,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/C/"
+      - "C:/develop/PicoRapidX2/build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -2038,9 +2038,9 @@ events:
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-dlltool.com"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-dlltool.exe"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-dlltool"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-dlltool.com"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-dlltool.exe"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-dlltool"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-dlltool.com"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-dlltool.exe"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-dlltool"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-dlltool.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-dlltool.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-dlltool"
@@ -2119,9 +2119,9 @@ events:
       - "C:/Windows/System32/OpenSSH/dlltool.com"
       - "C:/Windows/System32/OpenSSH/dlltool.exe"
       - "C:/Windows/System32/OpenSSH/dlltool"
-      - "C:/develop/PicoRapidX/build/C/dlltool.com"
-      - "C:/develop/PicoRapidX/build/C/dlltool.exe"
-      - "C:/develop/PicoRapidX/build/C/dlltool"
+      - "C:/develop/PicoRapidX2/build/C/dlltool.com"
+      - "C:/develop/PicoRapidX2/build/C/dlltool.exe"
+      - "C:/develop/PicoRapidX2/build/C/dlltool"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/dlltool.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/dlltool.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/dlltool"
@@ -2243,7 +2243,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/C/"
+      - "C:/develop/PicoRapidX2/build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -2339,7 +2339,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/C/"
+      - "C:/develop/PicoRapidX2/build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -2389,9 +2389,9 @@ events:
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-tapi.com"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-tapi.exe"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-tapi"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-tapi.com"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-tapi.exe"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-tapi"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-tapi.com"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-tapi.exe"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-tapi"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-tapi.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-tapi.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-tapi"
@@ -2470,9 +2470,9 @@ events:
       - "C:/Windows/System32/OpenSSH/tapi.com"
       - "C:/Windows/System32/OpenSSH/tapi.exe"
       - "C:/Windows/System32/OpenSSH/tapi"
-      - "C:/develop/PicoRapidX/build/C/tapi.com"
-      - "C:/develop/PicoRapidX/build/C/tapi.exe"
-      - "C:/develop/PicoRapidX/build/C/tapi"
+      - "C:/develop/PicoRapidX2/build/C/tapi.com"
+      - "C:/develop/PicoRapidX2/build/C/tapi.exe"
+      - "C:/develop/PicoRapidX2/build/C/tapi"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/tapi.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/tapi.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/tapi"
@@ -2598,7 +2598,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/C/"
+      - "C:/develop/PicoRapidX2/build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -2648,9 +2648,9 @@ events:
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ar-10.3.com"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ar-10.3.exe"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ar-10.3"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ar-10.3.com"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ar-10.3.exe"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ar-10.3"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ar-10.3.com"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ar-10.3.exe"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ar-10.3"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ar-10.3.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ar-10.3.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ar-10.3"
@@ -2729,9 +2729,9 @@ events:
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ar-10.com"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ar-10.exe"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ar-10"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ar-10.com"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ar-10.exe"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ar-10"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ar-10.com"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ar-10.exe"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ar-10"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ar-10.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ar-10.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ar-10"
@@ -2810,9 +2810,9 @@ events:
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ar10.com"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ar10.exe"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ar10"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ar10.com"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ar10.exe"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ar10"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ar10.com"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ar10.exe"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ar10"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ar10.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ar10.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ar10"
@@ -2939,7 +2939,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/C/"
+      - "C:/develop/PicoRapidX2/build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -2989,9 +2989,9 @@ events:
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ranlib-10.3.com"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ranlib-10.3.exe"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ranlib-10.3"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ranlib-10.3.com"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ranlib-10.3.exe"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ranlib-10.3"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ranlib-10.3.com"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ranlib-10.3.exe"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ranlib-10.3"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ranlib-10.3.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ranlib-10.3.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ranlib-10.3"
@@ -3070,9 +3070,9 @@ events:
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ranlib-10.com"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ranlib-10.exe"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ranlib-10"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ranlib-10.com"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ranlib-10.exe"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ranlib-10"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ranlib-10.com"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ranlib-10.exe"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ranlib-10"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ranlib-10.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ranlib-10.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ranlib-10"
@@ -3151,9 +3151,9 @@ events:
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ranlib10.com"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ranlib10.exe"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ranlib10"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ranlib10.com"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ranlib10.exe"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ranlib10"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ranlib10.com"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ranlib10.exe"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ranlib10"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ranlib10.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ranlib10.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ranlib10"
@@ -3428,7 +3428,7 @@ events:
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.o"
       
       The CXX compiler identification is GNU, found in:
-        C:/develop/PicoRapidX/build/CMakeFiles/4.1.1/CompilerIdCXX/CMakeCXXCompilerId.o
+        C:/develop/PicoRapidX2/build/CMakeFiles/4.1.1/CompilerIdCXX/CMakeCXXCompilerId.o
       
   -
     kind: "find-v1"
@@ -3464,7 +3464,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/C/"
+      - "C:/develop/PicoRapidX2/build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -3514,9 +3514,9 @@ events:
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ar-10.3.com"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ar-10.3.exe"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ar-10.3"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ar-10.3.com"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ar-10.3.exe"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ar-10.3"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ar-10.3.com"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ar-10.3.exe"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ar-10.3"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ar-10.3.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ar-10.3.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ar-10.3"
@@ -3595,9 +3595,9 @@ events:
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ar-10.com"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ar-10.exe"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ar-10"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ar-10.com"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ar-10.exe"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ar-10"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ar-10.com"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ar-10.exe"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ar-10"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ar-10.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ar-10.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ar-10"
@@ -3676,9 +3676,9 @@ events:
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ar10.com"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ar10.exe"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ar10"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ar10.com"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ar10.exe"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ar10"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ar10.com"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ar10.exe"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ar10"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ar10.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ar10.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ar10"
@@ -3805,7 +3805,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/C/"
+      - "C:/develop/PicoRapidX2/build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -3855,9 +3855,9 @@ events:
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ranlib-10.3.com"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ranlib-10.3.exe"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ranlib-10.3"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ranlib-10.3.com"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ranlib-10.3.exe"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ranlib-10.3"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ranlib-10.3.com"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ranlib-10.3.exe"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ranlib-10.3"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ranlib-10.3.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ranlib-10.3.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ranlib-10.3"
@@ -3936,9 +3936,9 @@ events:
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ranlib-10.com"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ranlib-10.exe"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ranlib-10"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ranlib-10.com"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ranlib-10.exe"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ranlib-10"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ranlib-10.com"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ranlib-10.exe"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ranlib-10"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ranlib-10.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ranlib-10.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ranlib-10"
@@ -4017,9 +4017,9 @@ events:
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ranlib10.com"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ranlib10.exe"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ranlib10"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ranlib10.com"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ranlib10.exe"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ranlib10"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ranlib10.com"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ranlib10.exe"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ranlib10"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ranlib10.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ranlib10.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ranlib10"
@@ -4159,7 +4159,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/C/"
+      - "C:/develop/PicoRapidX2/build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -4209,9 +4209,9 @@ events:
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ar-.com"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ar-.exe"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ar-"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ar-.com"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ar-.exe"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ar-"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ar-.com"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ar-.exe"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ar-"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ar-.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ar-.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ar-"
@@ -4290,9 +4290,9 @@ events:
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ar-.com"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ar-.exe"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ar-"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ar-.com"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ar-.exe"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ar-"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ar-.com"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ar-.exe"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ar-"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ar-.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ar-.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ar-"
@@ -4419,7 +4419,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/C/"
+      - "C:/develop/PicoRapidX2/build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -4469,9 +4469,9 @@ events:
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ranlib-.com"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ranlib-.exe"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ranlib-"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ranlib-.com"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ranlib-.exe"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ranlib-"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ranlib-.com"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ranlib-.exe"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ranlib-"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ranlib-.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ranlib-.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ranlib-"
@@ -4550,9 +4550,9 @@ events:
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ranlib-.com"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ranlib-.exe"
       - "C:/Windows/System32/OpenSSH/arm-none-eabi-gcc-ranlib-"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ranlib-.com"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ranlib-.exe"
-      - "C:/develop/PicoRapidX/build/C/arm-none-eabi-gcc-ranlib-"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ranlib-.com"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ranlib-.exe"
+      - "C:/develop/PicoRapidX2/build/C/arm-none-eabi-gcc-ranlib-"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ranlib-.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ranlib-.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/arm-none-eabi-gcc-ranlib-"
@@ -4654,8 +4654,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "C:/develop/PicoRapidX/build/CMakeFiles/CMakeScratch/TryCompile-ftxj3z"
-      binary: "C:/develop/PicoRapidX/build/CMakeFiles/CMakeScratch/TryCompile-ftxj3z"
+      source: "C:/develop/PicoRapidX2/build/CMakeFiles/CMakeScratch/TryCompile-qmyf2v"
+      binary: "C:/develop/PicoRapidX2/build/CMakeFiles/CMakeScratch/TryCompile-qmyf2v"
     cmakeVariables:
       CMAKE_C_FLAGS: "-mcpu=cortex-m0plus -mthumb"
       CMAKE_C_FLAGS_DEBUG: "-Og -g"
@@ -4666,10 +4666,10 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/develop/PicoRapidX/build/CMakeFiles/CMakeScratch/TryCompile-ftxj3z'
+        Change Dir: 'C:/develop/PicoRapidX2/build/CMakeFiles/CMakeScratch/TryCompile-qmyf2v'
         
-        Run Build Command(s): C:/tools/ninja/ninja.exe -v cmTC_882bc
-        [1/2] C:\\PROGRA~2\\GNUARM~1\\102021~1.10\\bin\\AR19DD~1.EXE   -mcpu=cortex-m0plus -mthumb    -v -o CMakeFiles/cmTC_882bc.dir/CMakeCCompilerABI.c.obj -c "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCCompilerABI.c"
+        Run Build Command(s): C:/tools/ninja/ninja.exe -v cmTC_0fa7e
+        [1/2] C:\\PROGRA~2\\GNUARM~1\\102021~1.10\\bin\\AR19DD~1.EXE   -mcpu=cortex-m0plus -mthumb    -v -o CMakeFiles/cmTC_0fa7e.dir/CMakeCCompilerABI.c.obj -c "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCCompilerABI.c"
         Using built-in specs.
         COLLECT_GCC=C:\\PROGRA~2\\GNUARM~1\\102021~1.10\\bin\\AR19DD~1.EXE
         Target: arm-none-eabi
@@ -4677,8 +4677,8 @@ events:
         Thread model: single
         Supported LTO compression algorithms: zlib
         gcc version 10.3.1 20210824 (release) (GNU Arm Embedded Toolchain 10.3-2021.10) 
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-v' '-o' 'CMakeFiles/cmTC_882bc.dir/CMakeCCompilerABI.c.obj' '-c' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m'
-         c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/cc1.exe -quiet -v -imultilib thumb/v6-m/nofp -iprefix c:\\progra~2\\gnuarm~1\\102021~1.10\\bin\\../lib/gcc/arm-none-eabi/10.3.1/ -isysroot c:\\progra~2\\gnuarm~1\\102021~1.10\\bin\\../arm-none-eabi -D__USES_INITFINI__ C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -mlibarch=armv6s-m -march=armv6s-m -auxbase-strip CMakeFiles/cmTC_882bc.dir/CMakeCCompilerABI.c.obj -version -o C:\\Users\\rai\\AppData\\Local\\Temp\\cc50EJqt.s
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-v' '-o' 'CMakeFiles/cmTC_0fa7e.dir/CMakeCCompilerABI.c.obj' '-c' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m'
+         c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/cc1.exe -quiet -v -imultilib thumb/v6-m/nofp -iprefix c:\\progra~2\\gnuarm~1\\102021~1.10\\bin\\../lib/gcc/arm-none-eabi/10.3.1/ -isysroot c:\\progra~2\\gnuarm~1\\102021~1.10\\bin\\../arm-none-eabi -D__USES_INITFINI__ C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -mlibarch=armv6s-m -march=armv6s-m -auxbase-strip CMakeFiles/cmTC_0fa7e.dir/CMakeCCompilerABI.c.obj -version -o C:\\Users\\rai\\AppData\\Local\\Temp\\ccYRBQym.s
         GNU C17 (GNU Arm Embedded Toolchain 10.3-2021.10) version 10.3.1 20210824 (release) (arm-none-eabi)
         	compiled by GNU C version 7.3-win32 20180312, GMP version 6.1.0, MPFR version 3.1.4, MPC version 1.0.3, isl version isl-0.18-GMP
         
@@ -4699,13 +4699,13 @@ events:
         
         GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
         Compiler executable checksum: f3937ce18b4177bfd408ca565336596a
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-v' '-o' 'CMakeFiles/cmTC_882bc.dir/CMakeCCompilerABI.c.obj' '-c' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m'
-         c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/as.exe -v -march=armv6s-m -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_882bc.dir/CMakeCCompilerABI.c.obj C:\\Users\\rai\\AppData\\Local\\Temp\\cc50EJqt.s
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-v' '-o' 'CMakeFiles/cmTC_0fa7e.dir/CMakeCCompilerABI.c.obj' '-c' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m'
+         c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/as.exe -v -march=armv6s-m -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_0fa7e.dir/CMakeCCompilerABI.c.obj C:\\Users\\rai\\AppData\\Local\\Temp\\ccYRBQym.s
         GNU assembler version 2.36.1 (arm-none-eabi) using BFD version (GNU Arm Embedded Toolchain 10.3-2021.10) 2.36.1.20210621
         COMPILER_PATH=c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/;c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/;c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/
         LIBRARY_PATH=c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/;c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/;c:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib/thumb/v6-m/nofp/;c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/;c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/;c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/;c:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib/\x0d
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-v' '-o' 'CMakeFiles/cmTC_882bc.dir/CMakeCCompilerABI.c.obj' '-c' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m'\x0d
-        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\PROGRA~2\\GNUARM~1\\102021~1.10\\bin\\AR19DD~1.EXE -mcpu=cortex-m0plus -mthumb -Wl,--build-id=none -nostdlib  -v CMakeFiles/cmTC_882bc.dir/CMakeCCompilerABI.c.obj -o cmTC_882bc.elf   && cd ."
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-v' '-o' 'CMakeFiles/cmTC_0fa7e.dir/CMakeCCompilerABI.c.obj' '-c' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m'\x0d
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\PROGRA~2\\GNUARM~1\\102021~1.10\\bin\\AR19DD~1.EXE -mcpu=cortex-m0plus -mthumb -Wl,--build-id=none -nostdlib  -v CMakeFiles/cmTC_0fa7e.dir/CMakeCCompilerABI.c.obj -o cmTC_0fa7e.elf   && cd ."
         Using built-in specs.
         COLLECT_GCC=C:\\PROGRA~2\\GNUARM~1\\102021~1.10\\bin\\AR19DD~1.EXE
         COLLECT_LTO_WRAPPER=c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/lto-wrapper.exe
@@ -4716,10 +4716,10 @@ events:
         gcc version 10.3.1 20210824 (release) (GNU Arm Embedded Toolchain 10.3-2021.10) 
         COMPILER_PATH=c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/;c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/;c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/
         LIBRARY_PATH=c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/;c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/;c:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib/thumb/v6-m/nofp/;c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/;c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/;c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/;c:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib/
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-nostdlib' '-v' '-o' 'cmTC_882bc.elf' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m'
-         c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/collect2.exe -plugin c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/liblto_plugin-0.dll -plugin-opt=c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\rai\\AppData\\Local\\Temp\\cczs6ZeE.res --sysroot=c:\\progra~2\\gnuarm~1\\102021~1.10\\bin\\../arm-none-eabi -X -o cmTC_882bc.elf -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib/thumb/v6-m/nofp -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1 -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib --build-id=none CMakeFiles/cmTC_882bc.dir/CMakeCCompilerABI.c.obj
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-nostdlib' '-v' '-o' 'cmTC_0fa7e.elf' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m'
+         c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/collect2.exe -plugin c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/liblto_plugin-0.dll -plugin-opt=c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\rai\\AppData\\Local\\Temp\\ccaYz9ry.res --sysroot=c:\\progra~2\\gnuarm~1\\102021~1.10\\bin\\../arm-none-eabi -X -o cmTC_0fa7e.elf -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib/thumb/v6-m/nofp -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1 -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib --build-id=none CMakeFiles/cmTC_0fa7e.dir/CMakeCCompilerABI.c.obj
         c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: warning: cannot find entry symbol _start; defaulting to 00008000
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-nostdlib' '-v' '-o' 'cmTC_882bc.elf' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m'\x0d
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-nostdlib' '-v' '-o' 'cmTC_0fa7e.elf' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m'\x0d
         
       exitCode: 0
   -
@@ -4752,10 +4752,10 @@ events:
       Parsed C implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
-        ignore line: [Change Dir: 'C:/develop/PicoRapidX/build/CMakeFiles/CMakeScratch/TryCompile-ftxj3z']
+        ignore line: [Change Dir: 'C:/develop/PicoRapidX2/build/CMakeFiles/CMakeScratch/TryCompile-qmyf2v']
         ignore line: []
-        ignore line: [Run Build Command(s): C:/tools/ninja/ninja.exe -v cmTC_882bc]
-        ignore line: [[1/2] C:\\PROGRA~2\\GNUARM~1\\102021~1.10\\bin\\AR19DD~1.EXE   -mcpu=cortex-m0plus -mthumb    -v -o CMakeFiles/cmTC_882bc.dir/CMakeCCompilerABI.c.obj -c "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCCompilerABI.c"]
+        ignore line: [Run Build Command(s): C:/tools/ninja/ninja.exe -v cmTC_0fa7e]
+        ignore line: [[1/2] C:\\PROGRA~2\\GNUARM~1\\102021~1.10\\bin\\AR19DD~1.EXE   -mcpu=cortex-m0plus -mthumb    -v -o CMakeFiles/cmTC_0fa7e.dir/CMakeCCompilerABI.c.obj -c "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCCompilerABI.c"]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=C:\\PROGRA~2\\GNUARM~1\\102021~1.10\\bin\\AR19DD~1.EXE]
         ignore line: [Target: arm-none-eabi]
@@ -4763,8 +4763,8 @@ events:
         ignore line: [Thread model: single]
         ignore line: [Supported LTO compression algorithms: zlib]
         ignore line: [gcc version 10.3.1 20210824 (release) (GNU Arm Embedded Toolchain 10.3-2021.10) ]
-        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-v' '-o' 'CMakeFiles/cmTC_882bc.dir/CMakeCCompilerABI.c.obj' '-c' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m']
-        ignore line: [ c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/cc1.exe -quiet -v -imultilib thumb/v6-m/nofp -iprefix c:\\progra~2\\gnuarm~1\\102021~1.10\\bin\\../lib/gcc/arm-none-eabi/10.3.1/ -isysroot c:\\progra~2\\gnuarm~1\\102021~1.10\\bin\\../arm-none-eabi -D__USES_INITFINI__ C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -mlibarch=armv6s-m -march=armv6s-m -auxbase-strip CMakeFiles/cmTC_882bc.dir/CMakeCCompilerABI.c.obj -version -o C:\\Users\\rai\\AppData\\Local\\Temp\\cc50EJqt.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-v' '-o' 'CMakeFiles/cmTC_0fa7e.dir/CMakeCCompilerABI.c.obj' '-c' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m']
+        ignore line: [ c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/cc1.exe -quiet -v -imultilib thumb/v6-m/nofp -iprefix c:\\progra~2\\gnuarm~1\\102021~1.10\\bin\\../lib/gcc/arm-none-eabi/10.3.1/ -isysroot c:\\progra~2\\gnuarm~1\\102021~1.10\\bin\\../arm-none-eabi -D__USES_INITFINI__ C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -mlibarch=armv6s-m -march=armv6s-m -auxbase-strip CMakeFiles/cmTC_0fa7e.dir/CMakeCCompilerABI.c.obj -version -o C:\\Users\\rai\\AppData\\Local\\Temp\\ccYRBQym.s]
         ignore line: [GNU C17 (GNU Arm Embedded Toolchain 10.3-2021.10) version 10.3.1 20210824 (release) (arm-none-eabi)]
         ignore line: [	compiled by GNU C version 7.3-win32 20180312  GMP version 6.1.0  MPFR version 3.1.4  MPC version 1.0.3  isl version isl-0.18-GMP]
         ignore line: []
@@ -4785,8 +4785,8 @@ events:
         ignore line: []
         ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
         ignore line: [Compiler executable checksum: f3937ce18b4177bfd408ca565336596a]
-        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-v' '-o' 'CMakeFiles/cmTC_882bc.dir/CMakeCCompilerABI.c.obj' '-c' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m']
-        ignore line: [ c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/as.exe -v -march=armv6s-m -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_882bc.dir/CMakeCCompilerABI.c.obj C:\\Users\\rai\\AppData\\Local\\Temp\\cc50EJqt.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-v' '-o' 'CMakeFiles/cmTC_0fa7e.dir/CMakeCCompilerABI.c.obj' '-c' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m']
+        ignore line: [ c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/as.exe -v -march=armv6s-m -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_0fa7e.dir/CMakeCCompilerABI.c.obj C:\\Users\\rai\\AppData\\Local\\Temp\\ccYRBQym.s]
         ignore line: [GNU assembler version 2.36.1 (arm-none-eabi) using BFD version (GNU Arm Embedded Toolchain 10.3-2021.10) 2.36.1.20210621]
         ignore line: [COMPILER_PATH=c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/]
         ignore line: [c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/]
@@ -4798,8 +4798,8 @@ events:
         ignore line: [c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/]
         ignore line: [c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/]
         ignore line: [c:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib/\x0d]
-        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-v' '-o' 'CMakeFiles/cmTC_882bc.dir/CMakeCCompilerABI.c.obj' '-c' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m'\x0d]
-        ignore line: [[2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\PROGRA~2\\GNUARM~1\\102021~1.10\\bin\\AR19DD~1.EXE -mcpu=cortex-m0plus -mthumb -Wl --build-id=none -nostdlib  -v CMakeFiles/cmTC_882bc.dir/CMakeCCompilerABI.c.obj -o cmTC_882bc.elf   && cd ."]
+        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-v' '-o' 'CMakeFiles/cmTC_0fa7e.dir/CMakeCCompilerABI.c.obj' '-c' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m'\x0d]
+        ignore line: [[2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\PROGRA~2\\GNUARM~1\\102021~1.10\\bin\\AR19DD~1.EXE -mcpu=cortex-m0plus -mthumb -Wl --build-id=none -nostdlib  -v CMakeFiles/cmTC_0fa7e.dir/CMakeCCompilerABI.c.obj -o cmTC_0fa7e.elf   && cd ."]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=C:\\PROGRA~2\\GNUARM~1\\102021~1.10\\bin\\AR19DD~1.EXE]
         ignore line: [COLLECT_LTO_WRAPPER=c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/lto-wrapper.exe]
@@ -4818,17 +4818,17 @@ events:
         ignore line: [c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/]
         ignore line: [c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/]
         ignore line: [c:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib/]
-        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-nostdlib' '-v' '-o' 'cmTC_882bc.elf' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m']
-        link line: [ c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/collect2.exe -plugin c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/liblto_plugin-0.dll -plugin-opt=c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\rai\\AppData\\Local\\Temp\\cczs6ZeE.res --sysroot=c:\\progra~2\\gnuarm~1\\102021~1.10\\bin\\../arm-none-eabi -X -o cmTC_882bc.elf -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib/thumb/v6-m/nofp -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1 -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib --build-id=none CMakeFiles/cmTC_882bc.dir/CMakeCCompilerABI.c.obj]
+        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-nostdlib' '-v' '-o' 'cmTC_0fa7e.elf' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m']
+        link line: [ c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/collect2.exe -plugin c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/liblto_plugin-0.dll -plugin-opt=c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\rai\\AppData\\Local\\Temp\\ccaYz9ry.res --sysroot=c:\\progra~2\\gnuarm~1\\102021~1.10\\bin\\../arm-none-eabi -X -o cmTC_0fa7e.elf -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib/thumb/v6-m/nofp -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1 -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib --build-id=none CMakeFiles/cmTC_0fa7e.dir/CMakeCCompilerABI.c.obj]
           arg [c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/collect2.exe] ==> ignore
           arg [-plugin] ==> ignore
           arg [c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/liblto_plugin-0.dll] ==> ignore
           arg [-plugin-opt=c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/lto-wrapper.exe] ==> ignore
-          arg [-plugin-opt=-fresolution=C:\\Users\\rai\\AppData\\Local\\Temp\\cczs6ZeE.res] ==> ignore
+          arg [-plugin-opt=-fresolution=C:\\Users\\rai\\AppData\\Local\\Temp\\ccaYz9ry.res] ==> ignore
           arg [--sysroot=c:\\progra~2\\gnuarm~1\\102021~1.10\\bin\\../arm-none-eabi] ==> ignore
           arg [-X] ==> ignore
           arg [-o] ==> ignore
-          arg [cmTC_882bc.elf] ==> ignore
+          arg [cmTC_0fa7e.elf] ==> ignore
           arg [-Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp] ==> dir [c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp]
           arg [-Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp] ==> dir [c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp]
           arg [-Lc:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib/thumb/v6-m/nofp] ==> dir [c:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib/thumb/v6-m/nofp]
@@ -4837,10 +4837,10 @@ events:
           arg [-Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib] ==> dir [c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib]
           arg [-Lc:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib] ==> dir [c:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib]
           arg [--build-id=none] ==> ignore
-          arg [CMakeFiles/cmTC_882bc.dir/CMakeCCompilerABI.c.obj] ==> ignore
+          arg [CMakeFiles/cmTC_0fa7e.dir/CMakeCCompilerABI.c.obj] ==> ignore
         ignore line: [c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: warning: cannot find entry symbol _start]
         ignore line: [ defaulting to 00008000]
-        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-nostdlib' '-v' '-o' 'cmTC_882bc.elf' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m'\x0d]
+        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-nostdlib' '-v' '-o' 'cmTC_0fa7e.elf' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m'\x0d]
         ignore line: []
         ignore line: []
         collapse library dir [c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp] ==> [C:/Program Files (x86)/GNU Arm Embedded Toolchain/10 2021.10/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp]
@@ -4865,8 +4865,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "C:/develop/PicoRapidX/build/CMakeFiles/CMakeScratch/TryCompile-z20en3"
-      binary: "C:/develop/PicoRapidX/build/CMakeFiles/CMakeScratch/TryCompile-z20en3"
+      source: "C:/develop/PicoRapidX2/build/CMakeFiles/CMakeScratch/TryCompile-t8mowa"
+      binary: "C:/develop/PicoRapidX2/build/CMakeFiles/CMakeScratch/TryCompile-t8mowa"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "-mcpu=cortex-m0plus -mthumb"
       CMAKE_CXX_FLAGS_DEBUG: "-Og -g"
@@ -4878,10 +4878,10 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/develop/PicoRapidX/build/CMakeFiles/CMakeScratch/TryCompile-z20en3'
+        Change Dir: 'C:/develop/PicoRapidX2/build/CMakeFiles/CMakeScratch/TryCompile-t8mowa'
         
-        Run Build Command(s): C:/tools/ninja/ninja.exe -v cmTC_bebad
-        [1/2] C:\\PROGRA~2\\GNUARM~1\\102021~1.10\\bin\\AR10B2~1.EXE   -mcpu=cortex-m0plus -mthumb    -v -o CMakeFiles/cmTC_bebad.dir/CMakeCXXCompilerABI.cpp.obj -c "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp"
+        Run Build Command(s): C:/tools/ninja/ninja.exe -v cmTC_92d12
+        [1/2] C:\\PROGRA~2\\GNUARM~1\\102021~1.10\\bin\\AR10B2~1.EXE   -mcpu=cortex-m0plus -mthumb    -v -o CMakeFiles/cmTC_92d12.dir/CMakeCXXCompilerABI.cpp.obj -c "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp"
         Using built-in specs.
         COLLECT_GCC=C:\\PROGRA~2\\GNUARM~1\\102021~1.10\\bin\\AR10B2~1.EXE
         Target: arm-none-eabi
@@ -4889,8 +4889,8 @@ events:
         Thread model: single
         Supported LTO compression algorithms: zlib
         gcc version 10.3.1 20210824 (release) (GNU Arm Embedded Toolchain 10.3-2021.10) 
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-v' '-o' 'CMakeFiles/cmTC_bebad.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m'
-         c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/cc1plus.exe -quiet -v -imultilib thumb/v6-m/nofp -iprefix c:\\progra~2\\gnuarm~1\\102021~1.10\\bin\\../lib/gcc/arm-none-eabi/10.3.1/ -isysroot c:\\progra~2\\gnuarm~1\\102021~1.10\\bin\\../arm-none-eabi -D__USES_INITFINI__ C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -mlibarch=armv6s-m -march=armv6s-m -auxbase-strip CMakeFiles/cmTC_bebad.dir/CMakeCXXCompilerABI.cpp.obj -version -o C:\\Users\\rai\\AppData\\Local\\Temp\\ccLmEEzX.s
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-v' '-o' 'CMakeFiles/cmTC_92d12.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m'
+         c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/cc1plus.exe -quiet -v -imultilib thumb/v6-m/nofp -iprefix c:\\progra~2\\gnuarm~1\\102021~1.10\\bin\\../lib/gcc/arm-none-eabi/10.3.1/ -isysroot c:\\progra~2\\gnuarm~1\\102021~1.10\\bin\\../arm-none-eabi -D__USES_INITFINI__ C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -mlibarch=armv6s-m -march=armv6s-m -auxbase-strip CMakeFiles/cmTC_92d12.dir/CMakeCXXCompilerABI.cpp.obj -version -o C:\\Users\\rai\\AppData\\Local\\Temp\\ccYFCP9W.s
         GNU C++14 (GNU Arm Embedded Toolchain 10.3-2021.10) version 10.3.1 20210824 (release) (arm-none-eabi)
         	compiled by GNU C version 7.3-win32 20180312, GMP version 6.1.0, MPFR version 3.1.4, MPC version 1.0.3, isl version isl-0.18-GMP
         
@@ -4917,13 +4917,13 @@ events:
         
         GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
         Compiler executable checksum: f8787892a7c5aa84cea58dce52be7118
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-v' '-o' 'CMakeFiles/cmTC_bebad.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m'
-         c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/as.exe -v -march=armv6s-m -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_bebad.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\rai\\AppData\\Local\\Temp\\ccLmEEzX.s
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-v' '-o' 'CMakeFiles/cmTC_92d12.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m'
+         c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/as.exe -v -march=armv6s-m -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_92d12.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\rai\\AppData\\Local\\Temp\\ccYFCP9W.s
         GNU assembler version 2.36.1 (arm-none-eabi) using BFD version (GNU Arm Embedded Toolchain 10.3-2021.10) 2.36.1.20210621
         COMPILER_PATH=c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/;c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/;c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/
         LIBRARY_PATH=c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/;c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/;c:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib/thumb/v6-m/nofp/;c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/;c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/;c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/;c:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib/
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-v' '-o' 'CMakeFiles/cmTC_bebad.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m'
-        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\PROGRA~2\\GNUARM~1\\102021~1.10\\bin\\AR10B2~1.EXE -mcpu=cortex-m0plus -mthumb -Wl,--build-id=none -nostdlib  -v CMakeFiles/cmTC_bebad.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_bebad.elf   && cd ."
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-v' '-o' 'CMakeFiles/cmTC_92d12.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m'
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\PROGRA~2\\GNUARM~1\\102021~1.10\\bin\\AR10B2~1.EXE -mcpu=cortex-m0plus -mthumb -Wl,--build-id=none -nostdlib  -v CMakeFiles/cmTC_92d12.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_92d12.elf   && cd ."
         Using built-in specs.
         COLLECT_GCC=C:\\PROGRA~2\\GNUARM~1\\102021~1.10\\bin\\AR10B2~1.EXE
         COLLECT_LTO_WRAPPER=c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/lto-wrapper.exe
@@ -4934,10 +4934,10 @@ events:
         gcc version 10.3.1 20210824 (release) (GNU Arm Embedded Toolchain 10.3-2021.10) 
         COMPILER_PATH=c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/;c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/;c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/
         LIBRARY_PATH=c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp/;c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/;c:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib/thumb/v6-m/nofp/;c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/;c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/;c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/;c:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib/
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-nostdlib' '-v' '-o' 'cmTC_bebad.elf' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m'
-         c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/collect2.exe -plugin c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/liblto_plugin-0.dll -plugin-opt=c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\rai\\AppData\\Local\\Temp\\ccXq4KO5.res --sysroot=c:\\progra~2\\gnuarm~1\\102021~1.10\\bin\\../arm-none-eabi -X -o cmTC_bebad.elf -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib/thumb/v6-m/nofp -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1 -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib --build-id=none CMakeFiles/cmTC_bebad.dir/CMakeCXXCompilerABI.cpp.obj\x0d
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-nostdlib' '-v' '-o' 'cmTC_92d12.elf' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m'
+         c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/collect2.exe -plugin c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/liblto_plugin-0.dll -plugin-opt=c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\rai\\AppData\\Local\\Temp\\ccEprRN5.res --sysroot=c:\\progra~2\\gnuarm~1\\102021~1.10\\bin\\../arm-none-eabi -X -o cmTC_92d12.elf -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib/thumb/v6-m/nofp -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1 -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib --build-id=none CMakeFiles/cmTC_92d12.dir/CMakeCXXCompilerABI.cpp.obj\x0d
         c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: warning: cannot find entry symbol _start; defaulting to 00008000\x0d
-        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-nostdlib' '-v' '-o' 'cmTC_bebad.elf' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m'\x0d
+        COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-nostdlib' '-v' '-o' 'cmTC_92d12.elf' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m'\x0d
         
       exitCode: 0
   -
@@ -4976,10 +4976,10 @@ events:
       Parsed CXX implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
-        ignore line: [Change Dir: 'C:/develop/PicoRapidX/build/CMakeFiles/CMakeScratch/TryCompile-z20en3']
+        ignore line: [Change Dir: 'C:/develop/PicoRapidX2/build/CMakeFiles/CMakeScratch/TryCompile-t8mowa']
         ignore line: []
-        ignore line: [Run Build Command(s): C:/tools/ninja/ninja.exe -v cmTC_bebad]
-        ignore line: [[1/2] C:\\PROGRA~2\\GNUARM~1\\102021~1.10\\bin\\AR10B2~1.EXE   -mcpu=cortex-m0plus -mthumb    -v -o CMakeFiles/cmTC_bebad.dir/CMakeCXXCompilerABI.cpp.obj -c "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp"]
+        ignore line: [Run Build Command(s): C:/tools/ninja/ninja.exe -v cmTC_92d12]
+        ignore line: [[1/2] C:\\PROGRA~2\\GNUARM~1\\102021~1.10\\bin\\AR10B2~1.EXE   -mcpu=cortex-m0plus -mthumb    -v -o CMakeFiles/cmTC_92d12.dir/CMakeCXXCompilerABI.cpp.obj -c "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp"]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=C:\\PROGRA~2\\GNUARM~1\\102021~1.10\\bin\\AR10B2~1.EXE]
         ignore line: [Target: arm-none-eabi]
@@ -4987,8 +4987,8 @@ events:
         ignore line: [Thread model: single]
         ignore line: [Supported LTO compression algorithms: zlib]
         ignore line: [gcc version 10.3.1 20210824 (release) (GNU Arm Embedded Toolchain 10.3-2021.10) ]
-        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-v' '-o' 'CMakeFiles/cmTC_bebad.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m']
-        ignore line: [ c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/cc1plus.exe -quiet -v -imultilib thumb/v6-m/nofp -iprefix c:\\progra~2\\gnuarm~1\\102021~1.10\\bin\\../lib/gcc/arm-none-eabi/10.3.1/ -isysroot c:\\progra~2\\gnuarm~1\\102021~1.10\\bin\\../arm-none-eabi -D__USES_INITFINI__ C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -mlibarch=armv6s-m -march=armv6s-m -auxbase-strip CMakeFiles/cmTC_bebad.dir/CMakeCXXCompilerABI.cpp.obj -version -o C:\\Users\\rai\\AppData\\Local\\Temp\\ccLmEEzX.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-v' '-o' 'CMakeFiles/cmTC_92d12.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m']
+        ignore line: [ c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/cc1plus.exe -quiet -v -imultilib thumb/v6-m/nofp -iprefix c:\\progra~2\\gnuarm~1\\102021~1.10\\bin\\../lib/gcc/arm-none-eabi/10.3.1/ -isysroot c:\\progra~2\\gnuarm~1\\102021~1.10\\bin\\../arm-none-eabi -D__USES_INITFINI__ C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -mlibarch=armv6s-m -march=armv6s-m -auxbase-strip CMakeFiles/cmTC_92d12.dir/CMakeCXXCompilerABI.cpp.obj -version -o C:\\Users\\rai\\AppData\\Local\\Temp\\ccYFCP9W.s]
         ignore line: [GNU C++14 (GNU Arm Embedded Toolchain 10.3-2021.10) version 10.3.1 20210824 (release) (arm-none-eabi)]
         ignore line: [	compiled by GNU C version 7.3-win32 20180312  GMP version 6.1.0  MPFR version 3.1.4  MPC version 1.0.3  isl version isl-0.18-GMP]
         ignore line: []
@@ -5015,8 +5015,8 @@ events:
         ignore line: []
         ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
         ignore line: [Compiler executable checksum: f8787892a7c5aa84cea58dce52be7118]
-        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-v' '-o' 'CMakeFiles/cmTC_bebad.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m']
-        ignore line: [ c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/as.exe -v -march=armv6s-m -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_bebad.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\rai\\AppData\\Local\\Temp\\ccLmEEzX.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-v' '-o' 'CMakeFiles/cmTC_92d12.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m']
+        ignore line: [ c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/as.exe -v -march=armv6s-m -mfloat-abi=soft -meabi=5 -o CMakeFiles/cmTC_92d12.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\rai\\AppData\\Local\\Temp\\ccYFCP9W.s]
         ignore line: [GNU assembler version 2.36.1 (arm-none-eabi) using BFD version (GNU Arm Embedded Toolchain 10.3-2021.10) 2.36.1.20210621]
         ignore line: [COMPILER_PATH=c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/]
         ignore line: [c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/]
@@ -5028,8 +5028,8 @@ events:
         ignore line: [c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/]
         ignore line: [c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/]
         ignore line: [c:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib/]
-        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-v' '-o' 'CMakeFiles/cmTC_bebad.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m']
-        ignore line: [[2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\PROGRA~2\\GNUARM~1\\102021~1.10\\bin\\AR10B2~1.EXE -mcpu=cortex-m0plus -mthumb -Wl --build-id=none -nostdlib  -v CMakeFiles/cmTC_bebad.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_bebad.elf   && cd ."]
+        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-v' '-o' 'CMakeFiles/cmTC_92d12.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m']
+        ignore line: [[2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\PROGRA~2\\GNUARM~1\\102021~1.10\\bin\\AR10B2~1.EXE -mcpu=cortex-m0plus -mthumb -Wl --build-id=none -nostdlib  -v CMakeFiles/cmTC_92d12.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_92d12.elf   && cd ."]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=C:\\PROGRA~2\\GNUARM~1\\102021~1.10\\bin\\AR10B2~1.EXE]
         ignore line: [COLLECT_LTO_WRAPPER=c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/lto-wrapper.exe]
@@ -5048,17 +5048,17 @@ events:
         ignore line: [c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/]
         ignore line: [c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/]
         ignore line: [c:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib/]
-        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-nostdlib' '-v' '-o' 'cmTC_bebad.elf' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m']
-        link line: [ c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/collect2.exe -plugin c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/liblto_plugin-0.dll -plugin-opt=c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\rai\\AppData\\Local\\Temp\\ccXq4KO5.res --sysroot=c:\\progra~2\\gnuarm~1\\102021~1.10\\bin\\../arm-none-eabi -X -o cmTC_bebad.elf -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib/thumb/v6-m/nofp -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1 -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib --build-id=none CMakeFiles/cmTC_bebad.dir/CMakeCXXCompilerABI.cpp.obj\x0d]
+        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-nostdlib' '-v' '-o' 'cmTC_92d12.elf' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m']
+        link line: [ c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/collect2.exe -plugin c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/liblto_plugin-0.dll -plugin-opt=c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\rai\\AppData\\Local\\Temp\\ccEprRN5.res --sysroot=c:\\progra~2\\gnuarm~1\\102021~1.10\\bin\\../arm-none-eabi -X -o cmTC_92d12.elf -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib/thumb/v6-m/nofp -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1 -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib -Lc:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib --build-id=none CMakeFiles/cmTC_92d12.dir/CMakeCXXCompilerABI.cpp.obj\x0d]
           arg [c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/collect2.exe] ==> ignore
           arg [-plugin] ==> ignore
           arg [c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/liblto_plugin-0.dll] ==> ignore
           arg [-plugin-opt=c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/lto-wrapper.exe] ==> ignore
-          arg [-plugin-opt=-fresolution=C:\\Users\\rai\\AppData\\Local\\Temp\\ccXq4KO5.res] ==> ignore
+          arg [-plugin-opt=-fresolution=C:\\Users\\rai\\AppData\\Local\\Temp\\ccEprRN5.res] ==> ignore
           arg [--sysroot=c:\\progra~2\\gnuarm~1\\102021~1.10\\bin\\../arm-none-eabi] ==> ignore
           arg [-X] ==> ignore
           arg [-o] ==> ignore
-          arg [cmTC_bebad.elf] ==> ignore
+          arg [cmTC_92d12.elf] ==> ignore
           arg [-Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp] ==> dir [c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp]
           arg [-Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp] ==> dir [c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp]
           arg [-Lc:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib/thumb/v6-m/nofp] ==> dir [c:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib/thumb/v6-m/nofp]
@@ -5067,10 +5067,10 @@ events:
           arg [-Lc:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib] ==> dir [c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib]
           arg [-Lc:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib] ==> dir [c:/progra~2/gnuarm~1/102021~1.10/bin/../arm-none-eabi/lib]
           arg [--build-id=none] ==> ignore
-          arg [CMakeFiles/cmTC_bebad.dir/CMakeCXXCompilerABI.cpp.obj] ==> ignore
+          arg [CMakeFiles/cmTC_92d12.dir/CMakeCXXCompilerABI.cpp.obj] ==> ignore
         ignore line: [c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/bin/ld.exe: warning: cannot find entry symbol _start]
         ignore line: [ defaulting to 00008000\x0d]
-        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-nostdlib' '-v' '-o' 'cmTC_bebad.elf' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m'\x0d]
+        ignore line: [COLLECT_GCC_OPTIONS='-mcpu=cortex-m0plus' '-mthumb' '-nostdlib' '-v' '-o' 'cmTC_92d12.elf' '-mfloat-abi=soft' '-mlibarch=armv6s-m' '-march=armv6s-m'\x0d]
         ignore line: []
         ignore line: []
         collapse library dir [c:/progra~2/gnuarm~1/102021~1.10/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp] ==> [C:/Program Files (x86)/GNU Arm Embedded Toolchain/10 2021.10/lib/gcc/arm-none-eabi/10.3.1/thumb/v6-m/nofp]
@@ -7527,11 +7527,11 @@ events:
         CMAKE_FIND_ROOT_PATH_MODE: "NEVER"
     candidates:
       -
-        path: "C:/develop/PicoRapidX/build/CMakeFiles/pkgRedirects/pioasmConfig.cmake"
+        path: "C:/develop/PicoRapidX2/build/CMakeFiles/pkgRedirects/pioasmConfig.cmake"
         mode: "config"
         reason: "no_exist"
       -
-        path: "C:/develop/PicoRapidX/build/CMakeFiles/pkgRedirects/pioasm-config.cmake"
+        path: "C:/develop/PicoRapidX2/build/CMakeFiles/pkgRedirects/pioasm-config.cmake"
         mode: "config"
         reason: "no_exist"
       -
@@ -7840,7 +7840,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/C/"
+      - "C:/develop/PicoRapidX2/build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -7906,9 +7906,9 @@ events:
       - "C:/Windows/System32/OpenSSH/doxygen.com"
       - "C:/Windows/System32/OpenSSH/doxygen.exe"
       - "C:/Windows/System32/OpenSSH/doxygen"
-      - "C:/develop/PicoRapidX/build/C/doxygen.com"
-      - "C:/develop/PicoRapidX/build/C/doxygen.exe"
-      - "C:/develop/PicoRapidX/build/C/doxygen"
+      - "C:/develop/PicoRapidX2/build/C/doxygen.com"
+      - "C:/develop/PicoRapidX2/build/C/doxygen.exe"
+      - "C:/develop/PicoRapidX2/build/C/doxygen"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/doxygen.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/doxygen.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/doxygen"
@@ -8037,7 +8037,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/C/"
+      - "C:/develop/PicoRapidX2/build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -8105,9 +8105,9 @@ events:
       - "C:/Windows/System32/OpenSSH/dot.com"
       - "C:/Windows/System32/OpenSSH/dot.exe"
       - "C:/Windows/System32/OpenSSH/dot"
-      - "C:/develop/PicoRapidX/build/C/dot.com"
-      - "C:/develop/PicoRapidX/build/C/dot.exe"
-      - "C:/develop/PicoRapidX/build/C/dot"
+      - "C:/develop/PicoRapidX2/build/C/dot.com"
+      - "C:/develop/PicoRapidX2/build/C/dot.exe"
+      - "C:/develop/PicoRapidX2/build/C/dot"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/dot.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/dot.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/dot"
@@ -8274,7 +8274,7 @@ events:
       - "C:/develop/pico-sdk/tools/CMakeLists.txt:153 (find_package)"
       - "C:/develop/pico-sdk/tools/CMakeLists.txt:688 (pico_init_picotool)"
       - "C:/develop/pico-sdk/src/cmake/on_device.cmake:81 (picotool_postprocess_binary)"
-      - "CMakeLists.txt:65 (pico_add_extra_outputs)"
+      - "CMakeLists.txt:91 (pico_add_extra_outputs)"
     name: "picotool"
     configs:
       -
@@ -8309,11 +8309,11 @@ events:
         CMAKE_FIND_ROOT_PATH_MODE: "NEVER"
     candidates:
       -
-        path: "C:/develop/PicoRapidX/build/CMakeFiles/pkgRedirects/picotoolConfig.cmake"
+        path: "C:/develop/PicoRapidX2/build/CMakeFiles/pkgRedirects/picotoolConfig.cmake"
         mode: "config"
         reason: "no_exist"
       -
-        path: "C:/develop/PicoRapidX/build/CMakeFiles/pkgRedirects/picotool-config.cmake"
+        path: "C:/develop/PicoRapidX2/build/CMakeFiles/pkgRedirects/picotool-config.cmake"
         mode: "config"
         reason: "no_exist"
       -
@@ -8605,7 +8605,7 @@ events:
       - "C:/develop/pico-sdk/tools/CMakeLists.txt:168 (find_package)"
       - "C:/develop/pico-sdk/tools/CMakeLists.txt:688 (pico_init_picotool)"
       - "C:/develop/pico-sdk/src/cmake/on_device.cmake:81 (picotool_postprocess_binary)"
-      - "CMakeLists.txt:65 (pico_add_extra_outputs)"
+      - "CMakeLists.txt:91 (pico_add_extra_outputs)"
     mode: "program"
     variable: "GIT_EXECUTABLE"
     description: "Git command line client"
@@ -8631,7 +8631,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/C/"
+      - "C:/develop/PicoRapidX2/build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -8692,9 +8692,9 @@ events:
       - "C:/Windows/System32/OpenSSH/git.cmd.com"
       - "C:/Windows/System32/OpenSSH/git.cmd.exe"
       - "C:/Windows/System32/OpenSSH/git.cmd"
-      - "C:/develop/PicoRapidX/build/C/git.cmd.com"
-      - "C:/develop/PicoRapidX/build/C/git.cmd.exe"
-      - "C:/develop/PicoRapidX/build/C/git.cmd"
+      - "C:/develop/PicoRapidX2/build/C/git.cmd.com"
+      - "C:/develop/PicoRapidX2/build/C/git.cmd.exe"
+      - "C:/develop/PicoRapidX2/build/C/git.cmd"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/git.cmd.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/git.cmd.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/git.cmd"
@@ -8812,9 +8812,9 @@ events:
       - "C:/Windows/System32/OpenSSH/git.com"
       - "C:/Windows/System32/OpenSSH/git.exe"
       - "C:/Windows/System32/OpenSSH/git"
-      - "C:/develop/PicoRapidX/build/C/git.com"
-      - "C:/develop/PicoRapidX/build/C/git.exe"
-      - "C:/develop/PicoRapidX/build/C/git"
+      - "C:/develop/PicoRapidX2/build/C/git.com"
+      - "C:/develop/PicoRapidX2/build/C/git.exe"
+      - "C:/develop/PicoRapidX2/build/C/git"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/git.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/git.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/git"

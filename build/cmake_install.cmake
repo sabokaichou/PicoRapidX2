@@ -1,4 +1,4 @@
-# Install script for directory: C:/develop/PicoRapidX
+# Install script for directory: C:/develop/PicoRapidX2
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,14 +39,14 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/develop/PicoRapidX/build/pico-sdk/cmake_install.cmake")
+  include("C:/develop/PicoRapidX2/build/pico-sdk/cmake_install.cmake")
 
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "C:/develop/PicoRapidX/build/install_local_manifest.txt"
+  file(WRITE "C:/develop/PicoRapidX2/build/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()
 if(CMAKE_INSTALL_COMPONENT)
@@ -62,6 +62,6 @@ else()
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "C:/develop/PicoRapidX/build/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "C:/develop/PicoRapidX2/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

@@ -1,7 +1,7 @@
-C:/develop/PicoRapidX/build/_deps/picotool/picotool.exe
-C:/develop/PicoRapidX/build/_deps/picotool/picotoolTargets.cmake
-C:/develop/PicoRapidX/build/_deps/picotool/picotoolTargets-release.cmake
-C:/develop/PicoRapidX/build/_deps/picotool/picotoolConfig.cmake
-C:/develop/PicoRapidX/build/_deps/picotool/picotoolConfigVersion.cmake
-C:/develop/PicoRapidX/build/_deps/picotool/enc_bootloader.elf
-C:/develop/PicoRapidX/build/_deps/picotool/enc_bootloader_mbedtls.elf
+C:/develop/PicoRapidX2/build/_deps/picotool/picotool.exe
+C:/develop/PicoRapidX2/build/_deps/picotool/picotoolTargets.cmake
+C:/develop/PicoRapidX2/build/_deps/picotool/picotoolTargets-release.cmake
+C:/develop/PicoRapidX2/build/_deps/picotool/picotoolConfig.cmake
+C:/develop/PicoRapidX2/build/_deps/picotool/picotoolConfigVersion.cmake
+C:/develop/PicoRapidX2/build/_deps/picotool/enc_bootloader.elf
+C:/develop/PicoRapidX2/build/_deps/picotool/enc_bootloader_mbedtls.elf

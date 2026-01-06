@@ -4,6 +4,6 @@
 
 method=source_dir
 command=
-source_dir=C:/develop/PicoRapidX/build/_deps/picotool-src/enc_bootloader
+source_dir=C:/develop/PicoRapidX2/build/_deps/picotool-src/enc_bootloader
 work_dir=
 

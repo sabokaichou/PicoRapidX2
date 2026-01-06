@@ -1,7 +1,7 @@
 {
 	"InstallScripts" : 
 	[
-		"C:/develop/PicoRapidX/build/_deps/picotool-build/enc_bootloader_mbedtls/cmake_install.cmake"
+		"C:/develop/PicoRapidX2/build/_deps/picotool-build/enc_bootloader_mbedtls/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

@@ -44,7 +44,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -272,27 +272,27 @@ events:
       - "C:/Windows/System32/OpenSSH/clang.com"
       - "C:/Windows/System32/OpenSSH/clang.exe"
       - "C:/Windows/System32/OpenSSH/clang"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/cc.com"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/cc.exe"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/cc"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc.com"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc.exe"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/cl.com"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/cl.exe"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/cl"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/bcc.com"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/bcc.exe"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/bcc"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/xlc.com"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/xlc.exe"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/xlc"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/icx.com"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/icx.exe"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/icx"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/clang.com"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/clang.exe"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/clang"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/cc.com"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/cc.exe"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/cc"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc.com"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc.exe"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/cl.com"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/cl.exe"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/cl"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/bcc.com"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/bcc.exe"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/bcc"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/xlc.com"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/xlc.exe"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/xlc"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/icx.com"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/icx.exe"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/icx"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/clang.com"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/clang.exe"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/clang"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/cc.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/cc.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/cc"
@@ -657,7 +657,7 @@ events:
         - "C:\\tools\\picotool"
         - "C:\\tools\\winlibs\\mingw64\\bin"
         - "C:\\Users\\rai\\.dotnet\\tools"
-      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX/build/_deps"
+      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX2/build/_deps"
   -
     kind: "find-v1"
     backtrace:
@@ -727,7 +727,7 @@ events:
         - "C:\\tools\\picotool"
         - "C:\\tools\\winlibs\\mingw64\\bin"
         - "C:\\Users\\rai\\.dotnet\\tools"
-      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX/build/_deps"
+      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX2/build/_deps"
   -
     kind: "message-v1"
     backtrace:
@@ -748,7 +748,7 @@ events:
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
       
       The C compiler identification is GNU, found in:
-        C:/develop/PicoRapidX/build/_deps/picotool-build/CMakeFiles/4.1.1/CompilerIdC/a.exe
+        C:/develop/PicoRapidX2/build/_deps/picotool-build/CMakeFiles/4.1.1/CompilerIdC/a.exe
       
   -
     kind: "find-v1"
@@ -781,7 +781,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -844,7 +844,7 @@ events:
         - "C:\\tools\\picotool"
         - "C:\\tools\\winlibs\\mingw64\\bin"
         - "C:\\Users\\rai\\.dotnet\\tools"
-      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX/build/_deps"
+      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX2/build/_deps"
   -
     kind: "find-v1"
     backtrace:
@@ -876,7 +876,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -939,7 +939,7 @@ events:
         - "C:\\tools\\picotool"
         - "C:\\tools\\winlibs\\mingw64\\bin"
         - "C:\\Users\\rai\\.dotnet\\tools"
-      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX/build/_deps"
+      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX2/build/_deps"
   -
     kind: "find-v1"
     backtrace:
@@ -971,7 +971,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -1034,7 +1034,7 @@ events:
         - "C:\\tools\\picotool"
         - "C:\\tools\\winlibs\\mingw64\\bin"
         - "C:\\Users\\rai\\.dotnet\\tools"
-      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX/build/_deps"
+      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX2/build/_deps"
   -
     kind: "find-v1"
     backtrace:
@@ -1066,7 +1066,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -1129,7 +1129,7 @@ events:
         - "C:\\tools\\picotool"
         - "C:\\tools\\winlibs\\mingw64\\bin"
         - "C:\\Users\\rai\\.dotnet\\tools"
-      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX/build/_deps"
+      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX2/build/_deps"
   -
     kind: "find-v1"
     backtrace:
@@ -1161,7 +1161,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -1224,7 +1224,7 @@ events:
         - "C:\\tools\\picotool"
         - "C:\\tools\\winlibs\\mingw64\\bin"
         - "C:\\Users\\rai\\.dotnet\\tools"
-      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX/build/_deps"
+      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX2/build/_deps"
   -
     kind: "find-v1"
     backtrace:
@@ -1256,7 +1256,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -1319,7 +1319,7 @@ events:
         - "C:\\tools\\picotool"
         - "C:\\tools\\winlibs\\mingw64\\bin"
         - "C:\\Users\\rai\\.dotnet\\tools"
-      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX/build/_deps"
+      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX2/build/_deps"
   -
     kind: "find-v1"
     backtrace:
@@ -1351,7 +1351,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -1414,7 +1414,7 @@ events:
         - "C:\\tools\\picotool"
         - "C:\\tools\\winlibs\\mingw64\\bin"
         - "C:\\Users\\rai\\.dotnet\\tools"
-      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX/build/_deps"
+      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX2/build/_deps"
   -
     kind: "find-v1"
     backtrace:
@@ -1446,7 +1446,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -1509,7 +1509,7 @@ events:
         - "C:\\tools\\picotool"
         - "C:\\tools\\winlibs\\mingw64\\bin"
         - "C:\\Users\\rai\\.dotnet\\tools"
-      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX/build/_deps"
+      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX2/build/_deps"
   -
     kind: "find-v1"
     backtrace:
@@ -1541,7 +1541,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -1604,7 +1604,7 @@ events:
         - "C:\\tools\\picotool"
         - "C:\\tools\\winlibs\\mingw64\\bin"
         - "C:\\Users\\rai\\.dotnet\\tools"
-      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX/build/_deps"
+      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX2/build/_deps"
   -
     kind: "find-v1"
     backtrace:
@@ -1636,7 +1636,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -1699,7 +1699,7 @@ events:
         - "C:\\tools\\picotool"
         - "C:\\tools\\winlibs\\mingw64\\bin"
         - "C:\\Users\\rai\\.dotnet\\tools"
-      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX/build/_deps"
+      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX2/build/_deps"
   -
     kind: "find-v1"
     backtrace:
@@ -1731,7 +1731,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -1781,9 +1781,9 @@ events:
       - "C:/Windows/System32/OpenSSH/tapi.com"
       - "C:/Windows/System32/OpenSSH/tapi.exe"
       - "C:/Windows/System32/OpenSSH/tapi"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/tapi.com"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/tapi.exe"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/tapi"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/tapi.com"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/tapi.exe"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/tapi"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/tapi.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/tapi.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/tapi"
@@ -1874,7 +1874,7 @@ events:
         - "C:\\tools\\picotool"
         - "C:\\tools\\winlibs\\mingw64\\bin"
         - "C:\\Users\\rai\\.dotnet\\tools"
-      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX/build/_deps"
+      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX2/build/_deps"
   -
     kind: "find-v1"
     backtrace:
@@ -1909,7 +1909,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -1959,9 +1959,9 @@ events:
       - "C:/Windows/System32/OpenSSH/gcc-ar-15.2.com"
       - "C:/Windows/System32/OpenSSH/gcc-ar-15.2.exe"
       - "C:/Windows/System32/OpenSSH/gcc-ar-15.2"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ar-15.2.com"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ar-15.2.exe"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ar-15.2"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ar-15.2.com"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ar-15.2.exe"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ar-15.2"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ar-15.2.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ar-15.2.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ar-15.2"
@@ -2040,9 +2040,9 @@ events:
       - "C:/Windows/System32/OpenSSH/gcc-ar-15.com"
       - "C:/Windows/System32/OpenSSH/gcc-ar-15.exe"
       - "C:/Windows/System32/OpenSSH/gcc-ar-15"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ar-15.com"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ar-15.exe"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ar-15"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ar-15.com"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ar-15.exe"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ar-15"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ar-15.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ar-15.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ar-15"
@@ -2121,9 +2121,9 @@ events:
       - "C:/Windows/System32/OpenSSH/gcc-ar15.com"
       - "C:/Windows/System32/OpenSSH/gcc-ar15.exe"
       - "C:/Windows/System32/OpenSSH/gcc-ar15"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ar15.com"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ar15.exe"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ar15"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ar15.com"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ar15.exe"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ar15"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ar15.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ar15.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ar15"
@@ -2215,7 +2215,7 @@ events:
         - "C:\\tools\\picotool"
         - "C:\\tools\\winlibs\\mingw64\\bin"
         - "C:\\Users\\rai\\.dotnet\\tools"
-      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX/build/_deps"
+      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX2/build/_deps"
   -
     kind: "find-v1"
     backtrace:
@@ -2250,7 +2250,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -2300,9 +2300,9 @@ events:
       - "C:/Windows/System32/OpenSSH/gcc-ranlib-15.2.com"
       - "C:/Windows/System32/OpenSSH/gcc-ranlib-15.2.exe"
       - "C:/Windows/System32/OpenSSH/gcc-ranlib-15.2"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ranlib-15.2.com"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ranlib-15.2.exe"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ranlib-15.2"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ranlib-15.2.com"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ranlib-15.2.exe"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ranlib-15.2"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ranlib-15.2.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ranlib-15.2.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ranlib-15.2"
@@ -2381,9 +2381,9 @@ events:
       - "C:/Windows/System32/OpenSSH/gcc-ranlib-15.com"
       - "C:/Windows/System32/OpenSSH/gcc-ranlib-15.exe"
       - "C:/Windows/System32/OpenSSH/gcc-ranlib-15"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ranlib-15.com"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ranlib-15.exe"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ranlib-15"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ranlib-15.com"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ranlib-15.exe"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ranlib-15"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ranlib-15.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ranlib-15.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ranlib-15"
@@ -2462,9 +2462,9 @@ events:
       - "C:/Windows/System32/OpenSSH/gcc-ranlib15.com"
       - "C:/Windows/System32/OpenSSH/gcc-ranlib15.exe"
       - "C:/Windows/System32/OpenSSH/gcc-ranlib15"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ranlib15.com"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ranlib15.exe"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ranlib15"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ranlib15.com"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ranlib15.exe"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ranlib15"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ranlib15.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ranlib15.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ranlib15"
@@ -2556,7 +2556,7 @@ events:
         - "C:\\tools\\picotool"
         - "C:\\tools\\winlibs\\mingw64\\bin"
         - "C:\\Users\\rai\\.dotnet\\tools"
-      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX/build/_deps"
+      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX2/build/_deps"
   -
     kind: "find-v1"
     backtrace:
@@ -2630,7 +2630,7 @@ events:
         - "C:\\tools\\picotool"
         - "C:\\tools\\winlibs\\mingw64\\bin"
         - "C:\\Users\\rai\\.dotnet\\tools"
-      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX/build/_deps"
+      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX2/build/_deps"
   -
     kind: "find-v1"
     backtrace:
@@ -2700,7 +2700,7 @@ events:
         - "C:\\tools\\picotool"
         - "C:\\tools\\winlibs\\mingw64\\bin"
         - "C:\\Users\\rai\\.dotnet\\tools"
-      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX/build/_deps"
+      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX2/build/_deps"
   -
     kind: "message-v1"
     backtrace:
@@ -2721,7 +2721,7 @@ events:
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.exe"
       
       The CXX compiler identification is GNU, found in:
-        C:/develop/PicoRapidX/build/_deps/picotool-build/CMakeFiles/4.1.1/CompilerIdCXX/a.exe
+        C:/develop/PicoRapidX2/build/_deps/picotool-build/CMakeFiles/4.1.1/CompilerIdCXX/a.exe
       
   -
     kind: "find-v1"
@@ -2757,7 +2757,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -2807,9 +2807,9 @@ events:
       - "C:/Windows/System32/OpenSSH/gcc-ar-15.2.com"
       - "C:/Windows/System32/OpenSSH/gcc-ar-15.2.exe"
       - "C:/Windows/System32/OpenSSH/gcc-ar-15.2"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ar-15.2.com"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ar-15.2.exe"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ar-15.2"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ar-15.2.com"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ar-15.2.exe"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ar-15.2"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ar-15.2.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ar-15.2.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ar-15.2"
@@ -2888,9 +2888,9 @@ events:
       - "C:/Windows/System32/OpenSSH/gcc-ar-15.com"
       - "C:/Windows/System32/OpenSSH/gcc-ar-15.exe"
       - "C:/Windows/System32/OpenSSH/gcc-ar-15"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ar-15.com"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ar-15.exe"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ar-15"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ar-15.com"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ar-15.exe"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ar-15"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ar-15.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ar-15.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ar-15"
@@ -2969,9 +2969,9 @@ events:
       - "C:/Windows/System32/OpenSSH/gcc-ar15.com"
       - "C:/Windows/System32/OpenSSH/gcc-ar15.exe"
       - "C:/Windows/System32/OpenSSH/gcc-ar15"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ar15.com"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ar15.exe"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ar15"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ar15.com"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ar15.exe"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ar15"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ar15.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ar15.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ar15"
@@ -3063,7 +3063,7 @@ events:
         - "C:\\tools\\picotool"
         - "C:\\tools\\winlibs\\mingw64\\bin"
         - "C:\\Users\\rai\\.dotnet\\tools"
-      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX/build/_deps"
+      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX2/build/_deps"
   -
     kind: "find-v1"
     backtrace:
@@ -3098,7 +3098,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -3148,9 +3148,9 @@ events:
       - "C:/Windows/System32/OpenSSH/gcc-ranlib-15.2.com"
       - "C:/Windows/System32/OpenSSH/gcc-ranlib-15.2.exe"
       - "C:/Windows/System32/OpenSSH/gcc-ranlib-15.2"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ranlib-15.2.com"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ranlib-15.2.exe"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ranlib-15.2"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ranlib-15.2.com"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ranlib-15.2.exe"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ranlib-15.2"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ranlib-15.2.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ranlib-15.2.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ranlib-15.2"
@@ -3229,9 +3229,9 @@ events:
       - "C:/Windows/System32/OpenSSH/gcc-ranlib-15.com"
       - "C:/Windows/System32/OpenSSH/gcc-ranlib-15.exe"
       - "C:/Windows/System32/OpenSSH/gcc-ranlib-15"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ranlib-15.com"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ranlib-15.exe"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ranlib-15"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ranlib-15.com"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ranlib-15.exe"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ranlib-15"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ranlib-15.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ranlib-15.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ranlib-15"
@@ -3310,9 +3310,9 @@ events:
       - "C:/Windows/System32/OpenSSH/gcc-ranlib15.com"
       - "C:/Windows/System32/OpenSSH/gcc-ranlib15.exe"
       - "C:/Windows/System32/OpenSSH/gcc-ranlib15"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ranlib15.com"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ranlib15.exe"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/gcc-ranlib15"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ranlib15.com"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ranlib15.exe"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/gcc-ranlib15"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ranlib15.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ranlib15.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/gcc-ranlib15"
@@ -3404,7 +3404,7 @@ events:
         - "C:\\tools\\picotool"
         - "C:\\tools\\winlibs\\mingw64\\bin"
         - "C:\\Users\\rai\\.dotnet\\tools"
-      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX/build/_deps"
+      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX2/build/_deps"
   -
     kind: "find-v1"
     backtrace:
@@ -3438,7 +3438,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -3464,9 +3464,9 @@ events:
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/CMake/sbin/"
       - "C:/Program Files/CMake/"
-      - "C:/develop/PicoRapidX/build/_deps/bin/"
-      - "C:/develop/PicoRapidX/build/_deps/sbin/"
-      - "C:/develop/PicoRapidX/build/_deps/"
+      - "C:/develop/PicoRapidX2/build/_deps/bin/"
+      - "C:/develop/PicoRapidX2/build/_deps/sbin/"
+      - "C:/develop/PicoRapidX2/build/_deps/"
     searched_directories:
       - "C:/Users/rai/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/windres.com"
       - "C:/Users/rai/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/windres.exe"
@@ -3498,9 +3498,9 @@ events:
       - "C:/Windows/System32/OpenSSH/windres.com"
       - "C:/Windows/System32/OpenSSH/windres.exe"
       - "C:/Windows/System32/OpenSSH/windres"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/windres.com"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/windres.exe"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/windres"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/windres.com"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/windres.exe"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/windres"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/windres.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/windres.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/windres"
@@ -3592,12 +3592,12 @@ events:
         - "C:\\tools\\picotool"
         - "C:\\tools\\winlibs\\mingw64\\bin"
         - "C:\\Users\\rai\\.dotnet\\tools"
-      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX/build/_deps"
+      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX2/build/_deps"
       CMAKE_SYSTEM_PREFIX_PATH:
         - "C:/Program Files"
         - "C:/Program Files (x86)"
         - "C:/Program Files/CMake"
-        - "C:/develop/PicoRapidX/build/_deps"
+        - "C:/develop/PicoRapidX2/build/_deps"
   -
     kind: "try_compile-v1"
     backtrace:
@@ -3607,8 +3607,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "C:/develop/PicoRapidX/build/_deps/picotool-build/CMakeFiles/CMakeScratch/TryCompile-yzlakl"
-      binary: "C:/develop/PicoRapidX/build/_deps/picotool-build/CMakeFiles/CMakeScratch/TryCompile-yzlakl"
+      source: "C:/develop/PicoRapidX2/build/_deps/picotool-build/CMakeFiles/CMakeScratch/TryCompile-13voml"
+      binary: "C:/develop/PicoRapidX2/build/_deps/picotool-build/CMakeFiles/CMakeScratch/TryCompile-13voml"
     cmakeVariables:
       CMAKE_C_FLAGS: ""
       CMAKE_C_FLAGS_DEBUG: "-g"
@@ -3617,10 +3617,10 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/develop/PicoRapidX/build/_deps/picotool-build/CMakeFiles/CMakeScratch/TryCompile-yzlakl'
+        Change Dir: 'C:/develop/PicoRapidX2/build/_deps/picotool-build/CMakeFiles/CMakeScratch/TryCompile-13voml'
         
-        Run Build Command(s): C:/tools/ninja/ninja.exe -v cmTC_16f60
-        [1/2] C:\\tools\\winlibs\\mingw64\\bin\\gcc.exe   -v -o CMakeFiles/cmTC_16f60.dir/CMakeCCompilerABI.c.obj -c "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCCompilerABI.c"
+        Run Build Command(s): C:/tools/ninja/ninja.exe -v cmTC_f8319
+        [1/2] C:\\tools\\winlibs\\mingw64\\bin\\gcc.exe   -v -o CMakeFiles/cmTC_f8319.dir/CMakeCCompilerABI.c.obj -c "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCCompilerABI.c"
         Using built-in specs.
         COLLECT_GCC=C:\\tools\\winlibs\\mingw64\\bin\\gcc.exe
         OFFLOAD_TARGET_NAMES=nvptx-none
@@ -3629,8 +3629,8 @@ events:
         Thread model: posix
         Supported LTO compression algorithms: zlib zstd
         gcc version 15.2.0 (MinGW-W64 x86_64-msvcrt-posix-seh, built by Brecht Sanders, r1) 
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_16f60.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_16f60.dir/'
-         C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/cc1.exe -quiet -v -iprefix C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/ -D_REENTRANT C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_16f60.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -o C:\\Users\\rai\\AppData\\Local\\Temp\\ccv5Ehyt.s
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_f8319.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_f8319.dir/'
+         C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/cc1.exe -quiet -v -iprefix C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/ -D_REENTRANT C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_f8319.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -o C:\\Users\\rai\\AppData\\Local\\Temp\\ccNaDqAN.s
         GNU C23 (MinGW-W64 x86_64-msvcrt-posix-seh, built by Brecht Sanders, r1) version 15.2.0 (x86_64-w64-mingw32)
         	compiled by GNU C version 15.2.0, GMP version 6.3.0, MPFR version 4.2.2, MPC version 1.3.1, isl version isl-0.27-GMP
         
@@ -3649,13 +3649,13 @@ events:
          C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/include
         End of search list.
         Compiler executable checksum: 4771f173d68fe323f806f2dc68586686
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_16f60.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_16f60.dir/'
-         C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles/cmTC_16f60.dir/CMakeCCompilerABI.c.obj C:\\Users\\rai\\AppData\\Local\\Temp\\ccv5Ehyt.s
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_f8319.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_f8319.dir/'
+         C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles/cmTC_f8319.dir/CMakeCCompilerABI.c.obj C:\\Users\\rai\\AppData\\Local\\Temp\\ccNaDqAN.s
         GNU assembler version 2.45 (x86_64-w64-mingw32) using BFD version (Binutils for MinGW-W64 x86_64, built by Brecht Sanders, r1) 2.45
         COMPILER_PATH=C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/;C:/tools/winlibs/mingw64/bin/../libexec/gcc/;C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/
         LIBRARY_PATH=C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/;C:/tools/winlibs/mingw64/bin/../lib/gcc/;C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/;C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/;C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_16f60.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_16f60.dir/CMakeCCompilerABI.c.'
-        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\tools\\winlibs\\mingw64\\bin\\gcc.exe  -v -Wl,-v CMakeFiles/cmTC_16f60.dir/CMakeCCompilerABI.c.obj -o cmTC_16f60.exe -Wl,--out-implib,libcmTC_16f60.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && cd ."
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_f8319.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_f8319.dir/CMakeCCompilerABI.c.'
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\tools\\winlibs\\mingw64\\bin\\gcc.exe  -v -Wl,-v CMakeFiles/cmTC_f8319.dir/CMakeCCompilerABI.c.obj -o cmTC_f8319.exe -Wl,--out-implib,libcmTC_f8319.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && cd ."
         Using built-in specs.
         COLLECT_GCC=C:\\tools\\winlibs\\mingw64\\bin\\gcc.exe
         COLLECT_LTO_WRAPPER=C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe
@@ -3667,12 +3667,12 @@ events:
         gcc version 15.2.0 (MinGW-W64 x86_64-msvcrt-posix-seh, built by Brecht Sanders, r1) 
         COMPILER_PATH=C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/;C:/tools/winlibs/mingw64/bin/../libexec/gcc/;C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/
         LIBRARY_PATH=C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/;C:/tools/winlibs/mingw64/bin/../lib/gcc/;C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/;C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/;C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_16f60.exe' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_16f60.'
-         C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe -plugin C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\rai\\AppData\\Local\\Temp\\cc9TjDhB.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_16f60.exe C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/tools/winlibs/mingw64/bin/../lib/gcc -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_16f60.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_16f60.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_f8319.exe' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_f8319.'
+         C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe -plugin C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\rai\\AppData\\Local\\Temp\\ccdabuwV.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_f8319.exe C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/tools/winlibs/mingw64/bin/../lib/gcc -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_f8319.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_f8319.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o
         collect2 version 15.2.0
-        C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\rai\\AppData\\Local\\Temp\\cc9TjDhB.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_16f60.exe C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/tools/winlibs/mingw64/bin/../lib/gcc -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_16f60.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_16f60.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o
+        C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\rai\\AppData\\Local\\Temp\\ccdabuwV.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_f8319.exe C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/tools/winlibs/mingw64/bin/../lib/gcc -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_f8319.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_f8319.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o
         GNU ld (Binutils for MinGW-W64 x86_64, built by Brecht Sanders, r1) 2.45\x0d
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_16f60.exe' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_16f60.'\x0d
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_f8319.exe' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_f8319.'\x0d
         
       exitCode: 0
   -
@@ -3707,10 +3707,10 @@ events:
       Parsed C implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
-        ignore line: [Change Dir: 'C:/develop/PicoRapidX/build/_deps/picotool-build/CMakeFiles/CMakeScratch/TryCompile-yzlakl']
+        ignore line: [Change Dir: 'C:/develop/PicoRapidX2/build/_deps/picotool-build/CMakeFiles/CMakeScratch/TryCompile-13voml']
         ignore line: []
-        ignore line: [Run Build Command(s): C:/tools/ninja/ninja.exe -v cmTC_16f60]
-        ignore line: [[1/2] C:\\tools\\winlibs\\mingw64\\bin\\gcc.exe   -v -o CMakeFiles/cmTC_16f60.dir/CMakeCCompilerABI.c.obj -c "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCCompilerABI.c"]
+        ignore line: [Run Build Command(s): C:/tools/ninja/ninja.exe -v cmTC_f8319]
+        ignore line: [[1/2] C:\\tools\\winlibs\\mingw64\\bin\\gcc.exe   -v -o CMakeFiles/cmTC_f8319.dir/CMakeCCompilerABI.c.obj -c "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCCompilerABI.c"]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=C:\\tools\\winlibs\\mingw64\\bin\\gcc.exe]
         ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none]
@@ -3719,8 +3719,8 @@ events:
         ignore line: [Thread model: posix]
         ignore line: [Supported LTO compression algorithms: zlib zstd]
         ignore line: [gcc version 15.2.0 (MinGW-W64 x86_64-msvcrt-posix-seh  built by Brecht Sanders  r1) ]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_16f60.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_16f60.dir/']
-        ignore line: [ C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/cc1.exe -quiet -v -iprefix C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/ -D_REENTRANT C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_16f60.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -o C:\\Users\\rai\\AppData\\Local\\Temp\\ccv5Ehyt.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_f8319.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_f8319.dir/']
+        ignore line: [ C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/cc1.exe -quiet -v -iprefix C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/ -D_REENTRANT C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_f8319.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -o C:\\Users\\rai\\AppData\\Local\\Temp\\ccNaDqAN.s]
         ignore line: [GNU C23 (MinGW-W64 x86_64-msvcrt-posix-seh  built by Brecht Sanders  r1) version 15.2.0 (x86_64-w64-mingw32)]
         ignore line: [	compiled by GNU C version 15.2.0  GMP version 6.3.0  MPFR version 4.2.2  MPC version 1.3.1  isl version isl-0.27-GMP]
         ignore line: []
@@ -3739,8 +3739,8 @@ events:
         ignore line: [ C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/include]
         ignore line: [End of search list.]
         ignore line: [Compiler executable checksum: 4771f173d68fe323f806f2dc68586686]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_16f60.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_16f60.dir/']
-        ignore line: [ C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles/cmTC_16f60.dir/CMakeCCompilerABI.c.obj C:\\Users\\rai\\AppData\\Local\\Temp\\ccv5Ehyt.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_f8319.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_f8319.dir/']
+        ignore line: [ C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles/cmTC_f8319.dir/CMakeCCompilerABI.c.obj C:\\Users\\rai\\AppData\\Local\\Temp\\ccNaDqAN.s]
         ignore line: [GNU assembler version 2.45 (x86_64-w64-mingw32) using BFD version (Binutils for MinGW-W64 x86_64  built by Brecht Sanders  r1) 2.45]
         ignore line: [COMPILER_PATH=C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/]
         ignore line: [C:/tools/winlibs/mingw64/bin/../libexec/gcc/]
@@ -3751,8 +3751,8 @@ events:
         ignore line: [C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/]
         ignore line: [C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/]
         ignore line: [C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_16f60.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_16f60.dir/CMakeCCompilerABI.c.']
-        ignore line: [[2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\tools\\winlibs\\mingw64\\bin\\gcc.exe  -v -Wl -v CMakeFiles/cmTC_16f60.dir/CMakeCCompilerABI.c.obj -o cmTC_16f60.exe -Wl --out-implib libcmTC_16f60.dll.a -Wl --major-image-version 0 --minor-image-version 0   && cd ."]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_f8319.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_f8319.dir/CMakeCCompilerABI.c.']
+        ignore line: [[2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\tools\\winlibs\\mingw64\\bin\\gcc.exe  -v -Wl -v CMakeFiles/cmTC_f8319.dir/CMakeCCompilerABI.c.obj -o cmTC_f8319.exe -Wl --out-implib libcmTC_f8319.dll.a -Wl --major-image-version 0 --minor-image-version 0   && cd ."]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=C:\\tools\\winlibs\\mingw64\\bin\\gcc.exe]
         ignore line: [COLLECT_LTO_WRAPPER=C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe]
@@ -3771,13 +3771,13 @@ events:
         ignore line: [C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/]
         ignore line: [C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/]
         ignore line: [C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_16f60.exe' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_16f60.']
-        link line: [ C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe -plugin C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\rai\\AppData\\Local\\Temp\\cc9TjDhB.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_16f60.exe C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/tools/winlibs/mingw64/bin/../lib/gcc -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_16f60.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_16f60.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_f8319.exe' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_f8319.']
+        link line: [ C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe -plugin C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\rai\\AppData\\Local\\Temp\\ccdabuwV.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_f8319.exe C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/tools/winlibs/mingw64/bin/../lib/gcc -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_f8319.dir/CMakeCCompilerABI.c.obj --out-implib libcmTC_f8319.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmingwex -lmsvcrt -lkernel32 C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o]
           arg [C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe] ==> ignore
           arg [-plugin] ==> ignore
           arg [C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll] ==> ignore
           arg [-plugin-opt=C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe] ==> ignore
-          arg [-plugin-opt=-fresolution=C:\\Users\\rai\\AppData\\Local\\Temp\\cc9TjDhB.res] ==> ignore
+          arg [-plugin-opt=-fresolution=C:\\Users\\rai\\AppData\\Local\\Temp\\ccdabuwV.res] ==> ignore
           arg [-plugin-opt=-pass-through=-lmingw32] ==> ignore
           arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
           arg [-plugin-opt=-pass-through=-lgcc_eh] ==> ignore
@@ -3799,7 +3799,7 @@ events:
           arg [i386pep] ==> ignore
           arg [-Bdynamic] ==> search dynamic
           arg [-o] ==> ignore
-          arg [cmTC_16f60.exe] ==> ignore
+          arg [cmTC_f8319.exe] ==> ignore
           arg [C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o] ==> obj [C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o]
           arg [C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o] ==> obj [C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o]
           arg [-LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0] ==> dir [C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0]
@@ -3809,9 +3809,9 @@ events:
           arg [-LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib] ==> dir [C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib]
           arg [-LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../..] ==> dir [C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../..]
           arg [-v] ==> ignore
-          arg [CMakeFiles/cmTC_16f60.dir/CMakeCCompilerABI.c.obj] ==> ignore
+          arg [CMakeFiles/cmTC_f8319.dir/CMakeCCompilerABI.c.obj] ==> ignore
           arg [--out-implib] ==> ignore
-          arg [libcmTC_16f60.dll.a] ==> ignore
+          arg [libcmTC_f8319.dll.a] ==> ignore
           arg [--major-image-version] ==> ignore
           arg [0] ==> ignore
           arg [--minor-image-version] ==> ignore
@@ -3893,8 +3893,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "C:/develop/PicoRapidX/build/_deps/picotool-build/CMakeFiles/CMakeScratch/TryCompile-e4h7bf"
-      binary: "C:/develop/PicoRapidX/build/_deps/picotool-build/CMakeFiles/CMakeScratch/TryCompile-e4h7bf"
+      source: "C:/develop/PicoRapidX2/build/_deps/picotool-build/CMakeFiles/CMakeScratch/TryCompile-16u2zu"
+      binary: "C:/develop/PicoRapidX2/build/_deps/picotool-build/CMakeFiles/CMakeScratch/TryCompile-16u2zu"
     cmakeVariables:
       CMAKE_CXX_FLAGS: ""
       CMAKE_CXX_FLAGS_DEBUG: "-g"
@@ -3904,10 +3904,10 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/develop/PicoRapidX/build/_deps/picotool-build/CMakeFiles/CMakeScratch/TryCompile-e4h7bf'
+        Change Dir: 'C:/develop/PicoRapidX2/build/_deps/picotool-build/CMakeFiles/CMakeScratch/TryCompile-16u2zu'
         
-        Run Build Command(s): C:/tools/ninja/ninja.exe -v cmTC_57f0f
-        [1/2] C:\\tools\\winlibs\\mingw64\\bin\\c++.exe   -v -o CMakeFiles/cmTC_57f0f.dir/CMakeCXXCompilerABI.cpp.obj -c "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp"
+        Run Build Command(s): C:/tools/ninja/ninja.exe -v cmTC_48073
+        [1/2] C:\\tools\\winlibs\\mingw64\\bin\\c++.exe   -v -o CMakeFiles/cmTC_48073.dir/CMakeCXXCompilerABI.cpp.obj -c "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp"
         Using built-in specs.
         COLLECT_GCC=C:\\tools\\winlibs\\mingw64\\bin\\c++.exe
         OFFLOAD_TARGET_NAMES=nvptx-none
@@ -3916,8 +3916,8 @@ events:
         Thread model: posix
         Supported LTO compression algorithms: zlib zstd
         gcc version 15.2.0 (MinGW-W64 x86_64-msvcrt-posix-seh, built by Brecht Sanders, r1) 
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_57f0f.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_57f0f.dir/'
-         C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/cc1plus.exe -quiet -v -iprefix C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/ -D_REENTRANT C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_57f0f.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -o C:\\Users\\rai\\AppData\\Local\\Temp\\ccFACVO0.s
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_48073.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_48073.dir/'
+         C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/cc1plus.exe -quiet -v -iprefix C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/ -D_REENTRANT C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_48073.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -o C:\\Users\\rai\\AppData\\Local\\Temp\\ccgl0Yuc.s
         GNU C++17 (MinGW-W64 x86_64-msvcrt-posix-seh, built by Brecht Sanders, r1) version 15.2.0 (x86_64-w64-mingw32)
         	compiled by GNU C version 15.2.0, GMP version 6.3.0, MPFR version 4.2.2, MPC version 1.3.1, isl version isl-0.27-GMP
         
@@ -3942,13 +3942,13 @@ events:
          C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/include
         End of search list.
         Compiler executable checksum: 43a2d58255b90554ada10a53fa1a7228
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_57f0f.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_57f0f.dir/'
-         C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles/cmTC_57f0f.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\rai\\AppData\\Local\\Temp\\ccFACVO0.s
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_48073.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_48073.dir/'
+         C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles/cmTC_48073.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\rai\\AppData\\Local\\Temp\\ccgl0Yuc.s
         GNU assembler version 2.45 (x86_64-w64-mingw32) using BFD version (Binutils for MinGW-W64 x86_64, built by Brecht Sanders, r1) 2.45
         COMPILER_PATH=C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/;C:/tools/winlibs/mingw64/bin/../libexec/gcc/;C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/
         LIBRARY_PATH=C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/;C:/tools/winlibs/mingw64/bin/../lib/gcc/;C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/;C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/;C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../\x0d
-        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_57f0f.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_57f0f.dir/CMakeCXXCompilerABI.cpp.'\x0d
-        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\tools\\winlibs\\mingw64\\bin\\c++.exe  -v -Wl,-v CMakeFiles/cmTC_57f0f.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_57f0f.exe -Wl,--out-implib,libcmTC_57f0f.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && cd ."
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_48073.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_48073.dir/CMakeCXXCompilerABI.cpp.'\x0d
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\tools\\winlibs\\mingw64\\bin\\c++.exe  -v -Wl,-v CMakeFiles/cmTC_48073.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_48073.exe -Wl,--out-implib,libcmTC_48073.dll.a -Wl,--major-image-version,0,--minor-image-version,0   && cd ."
         Using built-in specs.
         COLLECT_GCC=C:\\tools\\winlibs\\mingw64\\bin\\c++.exe
         COLLECT_LTO_WRAPPER=C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe
@@ -3960,12 +3960,12 @@ events:
         gcc version 15.2.0 (MinGW-W64 x86_64-msvcrt-posix-seh, built by Brecht Sanders, r1) 
         COMPILER_PATH=C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/;C:/tools/winlibs/mingw64/bin/../libexec/gcc/;C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/
         LIBRARY_PATH=C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/;C:/tools/winlibs/mingw64/bin/../lib/gcc/;C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/;C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/;C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/;C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_57f0f.exe' '-foffload-options=-l_GCC_stdc++' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_57f0f.'
-         C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe -plugin C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\rai\\AppData\\Local\\Temp\\cc1BL138.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_57f0f.exe C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/tools/winlibs/mingw64/bin/../lib/gcc -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_57f0f.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_57f0f.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_48073.exe' '-foffload-options=-l_GCC_stdc++' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_48073.'
+         C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe -plugin C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\rai\\AppData\\Local\\Temp\\ccTOnmXj.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_48073.exe C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/tools/winlibs/mingw64/bin/../lib/gcc -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_48073.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_48073.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o
         collect2 version 15.2.0
-        C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\rai\\AppData\\Local\\Temp\\cc1BL138.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_57f0f.exe C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/tools/winlibs/mingw64/bin/../lib/gcc -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_57f0f.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_57f0f.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o
+        C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/ld.exe -plugin C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\rai\\AppData\\Local\\Temp\\ccTOnmXj.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_48073.exe C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/tools/winlibs/mingw64/bin/../lib/gcc -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_48073.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_48073.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o
         GNU ld (Binutils for MinGW-W64 x86_64, built by Brecht Sanders, r1) 2.45
-        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_57f0f.exe' '-foffload-options=-l_GCC_stdc++' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_57f0f.'\x0d
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_48073.exe' '-foffload-options=-l_GCC_stdc++' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_48073.'\x0d
         
       exitCode: 0
   -
@@ -4006,10 +4006,10 @@ events:
       Parsed CXX implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)))("|,| |$)]
-        ignore line: [Change Dir: 'C:/develop/PicoRapidX/build/_deps/picotool-build/CMakeFiles/CMakeScratch/TryCompile-e4h7bf']
+        ignore line: [Change Dir: 'C:/develop/PicoRapidX2/build/_deps/picotool-build/CMakeFiles/CMakeScratch/TryCompile-16u2zu']
         ignore line: []
-        ignore line: [Run Build Command(s): C:/tools/ninja/ninja.exe -v cmTC_57f0f]
-        ignore line: [[1/2] C:\\tools\\winlibs\\mingw64\\bin\\c++.exe   -v -o CMakeFiles/cmTC_57f0f.dir/CMakeCXXCompilerABI.cpp.obj -c "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp"]
+        ignore line: [Run Build Command(s): C:/tools/ninja/ninja.exe -v cmTC_48073]
+        ignore line: [[1/2] C:\\tools\\winlibs\\mingw64\\bin\\c++.exe   -v -o CMakeFiles/cmTC_48073.dir/CMakeCXXCompilerABI.cpp.obj -c "C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp"]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=C:\\tools\\winlibs\\mingw64\\bin\\c++.exe]
         ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none]
@@ -4018,8 +4018,8 @@ events:
         ignore line: [Thread model: posix]
         ignore line: [Supported LTO compression algorithms: zlib zstd]
         ignore line: [gcc version 15.2.0 (MinGW-W64 x86_64-msvcrt-posix-seh  built by Brecht Sanders  r1) ]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_57f0f.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_57f0f.dir/']
-        ignore line: [ C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/cc1plus.exe -quiet -v -iprefix C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/ -D_REENTRANT C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_57f0f.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -o C:\\Users\\rai\\AppData\\Local\\Temp\\ccFACVO0.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_48073.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_48073.dir/']
+        ignore line: [ C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/cc1plus.exe -quiet -v -iprefix C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/ -D_REENTRANT C:/Program Files/CMake/share/cmake-4.1/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_48073.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -o C:\\Users\\rai\\AppData\\Local\\Temp\\ccgl0Yuc.s]
         ignore line: [GNU C++17 (MinGW-W64 x86_64-msvcrt-posix-seh  built by Brecht Sanders  r1) version 15.2.0 (x86_64-w64-mingw32)]
         ignore line: [	compiled by GNU C version 15.2.0  GMP version 6.3.0  MPFR version 4.2.2  MPC version 1.3.1  isl version isl-0.27-GMP]
         ignore line: []
@@ -4044,8 +4044,8 @@ events:
         ignore line: [ C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/include]
         ignore line: [End of search list.]
         ignore line: [Compiler executable checksum: 43a2d58255b90554ada10a53fa1a7228]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_57f0f.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_57f0f.dir/']
-        ignore line: [ C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles/cmTC_57f0f.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\rai\\AppData\\Local\\Temp\\ccFACVO0.s]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_48073.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_48073.dir/']
+        ignore line: [ C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/bin/as.exe -v -o CMakeFiles/cmTC_48073.dir/CMakeCXXCompilerABI.cpp.obj C:\\Users\\rai\\AppData\\Local\\Temp\\ccgl0Yuc.s]
         ignore line: [GNU assembler version 2.45 (x86_64-w64-mingw32) using BFD version (Binutils for MinGW-W64 x86_64  built by Brecht Sanders  r1) 2.45]
         ignore line: [COMPILER_PATH=C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/]
         ignore line: [C:/tools/winlibs/mingw64/bin/../libexec/gcc/]
@@ -4056,8 +4056,8 @@ events:
         ignore line: [C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/]
         ignore line: [C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/]
         ignore line: [C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../\x0d]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_57f0f.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_57f0f.dir/CMakeCXXCompilerABI.cpp.'\x0d]
-        ignore line: [[2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\tools\\winlibs\\mingw64\\bin\\c++.exe  -v -Wl -v CMakeFiles/cmTC_57f0f.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_57f0f.exe -Wl --out-implib libcmTC_57f0f.dll.a -Wl --major-image-version 0 --minor-image-version 0   && cd ."]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_48073.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_48073.dir/CMakeCXXCompilerABI.cpp.'\x0d]
+        ignore line: [[2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\tools\\winlibs\\mingw64\\bin\\c++.exe  -v -Wl -v CMakeFiles/cmTC_48073.dir/CMakeCXXCompilerABI.cpp.obj -o cmTC_48073.exe -Wl --out-implib libcmTC_48073.dll.a -Wl --major-image-version 0 --minor-image-version 0   && cd ."]
         ignore line: [Using built-in specs.]
         ignore line: [COLLECT_GCC=C:\\tools\\winlibs\\mingw64\\bin\\c++.exe]
         ignore line: [COLLECT_LTO_WRAPPER=C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe]
@@ -4076,13 +4076,13 @@ events:
         ignore line: [C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib/]
         ignore line: [C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/]
         ignore line: [C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../]
-        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_57f0f.exe' '-foffload-options=-l_GCC_stdc++' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_57f0f.']
-        link line: [ C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe -plugin C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\rai\\AppData\\Local\\Temp\\cc1BL138.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_57f0f.exe C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/tools/winlibs/mingw64/bin/../lib/gcc -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_57f0f.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_57f0f.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_48073.exe' '-foffload-options=-l_GCC_stdc++' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_48073.']
+        link line: [ C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe -plugin C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll -plugin-opt=C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\rai\\AppData\\Local\\Temp\\ccTOnmXj.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-lkernel32 -m i386pep -Bdynamic -o cmTC_48073.exe C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0 -LC:/tools/winlibs/mingw64/bin/../lib/gcc -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib -LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../.. -v CMakeFiles/cmTC_48073.dir/CMakeCXXCompilerABI.cpp.obj --out-implib libcmTC_48073.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 -lpthread -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmingwex -lmsvcrt -lkernel32 C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtend.o]
           arg [C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/collect2.exe] ==> ignore
           arg [-plugin] ==> ignore
           arg [C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/liblto_plugin.dll] ==> ignore
           arg [-plugin-opt=C:/tools/winlibs/mingw64/bin/../libexec/gcc/x86_64-w64-mingw32/15.2.0/lto-wrapper.exe] ==> ignore
-          arg [-plugin-opt=-fresolution=C:\\Users\\rai\\AppData\\Local\\Temp\\cc1BL138.res] ==> ignore
+          arg [-plugin-opt=-fresolution=C:\\Users\\rai\\AppData\\Local\\Temp\\ccTOnmXj.res] ==> ignore
           arg [-plugin-opt=-pass-through=-lmingw32] ==> ignore
           arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
           arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
@@ -4104,7 +4104,7 @@ events:
           arg [i386pep] ==> ignore
           arg [-Bdynamic] ==> search dynamic
           arg [-o] ==> ignore
-          arg [cmTC_57f0f.exe] ==> ignore
+          arg [cmTC_48073.exe] ==> ignore
           arg [C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o] ==> obj [C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib/../lib/crt2.o]
           arg [C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o] ==> obj [C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/crtbegin.o]
           arg [-LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0] ==> dir [C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0]
@@ -4114,9 +4114,9 @@ events:
           arg [-LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib] ==> dir [C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../../../x86_64-w64-mingw32/lib]
           arg [-LC:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../..] ==> dir [C:/tools/winlibs/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/15.2.0/../../..]
           arg [-v] ==> ignore
-          arg [CMakeFiles/cmTC_57f0f.dir/CMakeCXXCompilerABI.cpp.obj] ==> ignore
+          arg [CMakeFiles/cmTC_48073.dir/CMakeCXXCompilerABI.cpp.obj] ==> ignore
           arg [--out-implib] ==> ignore
-          arg [libcmTC_57f0f.dll.a] ==> ignore
+          arg [libcmTC_48073.dll.a] ==> ignore
           arg [--major-image-version] ==> ignore
           arg [0] ==> ignore
           arg [--minor-image-version] ==> ignore
@@ -4218,7 +4218,7 @@ events:
       - "C:/Windows/System32/wbem/"
       - "C:/Windows/System32/WindowsPowerShell/v1.0/"
       - "C:/Windows/System32/OpenSSH/"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/"
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/dotnet/"
@@ -4244,9 +4244,9 @@ events:
       - "C:/Program Files/CMake/bin/"
       - "C:/Program Files/CMake/sbin/"
       - "C:/Program Files/CMake/"
-      - "C:/develop/PicoRapidX/build/_deps/bin/"
-      - "C:/develop/PicoRapidX/build/_deps/sbin/"
-      - "C:/develop/PicoRapidX/build/_deps/"
+      - "C:/develop/PicoRapidX2/build/_deps/bin/"
+      - "C:/develop/PicoRapidX2/build/_deps/sbin/"
+      - "C:/develop/PicoRapidX2/build/_deps/"
       - "C:/Users/rai/AppData/Local/Atlassian/SourceTree/git_local/bin/"
     searched_directories:
       - "C:/Users/rai/AppData/Roaming/Code/User/globalStorage/github.copilot-chat/debugCommand/git.cmd.com"
@@ -4279,9 +4279,9 @@ events:
       - "C:/Windows/System32/OpenSSH/git.cmd.com"
       - "C:/Windows/System32/OpenSSH/git.cmd.exe"
       - "C:/Windows/System32/OpenSSH/git.cmd"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/git.cmd.com"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/git.cmd.exe"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/git.cmd"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/git.cmd.com"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/git.cmd.exe"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/git.cmd"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/git.cmd.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/git.cmd.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/git.cmd"
@@ -4357,15 +4357,15 @@ events:
       - "C:/Program Files/CMake/git.cmd.com"
       - "C:/Program Files/CMake/git.cmd.exe"
       - "C:/Program Files/CMake/git.cmd"
-      - "C:/develop/PicoRapidX/build/_deps/bin/git.cmd.com"
-      - "C:/develop/PicoRapidX/build/_deps/bin/git.cmd.exe"
-      - "C:/develop/PicoRapidX/build/_deps/bin/git.cmd"
-      - "C:/develop/PicoRapidX/build/_deps/sbin/git.cmd.com"
-      - "C:/develop/PicoRapidX/build/_deps/sbin/git.cmd.exe"
-      - "C:/develop/PicoRapidX/build/_deps/sbin/git.cmd"
-      - "C:/develop/PicoRapidX/build/_deps/git.cmd.com"
-      - "C:/develop/PicoRapidX/build/_deps/git.cmd.exe"
-      - "C:/develop/PicoRapidX/build/_deps/git.cmd"
+      - "C:/develop/PicoRapidX2/build/_deps/bin/git.cmd.com"
+      - "C:/develop/PicoRapidX2/build/_deps/bin/git.cmd.exe"
+      - "C:/develop/PicoRapidX2/build/_deps/bin/git.cmd"
+      - "C:/develop/PicoRapidX2/build/_deps/sbin/git.cmd.com"
+      - "C:/develop/PicoRapidX2/build/_deps/sbin/git.cmd.exe"
+      - "C:/develop/PicoRapidX2/build/_deps/sbin/git.cmd"
+      - "C:/develop/PicoRapidX2/build/_deps/git.cmd.com"
+      - "C:/develop/PicoRapidX2/build/_deps/git.cmd.exe"
+      - "C:/develop/PicoRapidX2/build/_deps/git.cmd"
       - "C:/Users/rai/AppData/Local/Atlassian/SourceTree/git_local/bin/git.cmd.com"
       - "C:/Users/rai/AppData/Local/Atlassian/SourceTree/git_local/bin/git.cmd.exe"
       - "C:/Users/rai/AppData/Local/Atlassian/SourceTree/git_local/bin/git.cmd"
@@ -4399,9 +4399,9 @@ events:
       - "C:/Windows/System32/OpenSSH/git.com"
       - "C:/Windows/System32/OpenSSH/git.exe"
       - "C:/Windows/System32/OpenSSH/git"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/git.com"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/git.exe"
-      - "C:/develop/PicoRapidX/build/_deps/picotool-build/C/git"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/git.com"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/git.exe"
+      - "C:/develop/PicoRapidX2/build/_deps/picotool-build/C/git"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/git.com"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/git.exe"
       - "C:/Program Files (x86)/Windows Kits/10/Windows Performance Toolkit/git"
@@ -4457,10 +4457,10 @@ events:
         - "C:\\tools\\picotool"
         - "C:\\tools\\winlibs\\mingw64\\bin"
         - "C:\\Users\\rai\\.dotnet\\tools"
-      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX/build/_deps"
+      CMAKE_INSTALL_PREFIX: "C:/develop/PicoRapidX2/build/_deps"
       CMAKE_SYSTEM_PREFIX_PATH:
         - "C:/Program Files"
         - "C:/Program Files (x86)"
         - "C:/Program Files/CMake"
-        - "C:/develop/PicoRapidX/build/_deps"
+        - "C:/develop/PicoRapidX2/build/_deps"
 ...

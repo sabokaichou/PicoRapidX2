@@ -2,37 +2,37 @@
 	"sources" : 
 	[
 		{
-			"file" : "C:/develop/PicoRapidX/build/_deps/picotool-subbuild/CMakeFiles/picotool-populate"
+			"file" : "C:/develop/PicoRapidX2/build/_deps/picotool-subbuild/CMakeFiles/picotool-populate"
 		},
 		{
-			"file" : "C:/develop/PicoRapidX/build/_deps/picotool-subbuild/CMakeFiles/picotool-populate.rule"
+			"file" : "C:/develop/PicoRapidX2/build/_deps/picotool-subbuild/CMakeFiles/picotool-populate.rule"
 		},
 		{
-			"file" : "C:/develop/PicoRapidX/build/_deps/picotool-subbuild/CMakeFiles/picotool-populate-complete.rule"
+			"file" : "C:/develop/PicoRapidX2/build/_deps/picotool-subbuild/CMakeFiles/picotool-populate-complete.rule"
 		},
 		{
-			"file" : "C:/develop/PicoRapidX/build/_deps/picotool-subbuild/picotool-populate-prefix/src/picotool-populate-stamp/picotool-populate-build.rule"
+			"file" : "C:/develop/PicoRapidX2/build/_deps/picotool-subbuild/picotool-populate-prefix/src/picotool-populate-stamp/picotool-populate-build.rule"
 		},
 		{
-			"file" : "C:/develop/PicoRapidX/build/_deps/picotool-subbuild/picotool-populate-prefix/src/picotool-populate-stamp/picotool-populate-configure.rule"
+			"file" : "C:/develop/PicoRapidX2/build/_deps/picotool-subbuild/picotool-populate-prefix/src/picotool-populate-stamp/picotool-populate-configure.rule"
 		},
 		{
-			"file" : "C:/develop/PicoRapidX/build/_deps/picotool-subbuild/picotool-populate-prefix/src/picotool-populate-stamp/picotool-populate-download.rule"
+			"file" : "C:/develop/PicoRapidX2/build/_deps/picotool-subbuild/picotool-populate-prefix/src/picotool-populate-stamp/picotool-populate-download.rule"
 		},
 		{
-			"file" : "C:/develop/PicoRapidX/build/_deps/picotool-subbuild/picotool-populate-prefix/src/picotool-populate-stamp/picotool-populate-install.rule"
+			"file" : "C:/develop/PicoRapidX2/build/_deps/picotool-subbuild/picotool-populate-prefix/src/picotool-populate-stamp/picotool-populate-install.rule"
 		},
 		{
-			"file" : "C:/develop/PicoRapidX/build/_deps/picotool-subbuild/picotool-populate-prefix/src/picotool-populate-stamp/picotool-populate-mkdir.rule"
+			"file" : "C:/develop/PicoRapidX2/build/_deps/picotool-subbuild/picotool-populate-prefix/src/picotool-populate-stamp/picotool-populate-mkdir.rule"
 		},
 		{
-			"file" : "C:/develop/PicoRapidX/build/_deps/picotool-subbuild/picotool-populate-prefix/src/picotool-populate-stamp/picotool-populate-patch.rule"
+			"file" : "C:/develop/PicoRapidX2/build/_deps/picotool-subbuild/picotool-populate-prefix/src/picotool-populate-stamp/picotool-populate-patch.rule"
 		},
 		{
-			"file" : "C:/develop/PicoRapidX/build/_deps/picotool-subbuild/picotool-populate-prefix/src/picotool-populate-stamp/picotool-populate-test.rule"
+			"file" : "C:/develop/PicoRapidX2/build/_deps/picotool-subbuild/picotool-populate-prefix/src/picotool-populate-stamp/picotool-populate-test.rule"
 		},
 		{
-			"file" : "C:/develop/PicoRapidX/build/_deps/picotool-subbuild/picotool-populate-prefix/src/picotool-populate-stamp/picotool-populate-update.rule"
+			"file" : "C:/develop/PicoRapidX2/build/_deps/picotool-subbuild/picotool-populate-prefix/src/picotool-populate-stamp/picotool-populate-update.rule"
 		}
 	],
 	"target" : 
