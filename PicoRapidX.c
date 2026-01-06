@@ -832,6 +832,11 @@ void InitGPIO() {
         gpio_set_drive_strength(Input_Pin[i], GPIO_DRIVE_STRENGTH_2MA);
     }
 
+    // 出力ピンを明示的にLOWに初期化
+    for (int i = 0; i < IOCount; i++) {
+        gpio_put(Output_Pin[i], false);
+    }
+
     for (int i = 0; i < IOCount; i++) {
         gpio_pull_up(Input_Pin[i]);
     }
