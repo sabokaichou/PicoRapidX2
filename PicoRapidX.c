@@ -799,7 +799,7 @@ int main() {
 void core1_main() {
     if (SettingMode) return;
     while (true) {
-        //GetInput();
+        GetInput();
     }
     return;
 }
@@ -851,7 +851,7 @@ static void vsync_callback(void) {
     // LED点滅
     static bool led_state = false;
     led_state = !led_state;
-    //gpio_put(LED_PIN, led_state);
+    gpio_put(LED_PIN, led_state);
     
     // 入力状態を取得してから処理実行
     GetInput();
@@ -1015,15 +1015,14 @@ void SetCommandData(int InputNo) {
 
 // ボタンの状態を取得
 void GetInput() {
+    int32_t InputValue = gpio_get_all();
     for (int i = 0; i < IOCount; i++) {
-        // 各ピンを個別に取得
-        bool pin_state = gpio_get(Input_Pin[i]);
-        InputStatus[i] = (pin_state == 0) ? true : false;
+        InputStatus[i] = (((InputValue >> Input_Pin[i]) & 1) == 0) ? true : false;
         if (IOSetting[i].Reverse == true) InputStatus[i] = !InputStatus[i];
     }
 
     // 入力確認はここのコメントを外す    
-    gpio_put(LED_PIN, InputStatus[0]);
+    // gpio_put(LED_PIN, InputStatus[0]);
 
 }
 

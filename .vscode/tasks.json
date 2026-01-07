@@ -2,15 +2,15 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Build PicoRapidX",
+      "label": "Build PicoRapidX2",
       "type": "shell",
       "command": "cmake",
       "args": [
-        "--build", "${workspaceFolder}/build_ninja",
-        "--target", "PicoRapidX"
+        "--build", ".",
+        "--target", "PicoRapidX2"
       ],
       "options": {
-        "cwd": "${workspaceFolder}"
+        "cwd": "${workspaceFolder}/build"
       },
       "problemMatcher": "$gcc",
       "group": {
