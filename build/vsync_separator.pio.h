@@ -18,7 +18,7 @@
 
 static const uint16_t csync_measure_program_instructions[] = {
             //     .wrap_target
-    0xa0c0, //  0: mov    isr, pins
+    0x4001, //  0: in     pins, 1
     0x8000, //  1: push   noblock
             //     .wrap
 };
@@ -42,7 +42,9 @@ static inline pio_sm_config csync_measure_program_get_default_config(uint offset
 
 static inline void csync_measure_program_init(PIO pio, uint sm, uint offset, uint pin) {
     pio_sm_config c = csync_measure_program_get_default_config(offset);
-    // シフト方向設定（全ピン読み取りなのでin_pinsは不要）
+    // 入力ピン設定（GP28のみ）
+    sm_config_set_in_pins(&c, pin);
+    // シフト方向設定（1ビットだけ右シフト）
     sm_config_set_in_shift(&c, false, false, 32);
     // クロック設定 (125MHz → 1MHz = 1μs分解能)
     sm_config_set_clkdiv(&c, 125.0f);

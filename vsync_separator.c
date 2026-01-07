@@ -99,8 +99,9 @@ void vsync_separator_init(void) {
 void vsync_separator_init_with_callback(void (*callback)(void)) {
     user_vsync_callback = callback;
     
-    // デフォルト出力ピンを設定
-    vsync_separator_set_output_pins(DEFAULT_OUTPUT_PINS, DEFAULT_OUTPUT_PATTERNS, DEFAULT_OUTPUT_COUNT);
+    // PicoRapidX2では出力ピンは使用しない（GP12-15は入力ピンとして使用するため）
+    // vsync_separator_set_output_pins(DEFAULT_OUTPUT_PINS, DEFAULT_OUTPUT_PATTERNS, DEFAULT_OUTPUT_COUNT);
+    output_pin_count = 0;  // 出力ピンなし
     
     // GP28を入力として明示的に初期化（PIO初期化前）
     gpio_init(CSYNC_INPUT_PIN);
@@ -258,11 +259,11 @@ void vsync_separator_task(void) {
     // PIO FIFOからデータ読み取り
     while (!pio_sm_is_rx_fifo_empty(pio, sm)) {
         
-        // PIOから全ピン読み取り（1MHzサンプリング）
-        uint32_t all_pins = pio_sm_get_blocking(pio, sm);
+        // PIOから1ビット読み取り（1MHzサンプリング、GP28のみ）
+        uint32_t data = pio_sm_get_blocking(pio, sm);
         
-        // GP28ビットを抽出（ビット28）
-        uint32_t pin_state = ((all_pins >> CSYNC_INPUT_PIN) & 1);
+        // 最下位ビットがGP28の状態
+        uint32_t pin_state = (data & 1);
         
         // エッジ検出
         if (pin_state != last_pin_state) {

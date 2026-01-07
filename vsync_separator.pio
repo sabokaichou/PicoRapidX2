@@ -6,18 +6,21 @@
 
 .program csync_measure
 
-; 定期サンプリング方式 - 全ピンを読んでシフト
+; 定期サンプリング方式 - 指定ピンのみ読み取り
 .wrap_target
-    ; 全GPIOピン(32本)を読み取り
-    mov isr, pins       ; 全ピンの状態をISRに読み込み
-    push noblock        ; すぐに送信（CPU側でGP28ビットを抽出）
+    ; 指定したGPIOピン1本のみを読み取り
+    in pins, 1          ; 1ビットだけ読み取り（in_base指定のピン）
+    push noblock        ; すぐに送信
 .wrap
 
 % c-sdk {
 static inline void csync_measure_program_init(PIO pio, uint sm, uint offset, uint pin) {
     pio_sm_config c = csync_measure_program_get_default_config(offset);
     
-    // シフト方向設定（全ピン読み取りなのでin_pinsは不要）
+    // 入力ピン設定（GP28のみ）
+    sm_config_set_in_pins(&c, pin);
+    
+    // シフト方向設定（1ビットだけ右シフト）
     sm_config_set_in_shift(&c, false, false, 32);
     
     // クロック設定 (125MHz → 1MHz = 1μs分解能)

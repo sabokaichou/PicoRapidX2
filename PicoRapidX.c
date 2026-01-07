@@ -115,19 +115,18 @@ const uint16_t row_byte_half = 128;
 #define Sync_IRQ_enable   gpio_set_irq_enabled(Sync_Pin, 0x4u, true);
 #define Sync_IRQ_disable  gpio_set_irq_enabled(Sync_Pin, 0x4u, false);
 
-const int32_t maskGPIO   = 0b01100011111111111111111111111; // GP28-GP0
-const int32_t maskIO     = 0b00000000000000000111111111111; // GP28-GP0
+const int32_t maskGPIO   = 0b11101111111111111111111111111; // GP28-GP0 (GP28,27,26,22-0)
+const int32_t maskIO     = 0b00000000000000000111111111111; // GP28-GP0 (GP11-0)
 
 bool InputStatus[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 uint8_t boardMode = 0;
 
-//int Output_Pin[] = {11, 10, 9, 8, 6, 7, 5, 4, 3, 2, 1, 0};
-//int Input_Pin[]  = {15, 14, 13, 12, 16, 17, 18, 19, 20, 21, 22, 26};
+int Output_Pin[] = {11, 10, 9, 8, 6, 7, 5, 4, 3, 2, 1, 0};
+int Input_Pin[]  = {15, 14, 13, 12, 16, 17, 18, 19, 20, 21, 22, 26};
 
-int8_t Output_Pin[] = {4, 3, 11, 10, 9, 8, 7, 6, 5, 2, 1, 0};
-int8_t Input_Pin[]  = {19, 20, 12, 13, 14, 15, 16, 17, 18, 21, 22, 26};
-
+//int8_t Output_Pin[] = {4, 3, 11, 10, 9, 8, 7, 6, 5, 2, 1, 0};
+//int8_t Input_Pin[]  = {19, 20, 12, 13, 14, 15, 16, 17, 18, 21, 22, 26};
 
 const int8_t Output_Pin_A[] = {11, 10, 9, 8, 6, 7, 5, 4, 3, 2, 1, 0};
 const int8_t Input_Pin_A[]  = {15, 14, 13, 12, 16, 17, 18, 19, 20, 21, 22, 26};
@@ -784,7 +783,7 @@ int main() {
     
     SetIOSetting();
 
-    multicore_launch_core1(core1_main); // 同期信号の受付とイベント処理
+    //multicore_launch_core1(core1_main); // 同期信号の受付とイベント処理
 
     // VSync分離器初期化（コールバック登録）
     vsync_separator_init_with_callback(vsync_callback);
@@ -800,7 +799,7 @@ int main() {
 void core1_main() {
     if (SettingMode) return;
     while (true) {
-        GetInput();
+        //GetInput();
     }
     return;
 }
@@ -823,16 +822,18 @@ void InitGPIO() {
     gpio_set_function(27, GPIO_FUNC_SIO);
     gpio_set_function(28, GPIO_FUNC_SIO);
 
-    gpio_init_mask(maskIO);
-    gpio_set_dir_masked(maskGPIO, maskIO);
-
-    // 電流は2mアンペア
+    // 出力ピンを個別に初期化
     for (int i = 0; i < IOCount; i++) {
+        gpio_init(Output_Pin[i]);
+        gpio_set_dir(Output_Pin[i], GPIO_OUT);
         gpio_set_drive_strength(Output_Pin[i], GPIO_DRIVE_STRENGTH_2MA);
-        gpio_set_drive_strength(Input_Pin[i], GPIO_DRIVE_STRENGTH_2MA);
     }
 
+    // 入力ピンを個別に初期化
     for (int i = 0; i < IOCount; i++) {
+        gpio_init(Input_Pin[i]);
+        gpio_set_dir(Input_Pin[i], GPIO_IN);
+        gpio_set_drive_strength(Input_Pin[i], GPIO_DRIVE_STRENGTH_2MA);
         gpio_pull_up(Input_Pin[i]);
     }
 
@@ -850,7 +851,7 @@ static void vsync_callback(void) {
     // LED点滅
     static bool led_state = false;
     led_state = !led_state;
-    gpio_put(LED_PIN, led_state);
+    //gpio_put(LED_PIN, led_state);
     
     // 入力状態を取得してから処理実行
     GetInput();
@@ -889,7 +890,7 @@ void callback_sync(uint gpio, uint32_t events) {
             Sync_IRQ_disable;
             InputExecute();
             Sync_IRQ_enable;
-            gpio_put(LED_PIN, Rapid ? GPIO_IN : GPIO_OUT);
+            //gpio_put(LED_PIN, Rapid ? GPIO_IN : GPIO_OUT);
             break; // ブロック内breakでcaseを抜ける
         }
         case ModeSW_Pin:
@@ -1014,19 +1015,16 @@ void SetCommandData(int InputNo) {
 
 // ボタンの状態を取得
 void GetInput() {
-    int32_t InputValue = gpio_get_all();
-
     for (int i = 0; i < IOCount; i++) {
-        InputStatus[i] = (((InputValue >> Input_Pin[i]) & 1) == 0) ? true : false;
+        // 各ピンを個別に取得
+        bool pin_state = gpio_get(Input_Pin[i]);
+        InputStatus[i] = (pin_state == 0) ? true : false;
         if (IOSetting[i].Reverse == true) InputStatus[i] = !InputStatus[i];
     }
 
     // 入力確認はここのコメントを外す    
-    // if (InputStatus[11] == 1) {
-    //     gpio_put(LED_PIN, GPIO_OUT);
-    // } else {
-    //     gpio_put(LED_PIN, GPIO_IN);
-    // }
+    gpio_put(LED_PIN, InputStatus[0]);
+
 }
 
 // 同期信号入力発生時の処理
