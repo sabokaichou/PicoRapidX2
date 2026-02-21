@@ -2,6 +2,20 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Configure PicoRapidX2",
+      "type": "shell",
+      "command": "cmake",
+      "args": [
+        "-S", "..",
+        "-B", ".",
+        "-G", "Ninja"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/PicoRapidX2/build"
+      },
+      "problemMatcher": []
+    },
+    {
       "label": "Build PicoRapidX2",
       "type": "shell",
       "command": "cmake",
@@ -10,8 +24,9 @@
         "--target", "PicoRapidX2"
       ],
       "options": {
-        "cwd": "${workspaceFolder}/build"
+        "cwd": "${workspaceFolder}/PicoRapidX2/build"
       },
+      "dependsOn": "Configure PicoRapidX2",
       "problemMatcher": "$gcc",
       "group": {
         "kind": "build",

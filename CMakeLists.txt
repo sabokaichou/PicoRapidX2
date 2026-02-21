@@ -11,7 +11,7 @@ pico_sdk_init()
 
 # PicoRapidX2: VSync検出機能統合版
 add_executable(PicoRapidX2
-    PicoRapidX.c
+    PicoRapidX2.c
     usb_msc_device.c
     usb_descriptors.c
     vsync_separator.c
