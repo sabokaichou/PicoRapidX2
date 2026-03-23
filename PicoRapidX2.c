@@ -806,12 +806,29 @@ void core1_main() {
 
 // 使用ボードの設定
 void SetBoardMode() {
-    boardMode = g_read_io_data[0];
-    if (boardMode > 1) boardMode = 0;
+    uint8_t magic = g_read_io_data[0];
 
-    for (int i = 0; i < 12; i++) {
-        Input_Pin[i] = (boardMode == 0) ? Input_Pin_A[i] : Input_Pin_B[i];
-        Output_Pin[i] = (boardMode == 0) ? Output_Pin_A[i] : Output_Pin_B[i];
+    if (magic == 0xA5) {
+        // カスタムピン設定 (PINMAP.txtから書き込まれた設定)
+        boardMode = 0;  // マクロのスワップ処理を無効化
+        for (int i = 0; i < 12; i++) {
+            Output_Pin[i] = g_read_io_data[1 + i];
+            Input_Pin[i]  = g_read_io_data[13 + i];
+        }
+    } else if (magic == 1) {
+        // Board B
+        boardMode = 1;
+        for (int i = 0; i < 12; i++) {
+            Input_Pin[i]  = Input_Pin_B[i];
+            Output_Pin[i] = Output_Pin_B[i];
+        }
+    } else {
+        // Board A (デフォルト)
+        boardMode = 0;
+        for (int i = 0; i < 12; i++) {
+            Input_Pin[i]  = Input_Pin_A[i];
+            Output_Pin[i] = Output_Pin_A[i];
+        }
     }
 }
 

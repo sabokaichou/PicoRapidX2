@@ -38,6 +38,12 @@ static uint8_t s_macro_write_buffer[DISK_SECTOR_SIZE * 10];
 static int s_macro_write_number = -1;  // 現在書き込み中のマクロ番号 (-1 = なし)
 static bool s_macro_write_pending = false;
 
+// PINMAP.txtファイル書き込み用
+static uint8_t s_pinmap_write_buffer[DISK_SECTOR_SIZE];
+static bool s_pinmap_write_pending = false;
+#define PINMAP_CLUSTER 123
+#define PINMAP_DATA_SECTOR (DATA_START_SECTOR + PINMAP_CLUSTER - 2)  // = 132
+
 // ---- Validation and deletion helpers --------------------------------------
 static bool has_expected_header_n(const char *data, size_t len) {
     if (!data || len == 0) return false;
@@ -223,6 +229,112 @@ static void generate_macro_text(int macro_no, char *buffer, size_t buffer_size) 
     }
 }
 
+// PINMAP.txtの内容を生成する
+static void generate_pinmap_text(char *buffer, size_t buffer_size) {
+    const uint8_t *flash_ptr = (const uint8_t *)(XIP_BASE + 0x1D0000);
+    int out_pins[12], in_pins[12];
+
+    if (flash_ptr[0] == 0xA5) {
+        // カスタム設定
+        for (int i = 0; i < 12; i++) {
+            out_pins[i] = flash_ptr[1 + i];
+            in_pins[i]  = flash_ptr[13 + i];
+        }
+    } else if (flash_ptr[0] == 1) {
+        // Board B
+        const int8_t ob[] = {4, 3, 11, 10, 9, 8, 7, 6, 5, 2, 1, 0};
+        const int8_t ib[] = {19, 20, 12, 13, 14, 15, 16, 17, 18, 21, 22, 26};
+        for (int i = 0; i < 12; i++) { out_pins[i] = ob[i]; in_pins[i] = ib[i]; }
+    } else {
+        // Board A (デフォルト)
+        const int8_t oa[] = {11, 10, 9, 8, 6, 7, 5, 4, 3, 2, 1, 0};
+        const int8_t ia[] = {15, 14, 13, 12, 16, 17, 18, 19, 20, 21, 22, 26};
+        for (int i = 0; i < 12; i++) { out_pins[i] = oa[i]; in_pins[i] = ia[i]; }
+    }
+
+    int pos = 0;
+    pos += snprintf(buffer + pos, buffer_size - pos,
+        "PicoRapidX2 Pin Map\r\n"
+        "Format: INDEX,OUTPUT_GPIO,INPUT_GPIO (GPIO: 0-28)\r\n"
+        "\r\n");
+    for (int i = 0; i < 12; i++) {
+        pos += snprintf(buffer + pos, buffer_size - pos,
+            "%d,%d,%d\r\n", i, out_pins[i], in_pins[i]);
+    }
+    buffer[pos] = '\0';
+}
+
+// PINMAP.txtのCSVをパースしてフラッシュに書き込む
+static void parse_pinmap_csv_n(const char *data, size_t len) {
+    // デフォルト: Board A
+    const int8_t def_out[] = {11, 10, 9, 8, 6, 7, 5, 4, 3, 2, 1, 0};
+    const int8_t def_in[]  = {15, 14, 13, 12, 16, 17, 18, 19, 20, 21, 22, 26};
+
+    uint8_t new_data[256];
+    memset(new_data, 0, sizeof(new_data));
+    new_data[0] = 0xA5;  // カスタムピン設定マジック
+    for (int i = 0; i < 12; i++) {
+        new_data[1 + i]  = (uint8_t)def_out[i];
+        new_data[13 + i] = (uint8_t)def_in[i];
+    }
+
+    const char *p = data;
+    const char *end = data + len;
+    int valid_rows = 0;
+
+    while (p < end) {
+        const char *line_start = p;
+        while (p < end && *p != '\r' && *p != '\n') p++;
+        const char *line_end = p;
+        while (p < end && (*p == '\r' || *p == '\n')) p++;
+
+        while (line_start < line_end && (*line_start == ' ' || *line_start == '\t')) line_start++;
+        while (line_end > line_start && (line_end[-1] == ' ' || line_end[-1] == '\t')) line_end--;
+        if (line_start >= line_end) continue;
+        if (!(line_start[0] >= '0' && line_start[0] <= '9')) continue;
+
+        char buf[64];
+        size_t blen = (size_t)(line_end - line_start);
+        if (blen >= sizeof(buf)) blen = sizeof(buf) - 1;
+        memcpy(buf, line_start, blen);
+        buf[blen] = '\0';
+
+        // INDEX,OUTPUT_GPIO,INPUT_GPIO
+        char *s = buf;
+        char *comma1 = strchr(s, ',');
+        if (!comma1) continue;
+        *comma1 = '\0';
+        int idx = atoi(s);
+
+        s = comma1 + 1;
+        char *comma2 = strchr(s, ',');
+        if (!comma2) continue;
+        *comma2 = '\0';
+        int out_gpio = atoi(s);
+
+        s = comma2 + 1;
+        int in_gpio = atoi(s);
+
+        if (idx < 0 || idx >= 12) continue;
+        if (out_gpio < 0 || out_gpio > 28) continue;
+        if (in_gpio < 0 || in_gpio > 28) continue;
+
+        new_data[1 + idx]  = (uint8_t)out_gpio;
+        new_data[13 + idx] = (uint8_t)in_gpio;
+        valid_rows++;
+    }
+
+    if (valid_rows == 0) return;
+
+    uint32_t ints = save_and_disable_interrupts();
+    flash_range_erase(0x1D0000, FLASH_SECTOR_SIZE);
+    flash_range_program(0x1D0000, new_data, FLASH_PAGE_SIZE);
+    restore_interrupts(ints);
+    __dsb();
+    __isb();
+    sleep_us(1000);
+}
+
 static void build_fat12_image(void) {
     for (uint i = 0; i < sizeof(ram_disk); ++i) ram_disk[i] = 0;
 
@@ -327,7 +439,6 @@ static void build_fat12_image(void) {
     const char *header =
         "Format: INPUT_NO,RAPID_TYPE,REVERSE,OUT_FRAME,IN_FRAME,OUTPUT_PINS(0:OFF 1:ON)\r\n"
         "RAPID: 1=Norm 2=R30 3=R30Rev 4=Custom 5=Macro 6=R15 7=R15Rev\r\n"
-        "+10(11-17) for Button ON/OFF Reverse\r\n"
         "\r\n";
     
     int header_len = strlen(header);
@@ -388,6 +499,42 @@ static void build_fat12_image(void) {
         uint32_t macro_size = strlen(macro_buffer);
         uint8_t *macro_entry = root + (macro_no + 1) * 32;
         memcpy(macro_entry + 28, &macro_size, 4);
+    }
+
+    // --- PINMAP.txt ---
+    // FATチェーン: クラスタ123 = EOC (1セクタ)
+    {
+        int pinmap_c = PINMAP_CLUSTER;  // 123
+        int foffset = pinmap_c * 3 / 2;
+        uint16_t eoc = 0xFFF;
+        if (pinmap_c % 2 == 0) {
+            fat1[foffset]     = eoc & 0xFF;
+            fat1[foffset + 1] = (fat1[foffset + 1] & 0xF0) | ((eoc >> 8) & 0x0F);
+        } else {
+            fat1[foffset]     = (fat1[foffset] & 0x0F) | ((eoc & 0x0F) << 4);
+            fat1[foffset + 1] = (eoc >> 4) & 0xFF;
+        }
+        memcpy(fat2, fat1, DISK_SECTOR_SIZE * 4);
+    }
+
+    // ディレクトリエントリ
+    {
+        uint8_t *entry = root + 13 * 32;
+        memcpy(entry, "PINMAP  TXT", 11);
+        entry[11] = 0x20;
+        uint16_t file_cluster = PINMAP_CLUSTER;
+        memcpy(entry + 26, &file_cluster, 2);
+    }
+
+    // PINMAP.txt の内容を生成
+    {
+        int pinmap_sector = actual_data_start + (PINMAP_CLUSTER - 2);
+        char *pinmap_buffer = (char *)(ram_disk + DISK_SECTOR_SIZE * pinmap_sector);
+        memset(pinmap_buffer, 0, DISK_SECTOR_SIZE);
+        generate_pinmap_text(pinmap_buffer, DISK_SECTOR_SIZE);
+        uint32_t pinmap_size = strlen(pinmap_buffer);
+        uint8_t *pinmap_entry = root + 13 * 32;
+        memcpy(pinmap_entry + 28, &pinmap_size, 4);
     }
 }
 
@@ -696,6 +843,19 @@ int32_t tud_msc_write10_cb(uint8_t lun, uint32_t lba, uint32_t offset, uint8_t *
                 }
             }
         }
+
+        // PINMAP.txt のチェック (エントリ13)
+        {
+            uint8_t *entry = root + 13 * 32;
+            if (entry[0] != 0x00 && entry[0] != 0xE5 && memcmp(entry, "PINMAP  TXT", 11) == 0) {
+                uint32_t fsz = 0; memcpy(&fsz, entry + 28, 4);
+                if (fsz > 0 && s_pinmap_write_pending) {
+                    parse_pinmap_csv_n((const char*)s_pinmap_write_buffer, fsz < sizeof(s_pinmap_write_buffer) ? fsz : sizeof(s_pinmap_write_buffer));
+                    s_pinmap_write_pending = false;
+                    start_post_blink_pattern();
+                }
+            }
+        }
     }
     
     // Setting.txt のデータセクタ書込み (セクタ7)
@@ -760,6 +920,24 @@ int32_t tud_msc_write10_cb(uint8_t lun, uint32_t lba, uint32_t offset, uint8_t *
         }
     }
     
+    // PINMAP.txt のデータセクタ書込み
+    if (lba == PINMAP_DATA_SECTOR) {
+        if (!s_led_blinking) {
+            s_post_blink_active = false;
+            s_post_blink_remaining_toggles = 0;
+            led_off();
+            s_led_suppress_until_write = false;
+            led_blink_start();
+            s_led_blinking = true;
+            memset(s_pinmap_write_buffer, 0, sizeof(s_pinmap_write_buffer));
+        }
+        s_last_write_ms = to_ms_since_boot(get_absolute_time());
+        if (offset + bufsize <= sizeof(s_pinmap_write_buffer)) {
+            memcpy(s_pinmap_write_buffer + offset, buffer, bufsize);
+            s_pinmap_write_pending = true;
+        }
+    }
+    
     return (int32_t) bufsize;
 }
 
@@ -812,6 +990,19 @@ void tud_msc_write10_complete_cb(uint8_t lun) {
             }
         }
     }
+
+    // PINMAP.txt の書き込み完了処理
+    if (s_pinmap_write_pending) {
+        memcpy(s_pinmap_write_buffer, ram_disk + DISK_SECTOR_SIZE * PINMAP_DATA_SECTOR, sizeof(s_pinmap_write_buffer));
+        size_t actual_size = 0;
+        for (size_t i = 0; i < sizeof(s_pinmap_write_buffer); i++) {
+            if (s_pinmap_write_buffer[i] == '\0') { actual_size = i; break; }
+        }
+        if (actual_size == 0) actual_size = sizeof(s_pinmap_write_buffer);
+        parse_pinmap_csv_n((const char*)s_pinmap_write_buffer, actual_size);
+        s_pinmap_write_pending = false;
+        start_post_blink_pattern();
+    }
 }
 
 bool tud_msc_is_writable_cb (uint8_t lun) { (void) lun; return true; }
@@ -851,6 +1042,9 @@ void usb_msc_start(void) {
     s_macro_write_number = -1;
     s_macro_write_pending = false;
     memset(s_macro_write_buffer, 0, sizeof(s_macro_write_buffer));
+    // PINMAP書き込み用の変数を初期化
+    s_pinmap_write_pending = false;
+    memset(s_pinmap_write_buffer, 0, sizeof(s_pinmap_write_buffer));
     led_blink_stop();
     led_off();
     memset(s_write_buffer, 0, sizeof(s_write_buffer));
@@ -874,6 +1068,18 @@ void usb_msc_task(void) {
         // タイムアウト時も即適用（パーサが安全側で取り込み）
         parse_settings_csv_n((const char*)s_write_buffer, s_write_len);
         s_write_processed = true;
+        start_post_blink_pattern();
+    }
+
+    // PINMAP.txt のタイムアウト処理
+    if (s_led_blinking && s_pinmap_write_pending && s_last_write_ms != 0 && (now - s_last_write_ms) > 1500) {
+        size_t actual_size = 0;
+        for (size_t i = 0; i < sizeof(s_pinmap_write_buffer); i++) {
+            if (s_pinmap_write_buffer[i] == '\0') { actual_size = i; break; }
+        }
+        if (actual_size == 0) actual_size = sizeof(s_pinmap_write_buffer);
+        parse_pinmap_csv_n((const char*)s_pinmap_write_buffer, actual_size);
+        s_pinmap_write_pending = false;
         start_post_blink_pattern();
     }
 
