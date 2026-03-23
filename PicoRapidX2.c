@@ -121,6 +121,7 @@ const int32_t maskIO     = 0b00000000000000000111111111111; // GP28-GP0 (GP11-0)
 bool InputStatus[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 uint8_t boardMode = 0;
+uint16_t vsync_delay_us = 0;  // VSync検出後の出力ディレイ（μs）
 
 int Output_Pin[] = {11, 10, 9, 8, 6, 7, 5, 4, 3, 2, 1, 0};
 int Input_Pin[]  = {15, 14, 13, 12, 16, 17, 18, 19, 20, 21, 22, 26};
@@ -830,6 +831,10 @@ void SetBoardMode() {
             Output_Pin[i] = Output_Pin_A[i];
         }
     }
+
+    // VSync出力ディレイ（bytes 25-26, uint16_t LE）
+    vsync_delay_us = (uint16_t)g_read_io_data[25] | ((uint16_t)g_read_io_data[26] << 8);
+    if (vsync_delay_us > 16000) vsync_delay_us = 16000;  // 最大1フレーム分
 }
 
 // 入力・設定側初期化
@@ -869,6 +874,11 @@ static void vsync_callback(void) {
     static bool led_state = false;
     led_state = !led_state;
     gpio_put(LED_PIN, led_state);
+    
+    // 出力ディレイ
+    if (vsync_delay_us > 0) {
+        busy_wait_us(vsync_delay_us);
+    }
     
     // 入力状態を取得してから処理実行
     GetInput();
@@ -2043,6 +2053,9 @@ void SetBoardSetting() {
     for (i = 1; i < 256; i++) {
         save_data[i] = 0;
     }
+    // VSync出力ディレイを保存（bytes 25-26, uint16_t LE）
+    save_data[25] = (int8_t)(vsync_delay_us & 0xFF);
+    save_data[26] = (int8_t)((vsync_delay_us >> 8) & 0xFF);
     save_io_setting_to_flash(FLASH_TARGET_OFFSET_IO_Board, save_data, FLASH_PAGE_SIZE);
 }
 

@@ -261,6 +261,13 @@ static void generate_pinmap_text(char *buffer, size_t buffer_size) {
         pos += snprintf(buffer + pos, buffer_size - pos,
             "%d,%d,%d\r\n", i, out_pins[i], in_pins[i]);
     }
+
+    // VSync出力ディレイ（μs）
+    uint16_t delay_us = (uint16_t)flash_ptr[25] | ((uint16_t)flash_ptr[26] << 8);
+    if (delay_us > 16000) delay_us = 0;
+    pos += snprintf(buffer + pos, buffer_size - pos,
+        "\r\nDELAY,%d\r\n", delay_us);
+
     buffer[pos] = '\0';
 }
 
@@ -278,6 +285,11 @@ static void parse_pinmap_csv_n(const char *data, size_t len) {
         new_data[13 + i] = (uint8_t)def_in[i];
     }
 
+    // 既存のディレイ値を保持
+    const uint8_t *flash_ptr = (const uint8_t *)(XIP_BASE + 0x1D0000);
+    new_data[25] = flash_ptr[25];
+    new_data[26] = flash_ptr[26];
+
     const char *p = data;
     const char *end = data + len;
     int valid_rows = 0;
@@ -291,13 +303,37 @@ static void parse_pinmap_csv_n(const char *data, size_t len) {
         while (line_start < line_end && (*line_start == ' ' || *line_start == '\t')) line_start++;
         while (line_end > line_start && (line_end[-1] == ' ' || line_end[-1] == '\t')) line_end--;
         if (line_start >= line_end) continue;
-        if (!(line_start[0] >= '0' && line_start[0] <= '9')) continue;
+        if (!(line_start[0] >= '0' && line_start[0] <= '9') &&
+            !(line_end - line_start >= 5 &&
+              (line_start[0] == 'D' || line_start[0] == 'd') &&
+              (line_start[1] == 'E' || line_start[1] == 'e') &&
+              (line_start[2] == 'L' || line_start[2] == 'l') &&
+              (line_start[3] == 'A' || line_start[3] == 'a') &&
+              (line_start[4] == 'Y' || line_start[4] == 'y')))
+            continue;
 
         char buf[64];
         size_t blen = (size_t)(line_end - line_start);
         if (blen >= sizeof(buf)) blen = sizeof(buf) - 1;
         memcpy(buf, line_start, blen);
         buf[blen] = '\0';
+
+        // DELAY,<value> 行のチェック
+        if ((buf[0] == 'D' || buf[0] == 'd') &&
+            (buf[1] == 'E' || buf[1] == 'e') &&
+            (buf[2] == 'L' || buf[2] == 'l') &&
+            (buf[3] == 'A' || buf[3] == 'a') &&
+            (buf[4] == 'Y' || buf[4] == 'y')) {
+            char *comma = strchr(buf, ',');
+            if (comma) {
+                int delay_val = atoi(comma + 1);
+                if (delay_val < 0) delay_val = 0;
+                if (delay_val > 16000) delay_val = 16000;
+                new_data[25] = (uint8_t)(delay_val & 0xFF);
+                new_data[26] = (uint8_t)((delay_val >> 8) & 0xFF);
+            }
+            continue;
+        }
 
         // INDEX,OUTPUT_GPIO,INPUT_GPIO
         char *s = buf;
