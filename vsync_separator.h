@@ -27,6 +27,10 @@ typedef enum {
     OUTPUT_1ON_6OFF         // 1回オン、6回オフ（約8.6回/秒）
 } output_pattern_t;
 
+// 同期モード
+#define SYNC_MODE_VSYNC         0   // VSync検出時にコールバック
+#define SYNC_MODE_HSYNC_PREDICT 1   // HSync予測でVSync直前にコールバック
+
 // 統計情報構造体
 typedef struct {
     uint32_t hsync_count;
@@ -37,6 +41,8 @@ typedef struct {
     bool vsync_active;
     uint32_t debug_hsync_count_in_period;  // デバッグ: 現在の期間内H-Syncカウント
     uint32_t debug_prev_hsync_count;       // デバッグ: 前回の期間内H-Syncカウント
+    uint32_t calibrated_hsync_count;       // キャリブレーション済みHSync数/フレーム
+    uint8_t  calibration_state;            // 0=待機, 1=計測中, 2=完了
 } sync_stats_t;
 
 /*
@@ -86,5 +92,17 @@ void vsync_separator_set_output_pins(const uint8_t* pins, const output_pattern_t
  * 簡易設定：全ピン同じパターン
  */
 void vsync_separator_set_output_pins_simple(const uint8_t* pins, uint8_t count, output_pattern_t pattern);
+
+/*
+ * 同期モードを設定
+ * mode: SYNC_MODE_VSYNC(0) または SYNC_MODE_HSYNC_PREDICT(1)
+ */
+void vsync_separator_set_sync_mode(uint8_t mode);
+
+/*
+ * HSync予測モードのオフセット設定
+ * offset: VSync何ライン前でコールバックを発火するか
+ */
+void vsync_separator_set_hsync_offset(uint16_t offset);
 
 #endif // VSYNC_SEPARATOR_H

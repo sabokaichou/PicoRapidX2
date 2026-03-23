@@ -122,6 +122,8 @@ bool InputStatus[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 uint8_t boardMode = 0;
 uint16_t vsync_delay_us = 0;  // VSync検出後の出力ディレイ（μs）
+uint8_t sync_mode = 0;        // 同期モード (0=VSync, 1=HSync予測)
+uint16_t hsync_offset = 1;    // HSync予測: VSync何ライン前で発火
 
 int Output_Pin[] = {11, 10, 9, 8, 6, 7, 5, 4, 3, 2, 1, 0};
 int Input_Pin[]  = {15, 14, 13, 12, 16, 17, 18, 19, 20, 21, 22, 26};
@@ -789,6 +791,10 @@ int main() {
     // VSync分離器初期化（コールバック登録）
     vsync_separator_init_with_callback(vsync_callback);
     
+    // 同期モード設定
+    vsync_separator_set_sync_mode(sync_mode);
+    vsync_separator_set_hsync_offset(hsync_offset);
+    
     // メインループ: VSync検出タスク実行
     while (true) {
         vsync_separator_task();
@@ -835,6 +841,14 @@ void SetBoardMode() {
     // VSync出力ディレイ（bytes 25-26, uint16_t LE）
     vsync_delay_us = (uint16_t)g_read_io_data[25] | ((uint16_t)g_read_io_data[26] << 8);
     if (vsync_delay_us > 16000) vsync_delay_us = 16000;  // 最大1フレーム分
+
+    // 同期モード（byte 27）
+    sync_mode = g_read_io_data[27];
+    if (sync_mode > 1) sync_mode = 0;
+
+    // HSyncオフセット（bytes 28-29, uint16_t LE）
+    hsync_offset = (uint16_t)g_read_io_data[28] | ((uint16_t)g_read_io_data[29] << 8);
+    if (hsync_offset == 0 || hsync_offset > 300) hsync_offset = 1;
 }
 
 // 入力・設定側初期化
@@ -2056,6 +2070,11 @@ void SetBoardSetting() {
     // VSync出力ディレイを保存（bytes 25-26, uint16_t LE）
     save_data[25] = (int8_t)(vsync_delay_us & 0xFF);
     save_data[26] = (int8_t)((vsync_delay_us >> 8) & 0xFF);
+    // 同期モードを保存（byte 27）
+    save_data[27] = (int8_t)sync_mode;
+    // HSyncオフセットを保存（bytes 28-29, uint16_t LE）
+    save_data[28] = (int8_t)(hsync_offset & 0xFF);
+    save_data[29] = (int8_t)((hsync_offset >> 8) & 0xFF);
     save_io_setting_to_flash(FLASH_TARGET_OFFSET_IO_Board, save_data, FLASH_PAGE_SIZE);
 }
 

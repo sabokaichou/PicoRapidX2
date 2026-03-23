@@ -268,6 +268,18 @@ static void generate_pinmap_text(char *buffer, size_t buffer_size) {
     pos += snprintf(buffer + pos, buffer_size - pos,
         "\r\nDELAY,%d\r\n", delay_us);
 
+    // 同期モード (0=VSync, 1=HSync予測)
+    uint8_t smode = flash_ptr[27];
+    if (smode > 1) smode = 0;
+    pos += snprintf(buffer + pos, buffer_size - pos,
+        "SYNC_MODE,%d\r\n", smode);
+
+    // HSyncオフセット (VSync何ライン前)
+    uint16_t hoffset = (uint16_t)flash_ptr[28] | ((uint16_t)flash_ptr[29] << 8);
+    if (hoffset == 0 || hoffset > 300) hoffset = 1;
+    pos += snprintf(buffer + pos, buffer_size - pos,
+        "HSYNC_OFFSET,%d\r\n", hoffset);
+
     buffer[pos] = '\0';
 }
 
@@ -285,10 +297,13 @@ static void parse_pinmap_csv_n(const char *data, size_t len) {
         new_data[13 + i] = (uint8_t)def_in[i];
     }
 
-    // 既存のディレイ値を保持
+    // 既存のディレイ値・同期設定を保持
     const uint8_t *flash_ptr = (const uint8_t *)(XIP_BASE + 0x1D0000);
     new_data[25] = flash_ptr[25];
     new_data[26] = flash_ptr[26];
+    new_data[27] = flash_ptr[27];
+    new_data[28] = flash_ptr[28];
+    new_data[29] = flash_ptr[29];
 
     const char *p = data;
     const char *end = data + len;
@@ -309,7 +324,18 @@ static void parse_pinmap_csv_n(const char *data, size_t len) {
               (line_start[1] == 'E' || line_start[1] == 'e') &&
               (line_start[2] == 'L' || line_start[2] == 'l') &&
               (line_start[3] == 'A' || line_start[3] == 'a') &&
-              (line_start[4] == 'Y' || line_start[4] == 'y')))
+              (line_start[4] == 'Y' || line_start[4] == 'y')) &&
+            !(line_end - line_start >= 4 &&
+              (line_start[0] == 'S' || line_start[0] == 's') &&
+              (line_start[1] == 'Y' || line_start[1] == 'y') &&
+              (line_start[2] == 'N' || line_start[2] == 'n') &&
+              (line_start[3] == 'C' || line_start[3] == 'c')) &&
+            !(line_end - line_start >= 5 &&
+              (line_start[0] == 'H' || line_start[0] == 'h') &&
+              (line_start[1] == 'S' || line_start[1] == 's') &&
+              (line_start[2] == 'Y' || line_start[2] == 'y') &&
+              (line_start[3] == 'N' || line_start[3] == 'n') &&
+              (line_start[4] == 'C' || line_start[4] == 'c')))
             continue;
 
         char buf[64];
@@ -331,6 +357,39 @@ static void parse_pinmap_csv_n(const char *data, size_t len) {
                 if (delay_val > 16000) delay_val = 16000;
                 new_data[25] = (uint8_t)(delay_val & 0xFF);
                 new_data[26] = (uint8_t)((delay_val >> 8) & 0xFF);
+            }
+            continue;
+        }
+
+        // SYNC_MODE,<value> 行のチェック
+        if ((buf[0] == 'S' || buf[0] == 's') &&
+            (buf[1] == 'Y' || buf[1] == 'y') &&
+            (buf[2] == 'N' || buf[2] == 'n') &&
+            (buf[3] == 'C' || buf[3] == 'c') &&
+            buf[4] == '_') {
+            char *comma = strchr(buf, ',');
+            if (comma) {
+                int val = atoi(comma + 1);
+                if (val < 0 || val > 1) val = 0;
+                new_data[27] = (uint8_t)val;
+            }
+            continue;
+        }
+
+        // HSYNC_OFFSET,<value> 行のチェック
+        if ((buf[0] == 'H' || buf[0] == 'h') &&
+            (buf[1] == 'S' || buf[1] == 's') &&
+            (buf[2] == 'Y' || buf[2] == 'y') &&
+            (buf[3] == 'N' || buf[3] == 'n') &&
+            (buf[4] == 'C' || buf[4] == 'c') &&
+            buf[5] == '_') {
+            char *comma = strchr(buf, ',');
+            if (comma) {
+                int val = atoi(comma + 1);
+                if (val <= 0) val = 1;
+                if (val > 300) val = 300;
+                new_data[28] = (uint8_t)(val & 0xFF);
+                new_data[29] = (uint8_t)((val >> 8) & 0xFF);
             }
             continue;
         }

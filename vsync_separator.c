@@ -83,6 +83,14 @@ static bool in_vsync_candidate = false;  // V-Sync候補期間中フラグ
 // コールバック関数
 static void (*user_vsync_callback)(void) = NULL;
 
+// HSync予測モード関連
+static uint8_t sync_mode = SYNC_MODE_VSYNC;   // 0=VSync, 1=HSync予測
+static uint16_t hsync_offset = 1;              // VSync何ライン前で発火
+static uint32_t hsync_counter = 0;             // 現フレームのHSyncカウント
+static uint32_t calibrated_hsync_count = 0;    // 学習済みHSync数/フレーム
+static uint8_t calibration_state = 0;          // 0=待機, 1=計測中, 2=完了
+static bool pre_vsync_fired = false;           // 今フレームで既に発火済みか
+
 // 統計情報
 static sync_stats_t stats = {0};
 
@@ -238,9 +246,32 @@ static void process_sync_state(bool active) {
         stats.vsync_active = true;
         stats.last_high_width = high_count;  // デバッグ: 検出したHIGH幅を記録
         
-        // コールバック呼び出し
-        if (user_vsync_callback != NULL) {
-            user_vsync_callback();
+        // HSync予測キャリブレーション
+        if (calibration_state == 0) {
+            // 1st VSync: 計測開始
+            calibration_state = 1;
+        } else if (calibration_state == 1) {
+            // 2nd VSync: 学習完了
+            calibrated_hsync_count = hsync_counter;
+            calibration_state = 2;
+        } else {
+            // 3rd以降: 毎フレーム再キャリブレーション
+            calibrated_hsync_count = hsync_counter;
+        }
+        
+        // デバッグ用統計に反映
+        stats.calibrated_hsync_count = calibrated_hsync_count;
+        stats.calibration_state = calibration_state;
+        
+        // HSyncカウンタリセット
+        hsync_counter = 0;
+        pre_vsync_fired = false;
+        
+        // VSyncモード(0)の場合のみ、ここでコールバック
+        if (sync_mode == SYNC_MODE_VSYNC) {
+            if (user_vsync_callback != NULL) {
+                user_vsync_callback();
+            }
         }
     }
     else
@@ -278,6 +309,22 @@ void vsync_separator_task(void) {
                 // V-Sync候補期間中なら幅に加算
                 else if (in_vsync_candidate) {
                     total_vsync_width += high_count;
+                }
+                // 通常のHSyncパルス（VSync候補外、短いHIGH）をカウント
+                else if (high_count >= 2 && high_count < VSYNC_HIGH_MIN) {
+                    hsync_counter++;
+                    stats.hsync_count++;
+                    
+                    // HSync予測モード: ターゲットに到達したらコールバック
+                    if (sync_mode == SYNC_MODE_HSYNC_PREDICT &&
+                        calibration_state == 2 && !pre_vsync_fired &&
+                        hsync_offset < calibrated_hsync_count &&
+                        hsync_counter >= calibrated_hsync_count - hsync_offset) {
+                        pre_vsync_fired = true;
+                        if (user_vsync_callback != NULL) {
+                            user_vsync_callback();
+                        }
+                    }
                 }
                 
                 low_count = 1;
@@ -416,6 +463,19 @@ const char* vsync_separator_get_state_string(void) {
 
 const sync_stats_t* vsync_separator_get_stats(void) {
     return &stats;
+}
+
+void vsync_separator_set_sync_mode(uint8_t mode) {
+    sync_mode = mode;
+    // モード変更時にキャリブレーションをリセット
+    calibration_state = 0;
+    hsync_counter = 0;
+    calibrated_hsync_count = 0;
+    pre_vsync_fired = false;
+}
+
+void vsync_separator_set_hsync_offset(uint16_t offset) {
+    hsync_offset = (offset == 0) ? 1 : offset;
 }
 
 
