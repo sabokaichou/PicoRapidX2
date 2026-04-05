@@ -115,12 +115,9 @@ const uint16_t row_byte_half = 128;
 #define Sync_IRQ_enable   gpio_set_irq_enabled(Sync_Pin, 0x4u, true);
 #define Sync_IRQ_disable  gpio_set_irq_enabled(Sync_Pin, 0x4u, false);
 
-const int32_t maskGPIO   = 0b11101111111111111111111111111; // GP28-GP0 (GP28,27,26,22-0)
-const int32_t maskIO     = 0b00000000000000000111111111111; // GP28-GP0 (GP11-0)
-
 bool InputStatus[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-uint8_t boardMode = 0;
+int boardMode = 0;
 uint16_t vsync_delay_us = 0;  // VSync検出後の出力ディレイ（μs）
 uint8_t sync_mode = 0;        // 同期モード (0=VSync, 1=HSync予測)
 uint16_t hsync_offset = 1;    // HSync予測: VSync何ライン前で発火
@@ -136,6 +133,9 @@ const int8_t Input_Pin_A[]  = {15, 14, 13, 12, 16, 17, 18, 19, 20, 21, 22, 26};
 
 const int8_t Output_Pin_B[] = {4, 3, 11, 10, 9, 8, 7, 6, 5, 2, 1, 0};
 const int8_t Input_Pin_B[]  = {19, 20, 12, 13, 14, 15, 16, 17, 18, 21, 22, 26};
+
+const int8_t Output_Pin_C[] = {16, 4, 5, 6, 7, 8, 9, 10, 11, 17, 18, 19};
+const int8_t Input_Pin_C[]  = {26, 0, 1, 2, 3, 12, 13, 14, 15, 20, 21, 22};
 
 // GPIO関連(設定)
 bool SettingMode = false;
@@ -298,7 +298,7 @@ IOSettingDef IOSetting[12];
 IOSettingDef IOSetting_Current;
 uint8_t SelectInputNo = 0;
 
-bool GPIOStatusOn[12] = {false, false, false, false, false, false, false, false, false, false, false, false}; // 出力中ステータス
+bool GPIOStatusOn[32] = {false}; // 出力中ステータス（GPIO番号でインデックス、RP2040はGP0-GP29）
 
 // コマンド管理用宣言
 uint8_t ExecuteInputNo = 0; // 実行中の入力番号を格納
@@ -829,6 +829,13 @@ void SetBoardMode() {
             Input_Pin[i]  = Input_Pin_B[i];
             Output_Pin[i] = Output_Pin_B[i];
         }
+    } else if (magic == 2) {
+        // Board C
+        boardMode = 2;
+        for (int i = 0; i < 12; i++) {
+            Input_Pin[i]  = Input_Pin_C[i];
+            Output_Pin[i] = Output_Pin_C[i];
+        }
     } else {
         // Board A (デフォルト)
         boardMode = 0;
@@ -1076,7 +1083,7 @@ void InputExecute() {
 
     int i;
     for (i = 0; i < IOCount; i++) {
-        GPIOStatusOn[i] = false; 
+        GPIOStatusOn[Output_Pin[i]] = false; 
     }
 
     for (i = 0; i < IOCount; i++) {
@@ -1818,7 +1825,8 @@ void Setting_SW_DL() {
     {
     case SelectMode_Normal:
         if (ChangeBoard_Flg == true) {
-            boardMode = 0;
+            boardMode--;
+            if (boardMode < 0) boardMode = 2;
             DispChange();
         }
         else if (Confirm_Mode == ConfirmMode_Execute) {
@@ -1897,7 +1905,8 @@ void Setting_SW_DR() {
     {
     case SelectMode_Normal:
         if (ChangeBoard_Flg == true) {
-            boardMode = 1;
+            boardMode++;
+            if (boardMode > 2) boardMode = 0;
             DispChange();
         }
         else if (Confirm_Mode == ConfirmMode_Execute) {
@@ -2420,8 +2429,8 @@ void DispChange() {
         }
     }
 
-    char *SelectStr = "Org";
-    for (int col_pos = 0; col_pos < 3; col_pos++) {
+    char *SelectStr = "A";
+    for (int col_pos = 0; col_pos < 1; col_pos++) {
         dispCharPattern = getcharPattern(SelectStr[col_pos]);
         for (int i = 0; i < col_byte; i++) {
 
@@ -2435,12 +2444,27 @@ void DispChange() {
         }
     }
 
-    SelectStr = "MAXX";
-    for (int col_pos = 4; col_pos < 8; col_pos++) {
-        dispCharPattern = getcharPattern(SelectStr[col_pos - 4]);
+    SelectStr = "B";
+    for (int col_pos = 2; col_pos < 3; col_pos++) {
+        dispCharPattern = getcharPattern(SelectStr[0]);
         for (int i = 0; i < col_byte; i++) {
 
             if (boardMode == 1) {
+                dispCharPattern.pattern_head[i] = 0xFF - dispCharPattern.pattern_head[i];
+                dispCharPattern.pattern_foot[i] = 0xFF - dispCharPattern.pattern_foot[i]; 
+            }
+
+            canvas[(row_byte) + (col_byte * col_pos) + i] = dispCharPattern.pattern_head[i];
+            canvas[(row_byte) + (col_byte * col_pos) + row_byte_half + i] = dispCharPattern.pattern_foot[i];
+        }
+    }
+
+    SelectStr = "C";
+    for (int col_pos = 4; col_pos < 5; col_pos++) {
+        dispCharPattern = getcharPattern(SelectStr[0]);
+        for (int i = 0; i < col_byte; i++) {
+
+            if (boardMode == 2) {
                 dispCharPattern.pattern_head[i] = 0xFF - dispCharPattern.pattern_head[i];
                 dispCharPattern.pattern_foot[i] = 0xFF - dispCharPattern.pattern_foot[i]; 
             }
