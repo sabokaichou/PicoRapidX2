@@ -1042,7 +1042,7 @@ void SetCommandData(int InputNo) {
         } else {
             for (int j = 1; j < 16; j++) {
                 int k = j;
-                if (boardMode == 1) {
+                if (boardMode == 1 || boardMode == 2) {
                     if (j == 5) {
                         k = j + 1;
                     } else if (j == 6) {
@@ -1217,7 +1217,7 @@ void InputCommand(int InputNo)
     for (int i = 0; i < IOCount; i++) {
         bool on = bit_get_u16(CommandSetBits[InputNo][buttonCommands[IOSetting[InputNo].CommandType].CurrentFrame], i);
         gpio_put(Output_Pin[i], on ? GPIO_OUT : GPIO_IN);
-        GPIOStatusOn[i] = on;
+        GPIOStatusOn[Output_Pin[i]] = on;
     }
     buttonCommands[IOSetting[InputNo].CommandType].CurrentFrame++;
 
