@@ -134,8 +134,8 @@ const int8_t Input_Pin_A[]  = {15, 14, 13, 12, 16, 17, 18, 19, 20, 21, 22, 26};
 const int8_t Output_Pin_B[] = {4, 3, 11, 10, 9, 8, 7, 6, 5, 2, 1, 0};
 const int8_t Input_Pin_B[]  = {19, 20, 12, 13, 14, 15, 16, 17, 18, 21, 22, 26};
 
-const int8_t Output_Pin_C[] = {16, 4, 5, 6, 7, 8, 9, 10, 11, 17, 18, 19};
-const int8_t Input_Pin_C[]  = {26, 0, 1, 2, 3, 12, 13, 14, 15, 20, 21, 22};
+const int8_t Output_Pin_C[] = {16, 4, 5, 6, 8, 7, 9, 10, 11, 17, 18, 19};
+const int8_t Input_Pin_C[]  = {26, 0, 1, 2, 12, 3, 13, 14, 15, 20, 21, 22};
 
 // GPIO関連(設定)
 bool SettingMode = false;
@@ -656,9 +656,9 @@ int main() {
                     } else if (k == 3) {
                         hat_down = true;  // ハット下
                     } else if (k == 4) {
-                        hat_right = true;  // ハット右 (Output_Pin[4]=GPIO9)
+                        hat_left = true;  // ハット左
                     } else if (k == 5) {
-                        hat_left = true;  // ハット左 (Output_Pin[5]=GPIO8)
+                        hat_right = true;  // ハット右
                     } else if (k == 6) {
                         report[0] |= (1 << 1);  // ボタン2
                     } else if (k == 7) {
@@ -1035,25 +1035,17 @@ void SetIOSetting() {
 
 // コマンド設定
 void SetCommandData(int InputNo) {
-    int i;    
+    int i;
     for (i = 1; i < 150; i++) {
         if (!bit_get_u16(MacroSettingBits[InputNo][i], 0)) {
             break;
         } else {
             for (int j = 1; j < 16; j++) {
-                int k = j;
-                if (boardMode == 1 || boardMode == 2) {
-                    if (j == 5) {
-                        k = j + 1;
-                    } else if (j == 6) {
-                        k = j - 1;
-                    }
-                }
-                bit_set_u16(&CommandSetBits[InputNo][i - 1], k - 1, bit_get_u16(MacroSettingBits[InputNo][i], j));
+                bit_set_u16(&CommandSetBits[InputNo][i - 1], j - 1, bit_get_u16(MacroSettingBits[InputNo][i], j));
             }
         }
     }
-    
+
     LastFrameCount[InputNo] = i - 1;
     
     // マクロが読み込まれたかはここで確認
@@ -2075,6 +2067,22 @@ void SetBoardSetting() {
     save_data[0] = boardMode;
     for (i = 1; i < 256; i++) {
         save_data[i] = 0;
+    }
+    // ボードモードに対応するピンデータを保存（bytes 1-12: 出力, 13-24: 入力）
+    const int8_t *out_pins, *in_pins;
+    if (boardMode == 1) {
+        out_pins = Output_Pin_B;
+        in_pins  = Input_Pin_B;
+    } else if (boardMode == 2) {
+        out_pins = Output_Pin_C;
+        in_pins  = Input_Pin_C;
+    } else {
+        out_pins = Output_Pin_A;
+        in_pins  = Input_Pin_A;
+    }
+    for (i = 0; i < 12; i++) {
+        save_data[1 + i]  = out_pins[i];
+        save_data[13 + i] = in_pins[i];
     }
     // VSync出力ディレイを保存（bytes 25-26, uint16_t LE）
     save_data[25] = (int8_t)(vsync_delay_us & 0xFF);

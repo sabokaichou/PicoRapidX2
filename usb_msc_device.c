@@ -245,6 +245,11 @@ static void generate_pinmap_text(char *buffer, size_t buffer_size) {
         const int8_t ob[] = {4, 3, 11, 10, 9, 8, 7, 6, 5, 2, 1, 0};
         const int8_t ib[] = {19, 20, 12, 13, 14, 15, 16, 17, 18, 21, 22, 26};
         for (int i = 0; i < 12; i++) { out_pins[i] = ob[i]; in_pins[i] = ib[i]; }
+    } else if (flash_ptr[0] == 2) {
+        // Board C
+        const int8_t oc[] = {16, 4, 5, 6, 8, 7, 9, 10, 11, 17, 18, 19};
+        const int8_t ic[] = {26, 0, 1, 2, 12, 3, 13, 14, 15, 20, 21, 22};
+        for (int i = 0; i < 12; i++) { out_pins[i] = oc[i]; in_pins[i] = ic[i]; }
     } else {
         // Board A (デフォルト)
         const int8_t oa[] = {11, 10, 9, 8, 6, 7, 5, 4, 3, 2, 1, 0};
